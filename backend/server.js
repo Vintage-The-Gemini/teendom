@@ -1,28 +1,44 @@
-// server.js
 import express from "express";
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 
 dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(express.json());
-
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI, {
-    dbName: "teendom", // you can set a db name here
-  })
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
-
-// Simple route
-app.get("/", (req, res) => {
-  res.send("API is running...");
+// ✅ Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// ✅ Multer storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "job-recruitment-platform", // put uploads inside this folder in Cloudinary
+    allowed_formats: ["jpg", "jpeg", "png", "pdf"],
+  },
+});
+
+const upload = multer({ storage });
+
+// ✅ Upload route
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  try {
+    res.json({
+      success: true,
+      message: "File uploaded successfully",
+      url: req.file.path, // Cloudinary gives us file.path = URL
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+app.listen(5000, () => {
+  console.log("✅ Server running on http://localhost:5000");
+});
