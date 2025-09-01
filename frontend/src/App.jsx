@@ -1,15 +1,23 @@
-import Navbar from "./components/Navbar"; // adjust path if needed
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import ArticlesPage from "./pages/ArticlesPage";
+import ArticleDetail from "./pages/ArticleDetail";
+import "./index.css";
 
 function App() {
   return (
-    <div className="min-h-screen bg-black">
-      <Navbar />
-      <div className="flex items-center justify-center pt-24">
-        <h1 className="text-5xl font-bold text-white">
-          🖤 Tailwind Black Background Test
-        </h1>
+    <Router>
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/articles" element={<ArticlesPage />} />
+          <Route path="/article/:id" element={<ArticleDetail />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
