@@ -533,3 +533,67 @@ textarea:focus-visible {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
 }
+
+/* File Path: Add this to the end of frontend/src/index.css */
+
+/* Navbar specific focus fixes - Remove all borders and outlines on mobile */
+nav button,
+nav a,
+nav button:focus,
+nav a:focus,
+nav button:active,
+nav a:active,
+nav button:focus-visible,
+nav a:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Remove touch highlights specifically for navbar */
+nav * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Override the global focus styles specifically for navbar */
+nav button:focus,
+nav a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+nav button:focus-visible,
+nav a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure mobile touch doesn't show any borders */
+@media (max-width: 768px) {
+  nav button,
+  nav a {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    border: none !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  
+  nav button:focus,
+  nav a:focus,
+  nav button:active,
+  nav a:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
