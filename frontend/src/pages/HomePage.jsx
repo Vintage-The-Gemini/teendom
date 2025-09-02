@@ -2,7 +2,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { HiArrowRight, HiTrendingUp, HiStar, HiLightningBolt } from "react-icons/hi";
-import ConnectionTest from "../components/ConnectionTest";
 
 function HomePage() {
   const featuredArticles = [
@@ -40,15 +39,13 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-white" style={{fontFamily: "'Inter', 'Segoe UI', 'Roboto', sans-serif"}}>
-      {/* Temporary Connection Test - Remove after testing */}
-      <ConnectionTest />
       
       {/* Hero Section with YCP Images Background */}
       <section className="relative min-h-screen overflow-hidden">
         {/* Background Image Grid */}
         <div className="absolute inset-0">
           {/* Main grid of YCP images */}
-          <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-1 h-full opacity-60">
+          <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-2 h-full opacity-20">
             <div className="bg-cover bg-center" style={{backgroundImage: 'url(/images/YCP/ycp1.jpg)'}}></div>
             <div className="bg-cover bg-center" style={{backgroundImage: 'url(/images/YCP/ycp2.jpg)'}}></div>
             <div className="bg-cover bg-center" style={{backgroundImage: 'url(/images/YCP/ycp3.jpg)'}}></div>
@@ -74,7 +71,7 @@ function HomePage() {
           </div>
           
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/45 to-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/60"></div>
         </div>
 
         {/* Hero Content */}
