@@ -2,6 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import ArticlesPage from "./pages/ArticlesPage";
 import ArticleDetail from "./pages/ArticleDetail";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/awards/nominate" element={<NominatePage />} />
           <Route path="/admin" element={<AdminPanel />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
