@@ -1,41 +1,47 @@
-// frontend/src/components/nominations/RefereeSection.jsx
+// File Path: frontend/src/components/nominations/RefereeSection.jsx
 import React from "react";
-import { HiExclamation } from "react-icons/hi";
+import { HiUserGroup, HiPhone, HiMail } from "react-icons/hi";
 
 function RefereeSection({ formData, handleInputChange, errors }) {
   return (
-    <section className="bg-orange-50 p-6 rounded-xl border-l-4 border-orange-500">
-      <h2 className="text-2xl font-black text-gray-900 mb-6 flex items-center">
-        <span className="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-black">6</span>
+    <section className="bg-white rounded-2xl p-6 shadow-lg" style={{ 
+      border: '2px solid #DAA520', 
+      fontFamily: 'Inter, system-ui, sans-serif' 
+    }}>
+      <h2 className="text-2xl font-black mb-6 flex items-center" style={{ color: '#003875' }}>
+        <span className="rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold text-lg text-white" style={{ backgroundColor: '#DAA520' }}>
+          6
+        </span>
         REFEREE INFORMATION
       </h2>
       
-      <div className="bg-orange-100 border border-orange-300 rounded-lg p-4 mb-6">
-        <div className="flex items-start">
-          <HiExclamation className="h-6 w-6 text-orange-600 mr-3 mt-0.5" />
-          <div>
-            <p className="text-orange-800 font-bold text-sm">
-              Important: Referee must be a non-family adult in a professional or community role
-            </p>
-            <p className="text-orange-700 text-sm mt-1">
-              Examples: Teacher, coach, mentor, faith leader, youth worker, community leader, school principal
-            </p>
-          </div>
-        </div>
-      </div>
+      <p className="mb-6 font-medium" style={{ color: '#003875' }}>
+        Provide contact details of someone who can vouch for the nominee's character or achievements.
+        <br />
+        <strong>Note:</strong> Referees must be non-family adults in a professional or community role.
+      </p>
 
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-2">Referee Name *</label>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Referee Full Name *
+          </label>
           <input
             type="text"
             name="refereeName"
             value={formData.refereeName}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-orange-500 focus:border-orange-500 ${
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
               errors.refereeName ? 'border-red-500' : 'border-gray-300'
             }`}
-            placeholder="Full name of referee"
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.refereeName ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.refereeName ? '#ef4444' : '#d1d5db'}
+            placeholder="Enter referee's full name"
           />
           {errors.refereeName && (
             <p className="text-red-500 text-sm mt-1 font-semibold">{errors.refereeName}</p>
@@ -43,16 +49,25 @@ function RefereeSection({ formData, handleInputChange, errors }) {
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-2">Position/Relationship *</label>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Position/Relationship to Nominee *
+          </label>
           <input
             type="text"
             name="refereePosition"
-            value={formData.refereePosition}
+            value={formData.refereePosition || ''}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-orange-500 focus:border-orange-500 ${
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
               errors.refereePosition ? 'border-red-500' : 'border-gray-300'
             }`}
-            placeholder="e.g. Mathematics Teacher, Football Coach"
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.refereePosition ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.refereePosition ? '#ef4444' : '#d1d5db'}
+            placeholder="e.g., Teacher, Coach, Mentor, Community Leader"
           />
           {errors.refereePosition && (
             <p className="text-red-500 text-sm mt-1 font-semibold">{errors.refereePosition}</p>
@@ -60,15 +75,24 @@ function RefereeSection({ formData, handleInputChange, errors }) {
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number *</label>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Phone Number *
+          </label>
           <input
             type="tel"
             name="refereePhone"
             value={formData.refereePhone}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-orange-500 focus:border-orange-500 ${
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
               errors.refereePhone ? 'border-red-500' : 'border-gray-300'
             }`}
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.refereePhone ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.refereePhone ? '#ef4444' : '#d1d5db'}
             placeholder="0700000000"
           />
           {errors.refereePhone && (
@@ -77,15 +101,24 @@ function RefereeSection({ formData, handleInputChange, errors }) {
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-2">Email Address *</label>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Email Address *
+          </label>
           <input
             type="email"
             name="refereeEmail"
             value={formData.refereeEmail}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-orange-500 focus:border-orange-500 ${
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
               errors.refereeEmail ? 'border-red-500' : 'border-gray-300'
             }`}
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.refereeEmail ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.refereeEmail ? '#ef4444' : '#d1d5db'}
             placeholder="referee@example.com"
           />
           {errors.refereeEmail && (
@@ -94,19 +127,59 @@ function RefereeSection({ formData, handleInputChange, errors }) {
         </div>
       </div>
 
+      {/* Contact Permission */}
       <div className="mt-6">
-        <label className="flex items-center">
+        <label className="flex items-center space-x-3">
           <input
             type="checkbox"
             name="contactReferee"
-            checked={formData.contactReferee}
+            checked={formData.contactReferee || false}
             onChange={handleInputChange}
-            className="h-4 w-4 text-orange-500 focus:ring-orange-500 border-2 border-gray-300 rounded mr-3"
+            className="w-5 h-5 rounded"
+            style={{ accentColor: '#DAA520' }}
           />
-          <span className="text-sm font-bold text-gray-700">
-            May we contact them for verification? (Recommended)
+          <span className="text-sm font-medium" style={{ color: '#003875' }}>
+            May we contact this referee for verification? (Recommended)
           </span>
         </label>
+      </div>
+
+      {/* Referee Guidelines */}
+      <div className="mt-6 rounded-2xl p-6" style={{ backgroundColor: '#fffbeb', border: '1px solid #DAA520' }}>
+        <h3 className="text-lg font-bold mb-4 flex items-center" style={{ color: '#003875' }}>
+          <HiUserGroup className="mr-2 h-5 w-5" style={{ color: '#DAA520' }} />
+          Suitable Referees Include:
+        </h3>
+        <div className="grid md:grid-cols-2 gap-4">
+          <ul className="space-y-2 text-sm font-medium" style={{ color: '#003875' }}>
+            <li className="flex items-center">
+              <span className="text-yellow-600 mr-2">•</span>
+              Teachers or School Principals
+            </li>
+            <li className="flex items-center">
+              <span className="text-yellow-600 mr-2">•</span>
+              Coaches or Club Leaders
+            </li>
+            <li className="flex items-center">
+              <span className="text-yellow-600 mr-2">•</span>
+              Community Leaders
+            </li>
+          </ul>
+          <ul className="space-y-2 text-sm font-medium" style={{ color: '#003875' }}>
+            <li className="flex items-center">
+              <span className="text-yellow-600 mr-2">•</span>
+              Mentors or Youth Workers
+            </li>
+            <li className="flex items-center">
+              <span className="text-yellow-600 mr-2">•</span>
+              Faith Leaders
+            </li>
+            <li className="flex items-center">
+              <span className="text-yellow-600 mr-2">•</span>
+              Employers or Supervisors
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );

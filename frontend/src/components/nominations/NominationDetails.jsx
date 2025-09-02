@@ -2,80 +2,149 @@
 import React from "react";
 
 function NominationDetails({ formData, handleInputChange, errors }) {
-  // Function to estimate word count
   const getWordCount = (text) => {
-    return text.trim().split(/\s+/).filter(word => word.length > 0).length;
+    return text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
   };
 
   const bioWordCount = getWordCount(formData.shortBio || '');
   const statementWordCount = getWordCount(formData.nominationStatement || '');
 
   return (
-    <section className="bg-white border-l-4 border-purple-500 p-6 rounded-xl shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-        <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold text-lg">4</span>
+    <section className="bg-white rounded-2xl p-6 shadow-lg" style={{ 
+      border: '2px solid #DAA520', 
+      fontFamily: 'Inter, system-ui, sans-serif' 
+    }}>
+      <h2 className="text-2xl font-black mb-6 flex items-center" style={{ color: '#003875' }}>
+        <span className="rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold text-lg text-white" style={{ backgroundColor: '#DAA520' }}>
+          4
+        </span>
         NOMINATION DETAILS
       </h2>
       
       <div className="space-y-6">
+        {/* Short Bio */}
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-2">Short Bio (Max 100 words) *</label>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Short Bio (max 250 words) *
+          </label>
+          <p className="text-sm mb-3" style={{ color: '#003875' }}>
+            Tell us who they are, their background, and what they care about.
+          </p>
           <textarea
             name="shortBio"
             value={formData.shortBio}
             onChange={handleInputChange}
-            rows={4}
-            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-purple-500 focus:border-purple-500 focus:bg-white resize-none text-gray-800 placeholder-gray-500 ${
+            rows={5}
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 resize-none ${
               errors.shortBio ? 'border-red-500' : 'border-gray-300'
             }`}
-            placeholder="Brief introduction about the nominee - who they are, their background, and what makes them special..."
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.shortBio ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.shortBio ? '#ef4444' : '#d1d5db'}
+            placeholder="Tell us about the nominee's background, interests, and what drives them to make a difference..."
           />
-          <div className="flex justify-between mt-2">
-            <span className={`text-sm font-semibold ${bioWordCount > 100 ? 'text-red-500' : 'text-purple-600'}`}>
-              {bioWordCount}/100 words
+          <div className="flex justify-between items-center mt-2">
+            <div className="text-sm">
+              {errors.shortBio && (
+                <span className="text-red-500 font-semibold">{errors.shortBio}</span>
+              )}
+            </div>
+            <span className={`text-sm font-medium ${bioWordCount > 250 ? 'text-red-500' : 'text-gray-500'}`}>
+              {bioWordCount}/250 words
             </span>
-            {errors.shortBio && (
-              <p className="text-red-500 text-sm font-semibold">{errors.shortBio}</p>
-            )}
           </div>
         </div>
 
+        {/* Nomination Statement */}
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-2">
-            Nomination Statement (50-100 words) *
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Why does this teen deserve this award? (300-500 words) *
           </label>
-          <p className="text-sm text-gray-600 mb-3">
-            Tell us why this nominee deserves this award. Include specific achievements, impact they've made, 
-            and examples that demonstrate their excellence.
+          <p className="text-sm mb-3" style={{ color: '#003875' }}>
+            Share detailed examples of what they have done, the impact of their work, and any challenges they've overcome.
           </p>
           <textarea
             name="nominationStatement"
             value={formData.nominationStatement}
             onChange={handleInputChange}
-            rows={6}
-            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-purple-500 focus:border-purple-500 focus:bg-white resize-none text-gray-800 placeholder-gray-500 ${
+            rows={8}
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 resize-none ${
               errors.nominationStatement ? 'border-red-500' : 'border-gray-300'
             }`}
-            placeholder="Describe why this nominee deserves the award:
-
-• What specific achievements make them stand out?
-• What impact have they made in their community or school?
-• What challenges have they overcome?
-• Provide concrete examples of their excellence..."
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.nominationStatement ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.nominationStatement ? '#ef4444' : '#d1d5db'}
+            placeholder="Describe their specific achievements, the impact they've made, challenges they've overcome, and why they stand out as exceptional..."
           />
-          <div className="flex justify-between mt-2">
-            <span className={`text-sm font-semibold ${statementWordCount > 100 ? 'text-red-500' : statementWordCount < 50 ? 'text-yellow-600' : 'text-purple-600'}`}>
-              {statementWordCount}/100 words
+          <div className="flex justify-between items-center mt-2">
+            <div className="text-sm">
+              {errors.nominationStatement && (
+                <span className="text-red-500 font-semibold">{errors.nominationStatement}</span>
+              )}
+            </div>
+            <span className={`text-sm font-medium ${
+              statementWordCount < 300 || statementWordCount > 500 ? 'text-red-500' : 'text-green-600'
+            }`}>
+              {statementWordCount}/300-500 words
             </span>
-            {errors.nominationStatement && (
-              <p className="text-red-500 text-sm font-semibold">{errors.nominationStatement}</p>
-            )}
           </div>
-          {statementWordCount < 50 && (
-            <p className="text-yellow-600 text-xs mt-1 font-medium">
-              Minimum 50 words required for a strong nomination
-            </p>
-          )}
+        </div>
+
+        {/* Key Achievements (Optional) */}
+        <div>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Key Achievements or Milestones (Optional)
+          </label>
+          <p className="text-sm mb-3" style={{ color: '#003875' }}>
+            List any specific awards, recognition, or major accomplishments (bullet points format).
+          </p>
+          <textarea
+            name="keyAchievements"
+            value={formData.keyAchievements || ''}
+            onChange={handleInputChange}
+            rows={4}
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 resize-none"
+            style={{
+              backgroundColor: '#f8fafc',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
+            placeholder="• First place in national science fair&#10;• Founded school environmental club&#10;• Raised KSh 50,000 for local charity..."
+          />
+        </div>
+
+        {/* Writing Tips */}
+        <div className="rounded-2xl p-6" style={{ backgroundColor: '#fffbeb', border: '1px solid #DAA520' }}>
+          <h3 className="text-lg font-bold mb-4" style={{ color: '#003875' }}>
+            💡 Writing Tips
+          </h3>
+          <ul className="space-y-2 text-sm font-medium" style={{ color: '#003875' }}>
+            <li className="flex items-start">
+              <span className="text-yellow-600 mr-2">•</span>
+              <span>Be specific with examples and measurable impact</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-yellow-600 mr-2">•</span>
+              <span>Include challenges overcome and resilience shown</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-yellow-600 mr-2">•</span>
+              <span>Focus on community impact and positive influence on others</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-yellow-600 mr-2">•</span>
+              <span>Highlight what makes this teen unique or exceptional</span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

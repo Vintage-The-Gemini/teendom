@@ -1,102 +1,172 @@
 // File Path: frontend/src/components/nominations/ConsentSection.jsx
 import React from "react";
-import { HiShieldCheck } from "react-icons/hi";
+import { HiShieldCheck, HiCheck } from "react-icons/hi";
 
 function ConsentSection({ formData, handleInputChange, errors }) {
   const isMinor = parseInt(formData.nomineeAge) < 18;
 
-  const consentItems = [
-    {
-      name: "accurateInfo",
-      label: "I confirm that all information provided is accurate to the best of my knowledge",
-      required: true
-    },
-    {
-      name: "nomineePermission", 
-      label: "I have the nominee's permission to submit this nomination",
-      required: true
-    },
-    {
-      name: "parentalConsent",
-      label: "I confirm that parental/guardian consent has been obtained for this nomination",
-      required: isMinor,
-      show: isMinor
-    },
-    {
-      name: "understandsProcess",
-      label: "I understand the nomination and selection process",
-      required: true
-    },
-    {
-      name: "noFalseInfo",
-      label: "I acknowledge that false or misleading information may result in disqualification",
-      required: true
-    }
-  ];
-
   return (
-    <section className="bg-white border-l-4 border-red-500 p-6 rounded-xl shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-        <span className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold text-lg">7</span>
-        CONSENT & DECLARATIONS
+    <section className="bg-white rounded-2xl p-6 shadow-lg" style={{ 
+      border: '2px solid #DAA520', 
+      fontFamily: 'Inter, system-ui, sans-serif' 
+    }}>
+      <h2 className="text-2xl font-black mb-6 flex items-center" style={{ color: '#003875' }}>
+        <span className="rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold text-lg text-white" style={{ backgroundColor: '#DAA520' }}>
+          7
+        </span>
+        CONSENT & DECLARATION
       </h2>
 
-      <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-        <div className="flex items-start">
-          <HiShieldCheck className="h-6 w-6 text-red-600 mr-3 flex-shrink-0 mt-0.5" />
-          <div>
-            <h3 className="text-sm font-bold text-red-800 mb-2">Important Privacy Notice</h3>
-            <p className="text-sm text-red-700">
-              All information will be used solely for judging and selection. Only shortlisted nominees 
-              with proper consent will be featured publicly.
-            </p>
+      <div className="space-y-6">
+        {/* Important Notice */}
+        <div className="rounded-2xl p-6" style={{ backgroundColor: '#eff6ff', border: '1px solid #3b82f6' }}>
+          <h3 className="text-lg font-bold mb-4 flex items-center" style={{ color: '#1e40af' }}>
+            <HiShieldCheck className="mr-2 h-5 w-5" />
+            Important Information
+          </h3>
+          <ul className="space-y-2 text-sm font-medium" style={{ color: '#1e40af' }}>
+            <li className="flex items-start">
+              <span className="text-blue-500 mr-2">•</span>
+              Only shortlisted nominees will be contacted directly
+            </li>
+            <li className="flex items-start">
+              <span className="text-blue-500 mr-2">•</span>
+              No nominee details will be published without explicit consent
+            </li>
+            <li className="flex items-start">
+              <span className="text-blue-500 mr-2">•</span>
+              All information is kept confidential during the judging process
+            </li>
+          </ul>
+        </div>
+
+        {/* Consent Checkboxes */}
+        <div className="space-y-4">
+          <div className="space-y-4 rounded-2xl p-6" style={{ backgroundColor: '#f8fafc', border: '2px solid #DAA520' }}>
+            <h4 className="font-bold text-lg mb-4" style={{ color: '#003875' }}>
+              Required Confirmations
+            </h4>
+            
+            <div className="space-y-4">
+              <label className="flex items-start space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="accurateInfo"
+                  checked={formData.accurateInfo || false}
+                  onChange={handleInputChange}
+                  className="mt-1 w-5 h-5 rounded"
+                  style={{ accentColor: '#DAA520' }}
+                />
+                <span className="text-sm font-medium" style={{ color: '#003875' }}>
+                  I confirm that the information provided is accurate to the best of my knowledge.
+                </span>
+              </label>
+              {errors.accurateInfo && (
+                <p className="text-red-500 text-sm font-semibold ml-8">{errors.accurateInfo}</p>
+              )}
+
+              <label className="flex items-start space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="nomineePermission"
+                  checked={formData.nomineePermission || false}
+                  onChange={handleInputChange}
+                  className="mt-1 w-5 h-5 rounded"
+                  style={{ accentColor: '#DAA520' }}
+                />
+                <span className="text-sm font-medium" style={{ color: '#003875' }}>
+                  I confirm that I have the nominee's permission to submit this nomination.
+                </span>
+              </label>
+              {errors.nomineePermission && (
+                <p className="text-red-500 text-sm font-semibold ml-8">{errors.nomineePermission}</p>
+              )}
+
+              {isMinor && (
+                <div>
+                  <label className="flex items-start space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="parentalConsent"
+                      checked={formData.parentalConsent || false}
+                      onChange={handleInputChange}
+                      className="mt-1 w-5 h-5 rounded"
+                      style={{ accentColor: '#DAA520' }}
+                    />
+                    <span className="text-sm font-medium" style={{ color: '#003875' }}>
+                      If the nominee is under 18, I confirm that parental or guardian consent has been obtained for this nomination.
+                    </span>
+                  </label>
+                  {errors.parentalConsent && (
+                    <p className="text-red-500 text-sm font-semibold ml-8">{errors.parentalConsent}</p>
+                  )}
+                </div>
+              )}
+
+              <label className="flex items-start space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="understandsProcess"
+                  checked={formData.understandsProcess || false}
+                  onChange={handleInputChange}
+                  className="mt-1 w-5 h-5 rounded"
+                  style={{ accentColor: '#DAA520' }}
+                />
+                <span className="text-sm font-medium" style={{ color: '#003875' }}>
+                  I understand that all submitted information will be used solely for internal judging and shortlisting at this stage.
+                </span>
+              </label>
+              {errors.understandsProcess && (
+                <p className="text-red-500 text-sm font-semibold ml-8">{errors.understandsProcess}</p>
+              )}
+
+              <label className="flex items-start space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="noFalseInfo"
+                  checked={formData.noFalseInfo || false}
+                  onChange={handleInputChange}
+                  className="mt-1 w-5 h-5 rounded"
+                  style={{ accentColor: '#DAA520' }}
+                />
+                <span className="text-sm font-medium" style={{ color: '#003875' }}>
+                  I acknowledge that any nominee found to have submitted false, misleading or unverifiable information will be immediately disqualified from the Teendom Awards and may be barred from future participation.
+                </span>
+              </label>
+              {errors.noFalseInfo && (
+                <p className="text-red-500 text-sm font-semibold ml-8">{errors.noFalseInfo}</p>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="space-y-4">
-        {consentItems.map((item) => {
-          if (item.show === false) return null;
-          
-          return (
-            <div key={item.name} className="flex items-start space-x-3">
-              <input
-                type="checkbox"
-                id={item.name}
-                name={item.name}
-                checked={formData[item.name] || false}
-                onChange={handleInputChange}
-                className={`mt-1 h-5 w-5 rounded border-2 text-red-600 focus:ring-4 focus:ring-red-500 focus:ring-offset-0 ${
-                  errors[item.name] ? 'border-red-500' : 'border-gray-300'
-                }`}
-              />
-              <label htmlFor={item.name} className="flex-1 text-sm text-gray-700 font-medium cursor-pointer">
-                {item.label} {item.required && <span className="text-red-500">*</span>}
-              </label>
+        {/* Data Protection Notice */}
+        <div className="rounded-2xl p-6" style={{ backgroundColor: '#fefce8', border: '1px solid #DAA520' }}>
+          <h3 className="text-lg font-bold mb-4" style={{ color: '#92400e' }}>
+            Data Protection & Privacy
+          </h3>
+          <p className="text-sm font-medium leading-relaxed" style={{ color: '#92400e' }}>
+            We take data protection seriously. All personal information is used only for judging, communication, and award processes — and only with full consent. 
+            No nominee's name, photo, or story will be published or used for publicity unless formal consent is provided after shortlisting.
+          </p>
+        </div>
+
+        {/* Contact Information */}
+        <div className="text-center rounded-2xl p-6" style={{ backgroundColor: '#003875' }}>
+          <h3 className="text-lg font-bold text-white mb-4">
+            Questions About Your Nomination?
+          </h3>
+          <div className="grid md:grid-cols-3 gap-4 text-white">
+            <div>
+              <h4 className="font-bold mb-2" style={{ color: '#DAA520' }}>WhatsApp</h4>
+              <p className="text-sm">0742862080</p>
             </div>
-          );
-        })}
-      </div>
-
-      {/* Display any consent errors */}
-      <div className="mt-4 space-y-2">
-        {Object.entries(errors).map(([field, error]) => {
-          if (consentItems.some(item => item.name === field)) {
-            return (
-              <p key={field} className="text-red-500 text-sm font-semibold">
-                {error}
-              </p>
-            );
-          }
-          return null;
-        })}
-      </div>
-
-      <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        <p className="text-xs text-gray-600 text-center">
-          By proceeding, you acknowledge that this nomination may be reviewed by our judging panel 
-          and that selected nominees may be contacted for additional verification.
-        </p>
+            <div>
+              <h4 className="font-bold mb-2" style={{ color: '#DAA520' }}>Website</h4>
+              <p className="text-sm">www.teendom.africa</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

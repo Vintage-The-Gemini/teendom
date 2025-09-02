@@ -86,24 +86,7 @@ function Footer() {
         </div>
 
         {/* Categories Section */}
-        <div className="mt-12 pt-8 border-t border-gray-700">
-          <h4 className="text-lg font-black text-white mb-6 text-center">EXPLORE CATEGORIES</h4>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              "BUSINESS", "MONEY", "SELF-CARE", "RELATIONSHIPS", 
-              "LIFESTYLE", "HEALTH", "LEADERSHIP", "MENTAL HEALTH", 
-              "FINANCE", "BEAUTY", "SOCIAL"
-            ].map((category) => (
-              <Link
-                key={category}
-                to={`/articles?category=${category.toLowerCase()}`}
-                className="bg-gray-800 text-gray-300 px-4 py-2 rounded-lg font-bold hover:bg-red-500 hover:text-white transition-colors"
-              >
-                {category}
-              </Link>
-            ))}
-          </div>
-        </div>
+      
 
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">

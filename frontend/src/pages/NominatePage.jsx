@@ -1,64 +1,102 @@
 // File Path: frontend/src/pages/NominatePage.jsx
 import React from "react";
-import { Link } from "react-router-dom";
-import { HiArrowLeft, HiClock } from "react-icons/hi";
 import NominationForm from "../components/nominations/NominationForm";
+import { HiStar, HiLightningBolt } from "react-icons/hi";
 
 function NominatePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900" style={{fontFamily: "'Inter', 'Segoe UI', 'Roboto', sans-serif"}}>
-      {/* Clean Header */}
-      <section className="py-12 relative">
-        {/* Simple Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-20 h-20 border-2 border-yellow-400 rounded-full"></div>
-          <div className="absolute bottom-10 right-10 w-16 h-16 border-2 border-blue-400 rounded-full"></div>
-        </div>
-        
-        <div className="container mx-auto px-6 relative">
-          <div className="max-w-4xl mx-auto">
-            {/* Navigation */}
-            <div className="flex flex-col md:flex-row items-center justify-between mb-8 space-y-4 md:space-y-0">
-              <Link 
-                to="/awards"
-                className="flex items-center text-white hover:text-yellow-400 transition-colors duration-300 font-semibold"
-              >
-                <HiArrowLeft className="h-5 w-5 mr-2" />
-                Back to Awards
-              </Link>
-              
-              <div className="flex items-center bg-white bg-opacity-10 backdrop-blur-sm px-4 py-2 rounded-xl">
-                <HiClock className="h-5 w-5 mr-2 text-yellow-400" />
-                <span className="text-white font-medium">Deadline: Sept 30, 2025</span>
-              </div>
-            </div>
-
+    <div className="min-h-screen" style={{ backgroundColor: '#003875', fontFamily: 'Inter, system-ui, sans-serif' }}>
+      
+      {/* Hero Section */}
+      <section className="py-16 px-6">
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto text-center">
+            
             {/* Logo */}
-            <div className="flex justify-center mb-8">
-              <div className="bg-white bg-opacity-95 backdrop-blur-sm p-4 rounded-xl shadow-lg">
-                <img 
-                  src="/teendom awards primary logo.png" 
-                  alt="Teendom Awards Logo"
-                  className="h-20 w-auto"
-                />
+            <div className="mb-8">
+              <img 
+                src="/teendom awards primary logo.png" 
+                alt="Teendom Awards Logo"
+                className="h-20 md:h-24 w-auto mx-auto"
+                onError={(e) => {
+                  if (e.target.src.includes('primary')) {
+                    e.target.src = '/teendom.png';
+                  } else if (e.target.src.includes('teendom.png')) {
+                    e.target.src = '/teendom awards logo.jpg';
+                  }
+                }}
+              />
+            </div>
+
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-white">
+              NOMINATE AN EXCEPTIONAL TEEN
+            </h1>
+            
+            <p className="text-lg md:text-xl text-white mb-8 max-w-3xl mx-auto leading-relaxed">
+              Know a teen making a difference? This is your chance to celebrate their impact and help them gain national recognition.
+            </p>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
+              <div className="bg-white rounded-2xl p-4 shadow-lg">
+                <div className="text-2xl font-black mb-1" style={{ color: '#003875' }}>10</div>
+                <div className="text-sm font-bold" style={{ color: '#003875' }}>Categories</div>
+              </div>
+              <div className="bg-white rounded-2xl p-4 shadow-lg">
+                <div className="text-2xl font-black mb-1" style={{ color: '#003875' }}>13-19</div>
+                <div className="text-sm font-bold" style={{ color: '#003875' }}>Age Range</div>
+              </div>
+              <div className="bg-white rounded-2xl p-4 shadow-lg">
+                <div className="text-2xl font-black mb-1" style={{ color: '#DAA520' }}>FREE</div>
+                <div className="text-sm font-bold" style={{ color: '#003875' }}>Nomination</div>
+              </div>
+              <div className="bg-white rounded-2xl p-4 shadow-lg">
+                <div className="text-2xl font-black mb-1" style={{ color: '#DAA520' }}>DEC 6</div>
+                <div className="text-sm font-bold" style={{ color: '#003875' }}>Ceremony</div>
               </div>
             </div>
 
-            {/* Title */}
-            <div className="text-center mb-12">
-              <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
-                NOMINATE A <span className="text-yellow-400">TEEN HERO</span>
-              </h1>
-              <p className="text-xl text-blue-200 font-medium max-w-2xl mx-auto">
-                Know an exceptional teenager making a difference? Help us celebrate their impact and achievements.
-              </p>
+            {/* Key Benefits */}
+            <div className="bg-white rounded-3xl p-8 shadow-2xl mb-8">
+              <h2 className="text-2xl font-bold mb-6" style={{ color: '#003875' }}>
+                Why Nominate?
+              </h2>
+              <div className="grid md:grid-cols-3 gap-6 text-left">
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#DAA520' }}>
+                    <HiStar className="h-4 w-4" style={{ color: '#003875' }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2" style={{ color: '#003875' }}>National Recognition</h3>
+                    <p className="text-sm" style={{ color: '#003875' }}>Get featured in national media and campaigns</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#DAA520' }}>
+                    <HiLightningBolt className="h-4 w-4" style={{ color: '#003875' }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2" style={{ color: '#003875' }}>Development Support</h3>
+                    <p className="text-sm" style={{ color: '#003875' }}>12-month mentorship and growth journey</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#DAA520' }}>
+                    <HiStar className="h-4 w-4" style={{ color: '#003875' }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-2" style={{ color: '#003875' }}>Alumni Network</h3>
+                    <p className="text-sm" style={{ color: '#003875' }}>Connect with other outstanding teens</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Nomination Form */}
-      <section className="py-8">
+      {/* Nomination Form Section */}
+      <section className="pb-16">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <NominationForm />
@@ -66,13 +104,30 @@ function NominatePage() {
         </div>
       </section>
 
-      {/* Simple Footer */}
-      <section className="py-12 bg-black bg-opacity-20">
+      {/* Support Section */}
+      <section className="py-12" style={{ backgroundColor: '#002a5c' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-blue-200 font-medium">
-              Need help with your nomination? Contact us at info@teendom.africa
+            <h2 className="text-2xl font-bold text-white mb-4">
+              Need Help with Your Nomination?
+            </h2>
+            <p className="text-white mb-6">
+              Our team is here to support you through the nomination process
             </p>
+            <div className="grid md:grid-cols-3 gap-6 text-white">
+              <div>
+                <h3 className="font-bold mb-2" style={{ color: '#DAA520' }}>Email</h3>
+                <p>info@teendom.africa</p>
+              </div>
+              <div>
+                <h3 className="font-bold mb-2" style={{ color: '#DAA520' }}>WhatsApp</h3>
+                <p>0742862080</p>
+              </div>
+              <div>
+                <h3 className="font-bold mb-2" style={{ color: '#DAA520' }}>Website</h3>
+                <p>www.teendom.africa</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
