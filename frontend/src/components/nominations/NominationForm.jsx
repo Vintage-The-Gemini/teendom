@@ -1,4 +1,4 @@
-// frontend/src/components/nominations/NominationForm.jsx
+// File Path: frontend/src/components/nominations/NominationForm.jsx
 import React, { useState, useEffect } from "react";
 import NominatorSection from "./NominatorSection";
 import NomineeSection from "./NomineeSection";
@@ -10,7 +10,6 @@ import ConsentSection from "./ConsentSection";
 
 function NominationForm() {
   const [formData, setFormData] = useState(() => {
-    // Load saved data on initial render
     try {
       const saved = sessionStorage.getItem('nomination-form');
       if (saved) {
@@ -51,42 +50,40 @@ function NominationForm() {
 
   const handleFileUpload = async (file, fieldName) => {
     if (!file) return;
-
-    console.log('🔄 Uploading:', file.name, file.type, (file.size/1024/1024).toFixed(2) + 'MB');
-
-    if (file.size > 5 * 1024 * 1024) {
-      setErrors(prev => ({ ...prev, [fieldName]: "File too large (max 5MB)" }));
-      return;
-    }
-
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
-    if (!allowedTypes.includes(file.type)) {
-      setErrors(prev => ({ ...prev, [fieldName]: "Only JPEG, PNG, PDF allowed" }));
-      return;
-    }
-
-    setUploadProgress(prev => ({ ...prev, [fieldName]: 10 }));
-
-    const formData = new FormData();
-    formData.append('file', file);
-
+    
     try {
-      console.log('📤 Posting to: http://localhost:5000/api/upload');
-      const response = await fetch('http://localhost:5000/api/upload', {
-        method: 'POST',
-        body: formData
+      setUploadProgress(prev => ({ ...prev, [fieldName]: 0 }));
+      
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', file);
+      
+      const xhr = new XMLHttpRequest();
+      
+      xhr.upload.onprogress = (event) => {
+        if (event.lengthComputable) {
+          const percentComplete = (event.loaded / event.total) * 100;
+          setUploadProgress(prev => ({ ...prev, [fieldName]: percentComplete }));
+        }
+      };
+      
+      const uploadPromise = new Promise((resolve, reject) => {
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            resolve(JSON.parse(xhr.responseText));
+          } else {
+            reject(new Error('Upload failed'));
+          }
+        };
+        xhr.onerror = () => reject(new Error('Upload failed'));
       });
-
-      console.log('📡 Response:', response.status, response.statusText);
-
-      if (!response.ok) {
-        throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      console.log('✅ Upload result:', result);
-
+      
+      xhr.open('POST', 'http://localhost:5000/api/upload');
+      xhr.send(uploadFormData);
+      
+      const result = await uploadPromise;
+      
       if (result.success) {
+        console.log('✅ File uploaded:', result.url);
         setFormData(prev => ({
           ...prev,
           [fieldName]: fieldName === 'supportingDocuments' 
@@ -125,23 +122,22 @@ function NominationForm() {
       newErrors.nomineeAge = "Age must be between 13-19";
     }
 
-    // Bio length validation (250 words max)
+    // Bio length validation (100 words max)
     if (formData.shortBio) {
       const bioWords = formData.shortBio.trim().split(/\s+/).length;
-      if (bioWords > 250) {
-        newErrors.shortBio = `Bio too long: ${bioWords}/250 words`;
+      if (bioWords > 100) {
+        newErrors.shortBio = `Bio too long: ${bioWords}/100 words`;
       }
     }
 
-    // Statement length validation (300-500 words, max 3000 characters)
+    // Statement length validation (100 words max)
     if (formData.nominationStatement) {
       const statementWords = formData.nominationStatement.trim().split(/\s+/).length;
-      const statementChars = formData.nominationStatement.length;
-      
-      if (statementWords < 300) {
-        newErrors.nominationStatement = `Statement too short: ${statementWords}/300 words minimum`;
-      } else if (statementChars > 3000) {
-        newErrors.nominationStatement = `Statement too long: ${statementChars}/3000 characters maximum`;
+      if (statementWords > 100) {
+        newErrors.nominationStatement = `Statement too long: ${statementWords}/100 words`;
+      }
+      if (statementWords < 50) {
+        newErrors.nominationStatement = `Statement too short: ${statementWords}/50 words minimum`;
       }
     }
 
@@ -157,111 +153,87 @@ function NominationForm() {
       newErrors.refereeEmail = "Invalid email format";
     }
 
-    if (!formData.nomineePhoto) newErrors.nomineePhoto = "Photo required";
-    if (!formData.accurateInfo) newErrors.accurateInfo = "Required";
-    if (!formData.nomineePermission) newErrors.nomineePermission = "Required";
-    if (!formData.understandsProcess) newErrors.understandsProcess = "Required";
-    if (!formData.noFalseInfo) newErrors.noFalseInfo = "Required";
+    // Consent validations
+    if (!formData.accurateInfo) newErrors.accurateInfo = "Please confirm information is accurate";
+    if (!formData.nomineePermission) newErrors.nomineePermission = "Nominee permission required";
+    if (!formData.understandsProcess) newErrors.understandsProcess = "Please acknowledge the process";
+    if (!formData.noFalseInfo) newErrors.noFalseInfo = "Please confirm no false information";
 
-    if (parseInt(formData.nomineeAge) < 18 && !formData.parentalConsent) {
-      newErrors.parentalConsent = "Required for minors";
+    // Parental consent for minors
+    const nomineeAge = parseInt(formData.nomineeAge);
+    if (nomineeAge && nomineeAge < 18 && !formData.parentalConsent) {
+      newErrors.parentalConsent = "Parental consent required for nominees under 18";
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('🚀 Form submission started');
-    console.log('📋 Form data:', formData);
+    setIsSubmitting(true);
     
-    if (!validateForm()) {
-      console.log('❌ Form validation failed');
-      alert('❌ Please fix the errors in the form before submitting');
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsSubmitting(false);
       return;
     }
 
-    console.log('✅ Form validation passed');
-    setIsSubmitting(true);
-
     try {
-      console.log('📤 Sending nomination to: http://localhost:5000/api/nominations');
-      
       const response = await fetch('http://localhost:5000/api/nominations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          submittedAt: new Date().toISOString()
-        })
+        body: JSON.stringify(formData)
       });
 
-      console.log('📡 Response received:', response.status, response.statusText);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('❌ Response not OK:', errorText);
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
       const result = await response.json();
-      console.log('✅ Submission result:', result);
 
       if (result.success) {
-        console.log('🎉 Nomination submitted successfully!');
+        console.log('✅ Nomination submitted successfully');
+        alert('🎉 Nomination submitted successfully! Thank you for celebrating teen excellence.');
         sessionStorage.removeItem('nomination-form');
-        alert('🎉 Nomination submitted successfully! You will receive a confirmation email shortly.');
-        window.location.href = '/awards?submitted=true';
+        window.location.href = '/awards';
       } else {
         throw new Error(result.message || 'Submission failed');
       }
     } catch (error) {
       console.error('❌ Submission error:', error);
-      alert('❌ Submission failed: ' + error.message + '\n\nPlease try again or contact info@teendom.africa');
+      alert('❌ Submission failed. Please try again.');
+      setErrors({ submit: error.message });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900 py-12">
-      {/* Starry Background Effect */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-2 h-2 bg-white rounded-full opacity-60 animate-pulse"></div>
-        <div className="absolute top-32 right-20 w-1 h-1 bg-yellow-300 rounded-full opacity-80 animate-pulse"></div>
-        <div className="absolute top-40 left-1/4 w-1.5 h-1.5 bg-white rounded-full opacity-70 animate-pulse"></div>
-        <div className="absolute top-60 right-1/3 w-1 h-1 bg-blue-200 rounded-full opacity-60 animate-pulse"></div>
-        <div className="absolute top-80 left-1/2 w-2 h-2 bg-yellow-200 rounded-full opacity-50 animate-pulse"></div>
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto p-6">
-        <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-3xl shadow-2xl border border-white border-opacity-20 p-8">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center mb-6">
+    <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl border border-blue-300 shadow-2xl overflow-hidden" style={{fontFamily: "'Inter', 'Segoe UI', 'Roboto', sans-serif"}}>
+      
+      {/* Form Header with Logo */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-center relative">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-2 left-4 w-8 h-8 border-2 border-yellow-400 rounded-full"></div>
+          <div className="absolute bottom-2 right-4 w-6 h-6 border-2 border-white rounded-full"></div>
+        </div>
+        
+        <div className="relative">
+          <div className="flex justify-center mb-4">
+            <div className="bg-white p-3 rounded-xl shadow-lg">
               <img 
-                src="/teendom.png" 
-                alt="Teendom" 
-                className="h-16 w-16 rounded-full border-2 border-yellow-400 shadow-lg mr-4"
+                src="/teendom awards primary logo.png" 
+                alt="Teendom Awards Logo"
+                className="h-14 w-auto"
               />
-              <div>
-                <h1 className="text-4xl font-black text-white tracking-wider">
-                  TEENDOM
-                </h1>
-                <p className="text-yellow-400 font-bold">AWARDS NOMINATION</p>
-              </div>
-            </div>
-            <p className="text-blue-200 font-semibold text-lg">
-              Nominate an exceptional Kenyan teen making a difference (Ages 13-19)
-            </p>
-            <div className="bg-yellow-400 bg-opacity-20 backdrop-blur-sm border border-yellow-400 rounded-xl p-4 mt-6">
-              <p className="text-yellow-200 font-bold">
-                ⏰ Deadline: September 30, 2025 | 🆓 FREE | 💾 Auto-saves progress
-              </p>
             </div>
           </div>
+          <h2 className="text-2xl font-bold text-white mb-2">NOMINATION FORM</h2>
+          <p className="text-blue-100 font-medium">Complete all sections to nominate an exceptional teenager</p>
+        </div>
+      </div>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
+      <div className="p-6 bg-white">
+        <div className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <NominatorSection formData={formData} handleInputChange={handleInputChange} errors={errors} />
             <NomineeSection formData={formData} handleInputChange={handleInputChange} errors={errors} />
             <CategorySelection formData={formData} handleInputChange={handleInputChange} errors={errors} />
@@ -276,7 +248,7 @@ function NominationForm() {
             <div className="text-center py-8">
               <button
                 type="submit" disabled={isSubmitting}
-                className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-black py-6 px-16 rounded-2xl text-xl transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-yellow-400/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-6 px-16 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-400/50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <div className="flex items-center justify-center">
@@ -284,7 +256,7 @@ function NominationForm() {
                     SUBMITTING...
                   </div>
                 ) : (
-                  '🏆 SUBMIT NOMINATION'
+                  'SUBMIT NOMINATION'
                 )}
               </button>
               <p className="text-blue-200 text-sm mt-4 font-medium">

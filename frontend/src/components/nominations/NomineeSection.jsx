@@ -1,33 +1,24 @@
-// frontend/src/components/nominations/NomineeSection.jsx
+// File Path: frontend/src/components/nominations/NomineeSection.jsx
 import React from "react";
 
 function NomineeSection({ formData, handleInputChange, errors }) {
   const kenyanCounties = [
-    "Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret", "Nyeri", "Machakos", "Thika",
-    "Kiambu", "Meru", "Embu", "Kitui", "Garissa", "Isiolo", "Marsabit", "Wajir",
-    "Turkana", "West Pokot", "Baringo", "Laikipia", "Nyandarua", "Murang'a",
-    "Kirinyaga", "Tharaka-Nithi", "Makueni", "Taita-Taveta", "Lamu", "Tana River",
-    "Kilifi", "Kwale", "Kajiado", "Narok", "Bomet", "Kericho", "Nandi", 
-    "Uasin Gishu", "Elgeyo-Marakwet", "Trans-Nzoia", "Bungoma", "Kakamega",
-    "Vihiga", "Siaya", "Kisii", "Nyamira", "Migori", "Homa Bay", "Busia"
+    "Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay",
+    "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii",
+    "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera",
+    "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi",
+    "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita-Taveta", "Tana River",
+    "Tharaka-Nithi", "Trans Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"
   ];
 
   const isMinor = parseInt(formData.nomineeAge) < 18;
 
   return (
-    <section className="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
-      <h2 className="text-2xl font-black text-gray-900 mb-6 flex items-center">
-        <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-black">2</span>
+    <section className="bg-white border-l-4 border-green-500 p-6 rounded-xl shadow-lg">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+        <span className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold text-lg">2</span>
         NOMINEE INFORMATION
       </h2>
-      
-      {isMinor && (
-        <div className="bg-green-100 border border-green-300 rounded-lg p-4 mb-6">
-          <p className="text-green-800 font-bold text-sm">
-            📝 Note: Since this nominee is under 18, email, phone, and school are optional fields.
-          </p>
-        </div>
-      )}
       
       <div className="grid md:grid-cols-2 gap-6">
         <div>
@@ -37,10 +28,10 @@ function NomineeSection({ formData, handleInputChange, errors }) {
             name="nomineeName"
             value={formData.nomineeName}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-green-500 focus:border-green-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-green-500 focus:border-green-500 focus:bg-white text-gray-800 ${
               errors.nomineeName ? 'border-red-500' : 'border-gray-300'
             }`}
-            placeholder="Nominee's full name"
+            placeholder="Enter nominee's full name"
           />
           {errors.nomineeName && (
             <p className="text-red-500 text-sm mt-1 font-semibold">{errors.nomineeName}</p>
@@ -54,9 +45,8 @@ function NomineeSection({ formData, handleInputChange, errors }) {
             name="nomineeAge"
             value={formData.nomineeAge}
             onChange={handleInputChange}
-            min="13"
-            max="19"
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-green-500 focus:border-green-500 ${
+            min="13" max="19"
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-green-500 focus:border-green-500 focus:bg-white text-gray-800 ${
               errors.nomineeAge ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Age (13-19)"
@@ -72,7 +62,7 @@ function NomineeSection({ formData, handleInputChange, errors }) {
             name="nomineeCounty"
             value={formData.nomineeCounty}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-green-500 focus:border-green-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-green-500 focus:border-green-500 focus:bg-white text-gray-800 ${
               errors.nomineeCounty ? 'border-red-500' : 'border-gray-300'
             }`}
           >
@@ -95,7 +85,7 @@ function NomineeSection({ formData, handleInputChange, errors }) {
             name="nomineeSchool"
             value={formData.nomineeSchool}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-green-500 focus:border-green-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-green-500 focus:border-green-500 focus:bg-white text-gray-800 ${
               errors.nomineeSchool ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder={isMinor ? "Current school (if applicable)" : "Current school or institution"}
@@ -114,7 +104,7 @@ function NomineeSection({ formData, handleInputChange, errors }) {
             name="nomineeEmail"
             value={formData.nomineeEmail}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-green-500 focus:border-green-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-green-500 focus:border-green-500 focus:bg-white text-gray-800 ${
               errors.nomineeEmail ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder={isMinor ? "nominee@example.com (if they have one)" : "nominee@example.com"}
@@ -133,7 +123,7 @@ function NomineeSection({ formData, handleInputChange, errors }) {
             name="nomineePhone"
             value={formData.nomineePhone}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-green-500 focus:border-green-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-green-500 focus:border-green-500 focus:bg-white text-gray-800 ${
               errors.nomineePhone ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder={isMinor ? "0700000000 (if they have one)" : "0700000000"}

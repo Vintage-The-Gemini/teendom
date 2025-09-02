@@ -1,4 +1,4 @@
-// frontend/src/components/nominations/NominatorSection.jsx
+// File Path: frontend/src/components/nominations/NominatorSection.jsx
 import React from "react";
 
 function NominatorSection({ formData, handleInputChange, errors }) {
@@ -8,9 +8,9 @@ function NominatorSection({ formData, handleInputChange, errors }) {
   ];
 
   return (
-    <section className="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-500">
-      <h2 className="text-2xl font-black text-gray-900 mb-6 flex items-center">
-        <span className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-black">1</span>
+    <section className="bg-white border-l-4 border-blue-500 p-6 rounded-xl shadow-lg">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+        <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold text-lg">1</span>
         NOMINATOR INFORMATION
       </h2>
       
@@ -22,7 +22,7 @@ function NominatorSection({ formData, handleInputChange, errors }) {
             name="nominatorName"
             value={formData.nominatorName}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-blue-500 focus:border-blue-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-blue-500 focus:border-blue-500 focus:bg-white text-gray-800 ${
               errors.nominatorName ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Enter your full name"
@@ -39,7 +39,7 @@ function NominatorSection({ formData, handleInputChange, errors }) {
             name="nominatorEmail"
             value={formData.nominatorEmail}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-blue-500 focus:border-blue-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-blue-500 focus:border-blue-500 focus:bg-white text-gray-800 ${
               errors.nominatorEmail ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="your.email@example.com"
@@ -56,7 +56,7 @@ function NominatorSection({ formData, handleInputChange, errors }) {
             name="nominatorPhone"
             value={formData.nominatorPhone}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-blue-500 focus:border-blue-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-blue-500 focus:border-blue-500 focus:bg-white text-gray-800 ${
               errors.nominatorPhone ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="0700000000"
@@ -72,7 +72,7 @@ function NominatorSection({ formData, handleInputChange, errors }) {
             name="nominatorRelationship"
             value={formData.nominatorRelationship}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-lg font-semibold focus:ring-4 focus:ring-blue-500 focus:border-blue-500 ${
+            className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-lg font-medium focus:ring-4 focus:ring-blue-500 focus:border-blue-500 focus:bg-white text-gray-800 ${
               errors.nominatorRelationship ? 'border-red-500' : 'border-gray-300'
             }`}
           >

@@ -48,6 +48,31 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <Link to="/" className="text-red-500 text-2xl font-black tracking-wider">
+              TEENDOM
+            </Link>
+            <div className="hidden md:flex space-x-8">
+              <Link to="/" className="text-red-500 font-black border-b-2 border-red-500 pb-1">
+                HOME
+              </Link>
+              <Link to="/young-citizens" className="text-white font-bold hover:text-red-500 transition-colors">
+                YOUNG CITIZENS
+              </Link>
+              <Link to="/awards" className="text-white font-bold hover:text-red-500 transition-colors">
+                AWARDS
+              </Link>
+            </div>
+            <div className="bg-red-500 p-2 rounded">
+              <div className="w-6 h-6 text-white">👤</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section - NO GRADIENTS */}
       <section className="relative bg-black text-white section-spacing">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,33 +92,40 @@ function HomePage() {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/articles" className="btn-primary">
-                  READ STORIES
+                <Link to="/articles" className="btn-primary inline-flex items-center justify-center">
+                  EXPLORE STORIES
                   <HiArrowRight className="ml-3" />
                 </Link>
-                <Link to="/awards/nominate" className="btn-secondary">
-                  GET NOMINATED
-                  <HiTrendingUp className="ml-3" />
+                <Link to="/awards" className="btn-secondary inline-flex items-center justify-center">
+                  JOIN AWARDS
+                  <HiStar className="ml-3" />
                 </Link>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-8 pt-12 border-t border-gray-800">
+                <div className="text-center">
+                  <div className="text-3xl font-black text-red-500">500+</div>
+                  <div className="text-sm font-bold text-gray-400">YOUNG VOICES</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black text-red-500">50+</div>
+                  <div className="text-sm font-bold text-gray-400">STORIES SHARED</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black text-red-500">12</div>
+                  <div className="text-sm font-bold text-gray-400">AWARD CATEGORIES</div>
+                </div>
               </div>
             </div>
 
-            {/* Right Content */}
+            {/* Right Visual */}
             <div className="relative">
-              <div className="relative z-10">
-                <img 
-                  src="/images/hero/hero-teens.jpg" 
-                  alt="Young African Leaders"
-                  className="w-full h-96 object-cover rounded-2xl shadow-2xl"
-                  onError={(e) => {
-                    e.target.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%23EF4444"/><text x="50%" y="40%" text-anchor="middle" fill="white" font-size="32" font-weight="bold">TEENDOM</text><text x="50%" y="55%" text-anchor="middle" fill="white" font-size="20">YOUNG VOICES</text><text x="50%" y="70%" text-anchor="middle" fill="white" font-size="16">INSPIRING STORIES</text></svg>`;
-                  }}
-                />
+              <div className="relative">
+                <div className="w-96 h-96 bg-red-500 rounded-full opacity-20 animate-float-gentle"></div>
+                <div className="absolute top-20 left-20 w-64 h-64 bg-white rounded-full opacity-10 animate-morph"></div>
+                <div className="absolute top-40 left-40 w-32 h-32 bg-red-400 rounded-full opacity-30"></div>
               </div>
-              
-              {/* Decorative Elements */}
-              <div className="absolute -top-8 -left-8 w-24 h-24 bg-red-500 rounded-full opacity-30"></div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-yellow-400 rounded-full opacity-30"></div>
             </div>
           </div>
         </div>
@@ -134,26 +166,24 @@ function HomePage() {
       <section className="section-spacing bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-section text-gray-900 mb-6">
-              FEATURED <span className="text-red-500">STORIES</span>
-            </h2>
+            <h2 className="text-section text-gray-900 mb-6">FEATURED STORIES</h2>
             <p className="text-xl font-medium text-gray-600 max-w-2xl mx-auto">
-              Read the most inspiring stories from young African changemakers
+              Discover the latest stories and insights from young African voices
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             {featuredArticles.map((article, index) => (
-              <Link
+              <Link 
                 key={article.id}
                 to={`/article/${article.id}`}
                 className="article-card group"
               >
                 <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={article.image}
+                  <img 
+                    src={article.image} 
                     alt={article.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 p-2"
                     onError={(e) => {
                       const colors = {
                         'Health': '#10B981',
@@ -229,6 +259,47 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="md:col-span-2">
+              <h3 className="text-2xl font-black text-red-500 mb-6">TEENDOM</h3>
+              <p className="text-gray-300 font-medium leading-relaxed max-w-md">
+                Empowering young African voices through storytelling, recognition, and community building. 
+                Your platform for growth and inspiration.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-black text-white mb-6">QUICK LINKS</h4>
+              <ul className="space-y-3">
+                <li><Link to="/articles" className="text-gray-300 hover:text-red-500 font-medium transition-colors">Articles</Link></li>
+                <li><Link to="/awards" className="text-gray-300 hover:text-red-500 font-medium transition-colors">Awards</Link></li>
+                <li><Link to="/young-citizens" className="text-gray-300 hover:text-red-500 font-medium transition-colors">Young Citizens</Link></li>
+                <li><Link to="/about" className="text-gray-300 hover:text-red-500 font-medium transition-colors">About</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-black text-white mb-6">CONNECT</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-gray-300 hover:text-red-500 font-medium transition-colors">Instagram</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-red-500 font-medium transition-colors">Twitter</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-red-500 font-medium transition-colors">Facebook</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-red-500 font-medium transition-colors">LinkedIn</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 pt-8 mt-12 text-center">
+            <p className="text-gray-400 font-medium">
+              © 2025 TEENDOM AFRICA. ALL RIGHTS RESERVED.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
