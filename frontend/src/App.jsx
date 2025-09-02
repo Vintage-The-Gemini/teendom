@@ -1,4 +1,4 @@
-// frontend/src/App.jsx
+// File Path: frontend/src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -18,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/articles" element={<ArticlesPage />} />
+          <Route path="/young-citizens" element={<ArticlesPage />} />
           <Route path="/article/:id" element={<ArticleDetail />} />
           <Route path="/awards" element={<AwardsPage />} />
           <Route path="/awards/nominate" element={<NominatePage />} />
