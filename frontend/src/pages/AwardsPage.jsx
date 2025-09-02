@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { HiStar, HiClock, HiMail, HiPhone, HiAcademicCap } from "react-icons/hi";
 
-// Now I need to update App.jsx to include the awards route
-
 function AwardsPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -88,9 +86,9 @@ function AwardsPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               
-              {/* Left Content */}
-              <div className="text-white">
-                <div className="flex items-center mb-6">
+              {/* Left Content - CENTERED */}
+              <div className="text-white text-center">
+                <div className="flex items-center justify-center mb-6">
                   <img 
                     src="/teendom.png" 
                     alt="Teendom" 
@@ -115,9 +113,9 @@ function AwardsPage() {
                   <h4 className="text-3xl font-black text-yellow-300 mb-6">
                     2025 CATEGORIES
                   </h4>
-                  <div className="grid grid-cols-1 gap-2">
+                  <div className="grid grid-cols-1 gap-2 max-w-md mx-auto">
                     {awardCategories.map((category, index) => (
-                      <div key={category.id} className="flex items-center">
+                      <div key={category.id} className="flex items-center justify-center">
                         <HiStar className="h-5 w-5 text-yellow-400 mr-3" />
                         <span className="bg-black bg-opacity-50 px-4 py-2 rounded text-white font-bold text-sm">
                           {category.title}
@@ -127,11 +125,11 @@ function AwardsPage() {
                   </div>
                 </div>
 
-                <div className="mb-8">
+                <div className="mb-8 text-center">
                   <p className="text-2xl font-bold italic text-yellow-200 mb-4">
                     Nominations open on 5th September
                   </p>
-                  <div className="flex items-center space-x-6 text-yellow-300">
+                  <div className="flex items-center justify-center space-x-6 text-yellow-300">
                     <span className="bg-yellow-500 text-black px-4 py-2 rounded font-black">
                       www.teendom.africa
                     </span>
@@ -140,6 +138,7 @@ function AwardsPage() {
                     </span>
                   </div>
                 </div>
+
               </div>
 
               {/* Right Content - Trophy */}
@@ -211,30 +210,11 @@ function AwardsPage() {
               Know an exceptional teen making a difference? Let's celebrate their impact!
             </p>
 
+            {/* Contact Information */}
             <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-3xl border border-yellow-400">
-                <HiClock className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
-                <h3 className="text-2xl font-black text-white mb-4">Timeline</h3>
-                <div className="space-y-3 text-left">
-                  <div className="flex justify-between">
-                    <span className="text-blue-200 font-semibold">Nominations Open:</span>
-                    <span className="text-yellow-400 font-bold">Sept 5, 2025</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-blue-200 font-semibold">Deadline:</span>
-                    <span className="text-red-400 font-bold">Sept 30, 2025</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-blue-200 font-semibold">Ceremony:</span>
-                    <span className="text-green-400 font-bold">Dec 6, 2025</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-3xl border border-blue-400">
-                <HiMail className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-                <h3 className="text-2xl font-black text-white mb-4">Contact Us</h3>
-                <div className="space-y-3">
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-2xl border border-white border-opacity-20">
+                <h3 className="text-2xl font-black text-yellow-400 mb-4">Get In Touch</h3>
+                <div className="space-y-4">
                   <div className="flex items-center justify-center">
                     <HiMail className="h-5 w-5 text-yellow-400 mr-2" />
                     <span className="text-blue-200 font-semibold">info@teendom.africa</span>
@@ -244,6 +224,24 @@ function AwardsPage() {
                     <span className="text-blue-200 font-semibold">0742862080</span>
                   </div>
                   <p className="text-sm text-gray-300 italic">Free nominations for all teens!</p>
+                </div>
+              </div>
+              
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-2xl border border-white border-opacity-20">
+                <h3 className="text-2xl font-black text-yellow-400 mb-4">Key Dates</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-center">
+                    <HiClock className="h-5 w-5 text-yellow-400 mr-2" />
+                    <span className="text-blue-200 font-semibold">Nominations Open: Sept 5</span>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <HiClock className="h-5 w-5 text-yellow-400 mr-2" />
+                    <span className="text-blue-200 font-semibold">Deadline: Sept 30</span>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <HiClock className="h-5 w-5 text-yellow-400 mr-2" />
+                    <span className="text-blue-200 font-semibold">Awards Ceremony: Dec 6</span>
+                  </div>
                 </div>
               </div>
             </div>
