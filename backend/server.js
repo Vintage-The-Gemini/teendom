@@ -6,10 +6,16 @@ import dotenv from "dotenv";
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // Import routes
 import nominationsRouter from "./routes/nominations.js";
 import authRouter from "./routes/auth.js";
+
+// Get current directory for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -110,7 +116,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   }
 });
 
-// Routes
+// API Routes
 app.use('/api/auth', authRouter);
 app.use('/api/nominations', nominationsRouter);
 
@@ -142,23 +148,51 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 404 handler for API routes
-app.use('/api/*', (req, res) => {
-  console.log('❌ 404 - Route not found:', req.originalUrl);
-  res.status(404).json({
-    success: false,
-    message: `API endpoint not found: ${req.originalUrl}`,
-    availableRoutes: [
-      '/api/auth/login',
-      '/api/auth/verify', 
-      '/api/auth/logout',
-      '/api/nominations',
-      '/api/upload',
-      '/api/health',
-      '/api/test'
-    ]
+// Serve static files from frontend build (for production)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  
+  // Handle client-side routing - serve index.html for all non-API routes
+  app.get('*', (req, res) => {
+    // Don't serve index.html for API routes
+    if (req.path.startsWith('/api/')) {
+      return res.status(404).json({
+        success: false,
+        message: `API endpoint not found: ${req.originalUrl}`,
+        availableRoutes: [
+          '/api/auth/login',
+          '/api/auth/verify', 
+          '/api/auth/logout',
+          '/api/nominations',
+          '/api/upload',
+          '/api/health',
+          '/api/test'
+        ]
+      });
+    }
+    
+    // Serve the React app for all other routes (including /admin)
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
   });
-});
+} else {
+  // Development mode - just handle 404s for API routes
+  app.use('/api/*', (req, res) => {
+    console.log('❌ 404 - Route not found:', req.originalUrl);
+    res.status(404).json({
+      success: false,
+      message: `API endpoint not found: ${req.originalUrl}`,
+      availableRoutes: [
+        '/api/auth/login',
+        '/api/auth/verify', 
+        '/api/auth/logout',
+        '/api/nominations',
+        '/api/upload',
+        '/api/health',
+        '/api/test'
+      ]
+    });
+  });
+}
 
 // Error handling middleware
 app.use((error, req, res, next) => {
@@ -185,6 +219,8 @@ app.listen(PORT, () => {
   console.log(`🔗 API URL: http://localhost:${PORT}/api`);
   console.log(`🔐 Auth endpoints: /api/auth/login, /api/auth/verify`);
   console.log(`📊 Admin credentials: ${process.env.ADMIN_EMAIL || 'admin@teendom.africa'}`);
+  console.log(`🎯 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🌐 Frontend routes: All non-API routes serve React app`);
 });
 
 export default app;

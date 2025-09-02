@@ -1,0 +1,35 @@
+# File Path: render.yaml (place this in the root directory of your project)
+services:
+  - type: web
+    name: teendom-africa
+    env: node
+    plan: free
+    buildCommand: |
+      cd frontend && npm install && npm run build &&
+      cd ../backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: teendom-db
+          property: connectionString
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false  
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@teendom.africa
+      - key: ADMIN_PASSWORD
+        generateValue: true
+    healthCheckPath: /api/health
+    
+databases:
+  - name: teendom-db
+    databaseName: teendom
+    user: teendom_user
