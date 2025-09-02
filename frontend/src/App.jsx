@@ -1,6 +1,7 @@
 // File Path: frontend/src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
@@ -13,21 +14,32 @@ import "./index.css";
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/articles" element={<ArticlesPage />} />
-          <Route path="/young-citizens" element={<ArticlesPage />} />
-          <Route path="/article/:id" element={<ArticleDetail />} />
-          <Route path="/awards" element={<AwardsPage />} />
-          <Route path="/awards/nominate" element={<NominatePage />} />
-          <Route path="/admin" element={<AdminPanel />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="min-h-screen bg-white">
+          <Routes>
+            {/* Admin route - no navbar/footer */}
+            <Route path="/admin" element={<AdminPanel />} />
+            
+            {/* Public routes - with navbar/footer */}
+            <Route path="/*" element={
+              <>
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/articles" element={<ArticlesPage />} />
+                  <Route path="/young-citizens" element={<ArticlesPage />} />
+                  <Route path="/article/:id" element={<ArticleDetail />} />
+                  <Route path="/awards" element={<AwardsPage />} />
+                  <Route path="/awards/nominate" element={<NominatePage />} />
+                </Routes>
+                <Footer />
+              </>
+            } />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

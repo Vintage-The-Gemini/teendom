@@ -1,12 +1,17 @@
-// frontend/src/pages/AdminPanel.jsx
+// File Path: frontend/src/pages/AdminPanel.jsx
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import AdminLogin from '../components/AdminLogin';
 import AdminHeader from '../components/admin/AdminHeader';
 import StatsCards from '../components/admin/StatsCards';
 import FilterControls from '../components/admin/FilterControls';
 import NominationsTable from '../components/admin/NominationsTable';
 import NominationModal from '../components/admin/NominationModal';
+import { API_ENDPOINTS } from '../config/api';
 
 function AdminPanel() {
+  const { isAuthenticated, loading: authLoading, login, logout, authenticatedApiCall } = useAuth();
+  
   const [nominations, setNominations] = useState([]);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -40,30 +45,36 @@ function AdminPanel() {
     { value: 'entrepreneurship', label: 'Entrepreneurship' }
   ];
 
-  // Fetch nominations from backend
+  // Fetch nominations from backend (authenticated)
   const fetchNominations = async () => {
+    if (!isAuthenticated) return;
+    
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/nominations');
+      const response = await authenticatedApiCall(API_ENDPOINTS.NOMINATIONS);
       const data = await response.json();
       
       if (data.success) {
         console.log('📊 Loaded nominations:', data.nominations.length);
-        setNominations(data.nominations);
+        setNominations(data.nominations || []);
       } else {
         console.error('Failed to fetch nominations:', data.message);
+        setNominations([]);
       }
     } catch (error) {
       console.error('Error fetching nominations:', error);
+      setNominations([]);
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch statistics
+  // Fetch statistics (authenticated)
   const fetchStats = async () => {
+    if (!isAuthenticated) return;
+    
     try {
-      const response = await fetch('http://localhost:5000/api/nominations/stats/dashboard');
+      const response = await authenticatedApiCall(`${API_ENDPOINTS.NOMINATIONS}/stats/dashboard`);
       const data = await response.json();
       
       if (data.success) {
@@ -72,18 +83,28 @@ function AdminPanel() {
       }
     } catch (error) {
       console.error('Error fetching stats:', error);
+      // Create mock stats if API fails
+      const mockStats = {
+        total: nominations.length,
+        byStatus: statusOptions
+          .filter(s => s.value !== 'all')
+          .map(status => ({
+            _id: status.value,
+            count: nominations.filter(n => n.status === status.value).length
+          }))
+      };
+      setStats(mockStats);
     }
   };
 
-  // Update nomination status
+  // Update nomination status (authenticated)
   const updateNominationStatus = async (id, newStatus) => {
+    if (!isAuthenticated) return;
+    
     try {
       setUpdating(true);
-      const response = await fetch(`http://localhost:5000/api/nominations/${id}/status`, {
+      const response = await authenticatedApiCall(`${API_ENDPOINTS.NOMINATIONS}/${id}/status`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ status: newStatus }),
       });
 
@@ -95,66 +116,57 @@ function AdminPanel() {
           nom._id === id ? { ...nom, status: newStatus } : nom
         ));
         
+        // Update selected nomination if it's the one being viewed
         if (selectedNomination && selectedNomination._id === id) {
           setSelectedNomination(prev => ({ ...prev, status: newStatus }));
         }
         
         console.log(`✅ Updated nomination ${id} to ${newStatus}`);
-        fetchStats(); // Refresh stats
+        
+        // Refresh stats
+        fetchStats();
       } else {
         console.error('Failed to update status:', data.message);
+        alert('Failed to update status: ' + data.message);
       }
     } catch (error) {
-      console.error('Error updating nomination:', error);
+      console.error('Error updating nomination status:', error);
+      alert('Error updating nomination status. Please try again.');
     } finally {
       setUpdating(false);
     }
   };
 
-  // Export nominations to CSV
+  // Export to CSV
   const exportToCSV = async () => {
     try {
       setCsvExporting(true);
       
-      // Prepare CSV data
-      const csvData = filteredNominations.map(nomination => ({
-        'Nomination ID': nomination._id,
-        'Nominee Name': nomination.nominee.name,
-        'Nominee Age': nomination.nominee.age,
-        'Nominee Gender': nomination.nominee.gender,
-        'Nominee County': nomination.nominee.county,
-        'Nominee School': nomination.nominee.school || 'Not specified',
-        'Award Category': nomination.awardCategory.replace('-', ' '),
-        'Nominator Name': nomination.nominator.name,
-        'Nominator Email': nomination.nominator.email,
-        'Nominator Phone': nomination.nominator.phone,
-        'Relationship': nomination.nominator.relationship,
-        'Status': nomination.status,
-        'Submitted At': new Date(nomination.submittedAt || nomination.createdAt).toLocaleDateString(),
-        'Short Bio': nomination.details.shortBio,
-        'Nomination Statement': nomination.details.nominationStatement,
-        'Referee Name': nomination.referee.name,
-        'Referee Position': nomination.referee.position,
-        'Referee Email': nomination.referee.email,
-        'Referee Phone': nomination.referee.phone,
-        'Has Photo': nomination.supportingMaterials?.nomineePhoto ? 'Yes' : 'No',
-        'Photo URL': nomination.supportingMaterials?.nomineePhoto || '',
-        'Supporting Documents': nomination.supportingMaterials?.supportingDocuments?.length || 0,
-        'Supporting Links': nomination.supportingMaterials?.supportingLinks?.length || 0,
-        'Admin Notes': nomination.adminNotes || ''
-      }));
-
-      // Convert to CSV
-      const headers = Object.keys(csvData[0]).join(',');
-      const csvRows = csvData.map(row => 
-        Object.values(row).map(value => {
-          // Escape quotes and wrap in quotes if contains comma
-          const stringValue = String(value).replace(/"/g, '""');
-          return stringValue.includes(',') ? `"${stringValue}"` : stringValue;
-        }).join(',')
-      );
+      // Create CSV content
+      const headers = [
+        'ID', 'Nominee Name', 'Nominee Age', 'County', 'Category', 
+        'Nominator Name', 'Nominator Email', 'Nominator Phone', 'Status', 'Submitted Date'
+      ];
       
-      const csvContent = [headers, ...csvRows].join('\n');
+      const csvRows = filteredNominations.map(nomination => {
+        return [
+          nomination._id,
+          nomination.nominee.name,
+          nomination.nominee.age,
+          nomination.nominee.county,
+          nomination.awardCategory?.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Unknown',
+          nomination.nominator.name,
+          nomination.nominator.email,
+          nomination.nominator.phone,
+          nomination.status,
+          new Date(nomination.createdAt).toLocaleDateString()
+        ].map(field => {
+          const stringValue = field?.toString() || '';
+          return stringValue.includes(',') ? `"${stringValue}"` : stringValue;
+        }).join(',');
+      });
+      
+      const csvContent = [headers.join(','), ...csvRows].join('\n');
       
       // Create and download file
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -170,6 +182,7 @@ function AdminPanel() {
       console.log('📄 CSV exported successfully');
     } catch (error) {
       console.error('Error exporting CSV:', error);
+      alert('Error exporting CSV. Please try again.');
     } finally {
       setCsvExporting(false);
     }
@@ -199,11 +212,13 @@ function AdminPanel() {
     fetchStats();
   };
 
-  // Load data on mount
+  // Load data on mount (only if authenticated)
   useEffect(() => {
-    fetchNominations();
-    fetchStats();
-  }, []);
+    if (isAuthenticated) {
+      fetchNominations();
+      fetchStats();
+    }
+  }, [isAuthenticated]);
 
   // Helper functions
   const getStatusColor = (status) => {
@@ -221,10 +236,28 @@ function AdminPanel() {
     });
   };
 
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-red-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 font-medium">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show login if not authenticated
+  if (!isAuthenticated) {
+    return <AdminLogin onLogin={login} />;
+  }
+
+  // Show admin panel if authenticated
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
-      {/* Header Component */}
-      <AdminHeader onRefresh={handleRefresh} />
+    <div className="min-h-screen bg-gray-50">
+      {/* Header Component with Logout */}
+      <AdminHeader onRefresh={handleRefresh} onLogout={logout} />
 
       {/* Stats Component */}
       <StatsCards stats={stats} getStatusColor={getStatusColor} />

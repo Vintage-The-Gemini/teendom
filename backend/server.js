@@ -1,4 +1,4 @@
-// backend/server.js
+// File Path: backend/server.js
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -9,6 +9,7 @@ import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 // Import routes
 import nominationsRouter from "./routes/nominations.js";
+import authRouter from "./routes/auth.js";
 
 dotenv.config();
 
@@ -44,10 +45,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "teendom-awards", // Folder in Cloudinary
+    folder: "teendom-awards",
     allowed_formats: ["jpg", "jpeg", "png", "pdf"],
     public_id: (req, file) => {
-      // Generate unique filename
       const timestamp = Date.now();
       const originalName = file.originalname.split('.')[0];
       return `${originalName}-${timestamp}`;
@@ -61,7 +61,6 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024, // 5MB limit
   },
   fileFilter: (req, file, cb) => {
-    // Check file type
     if (file.mimetype.startsWith('image/') || file.mimetype === 'application/pdf') {
       cb(null, true);
     } else {
@@ -70,7 +69,7 @@ const upload = multer({
   }
 });
 
-// File upload route - MUST be BEFORE other routes
+// File upload route
 app.post("/api/upload", upload.single("file"), (req, res) => {
   console.log('📤 Upload request received:', {
     hasFile: !!req.file,
@@ -96,8 +95,8 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     const response = {
       success: true,
       message: "File uploaded successfully",
-      url: req.file.path, // Cloudinary URL
-      public_id: req.file.filename // Cloudinary public_id
+      url: req.file.path,
+      public_id: req.file.filename
     };
 
     console.log('📡 Sending response:', response);
@@ -111,87 +110,25 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   }
 });
 
-// Test route to create collection manually
-app.post('/api/test-db', async (req, res) => {
-  try {
-    console.log('🧪 Testing database connection and collection creation...');
-    console.log('📊 MongoDB connection state:', mongoose.connection.readyState);
-    console.log('📊 Database name:', mongoose.connection.name);
-    console.log('📊 Collections in database:', await mongoose.connection.db.listCollections().toArray());
-
-    // Import the model
-    const { default: Nomination } = await import('./models/Nomination.js');
-    
-    // Create a simple test document
-    const testNomination = new Nomination({
-      nominator: {
-        name: 'Test User',
-        email: 'test@example.com',
-        phone: '0700000000',
-        relationship: 'Teacher'
-      },
-      nominee: {
-        name: 'Test Nominee',
-        age: 16,
-        county: 'Nairobi'
-      },
-      awardCategory: 'academic',
-      details: {
-        shortBio: 'This is a test bio for database testing purposes.',
-        nominationStatement: 'This is a comprehensive test nomination statement that is designed to meet the minimum character requirements for the database schema validation. This statement contains sufficient words and characters to pass all validation rules that have been established in the Mongoose schema. The nominee being tested here represents an exceptional individual who has demonstrated outstanding qualities in their chosen field of excellence. They have shown remarkable dedication, perseverance, and leadership skills that set them apart from their peers. Through their various achievements and contributions to their community, they have proven themselves worthy of recognition through the Teendom Awards program. This detailed statement ensures that all database validation requirements are properly satisfied during the testing process.'
-      },
-      supportingMaterials: {
-        nomineePhoto: 'https://example.com/test-photo.jpg',
-        supportingDocuments: [],
-        supportingLinks: []
-      },
-      referee: {
-        name: 'Test Referee',
-        position: 'Principal',
-        phone: '0700000001',
-        email: 'referee@example.com'
-      },
-      consent: {
-        accurateInfo: true,
-        nomineePermission: true,
-        parentalConsent: true,
-        understandsProcess: true,
-        noFalseInfo: true
-      }
-    });
-
-    console.log('💾 Saving test document...');
-    const saved = await testNomination.save();
-    console.log('✅ Test document saved with ID:', saved._id);
-    
-    // List collections again
-    const collections = await mongoose.connection.db.listCollections().toArray();
-    console.log('📊 Collections after save:', collections.map(c => c.name));
-
-    res.json({
-      success: true,
-      message: 'Test document created successfully!',
-      documentId: saved._id,
-      database: mongoose.connection.name,
-      collections: collections.map(c => c.name)
-    });
-
-  } catch (error) {
-    console.error('❌ Test failed:', error);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-      error: error.stack
-    });
-  }
-});
-
 // Routes
+app.use('/api/auth', authRouter);
 app.use('/api/nominations', nominationsRouter);
 
 // Test route
 app.get('/api/test', (req, res) => {
-  res.json({ message: 'Backend is working!', timestamp: new Date().toISOString() });
+  res.json({ 
+    message: 'Teendom Backend is working!', 
+    timestamp: new Date().toISOString(),
+    features: ['Authentication', 'File Upload', 'Nominations'],
+    availableRoutes: [
+      '/api/auth/login',
+      '/api/auth/verify', 
+      '/api/auth/logout',
+      '/api/nominations',
+      '/api/upload',
+      '/api/health'
+    ]
+  });
 });
 
 // Health check route  
@@ -199,15 +136,27 @@ app.get('/api/health', (req, res) => {
   res.json({ 
     success: true, 
     message: 'Teendom Awards API is running!',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    database: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
+    auth: 'Enabled'
   });
 });
 
 // 404 handler for API routes
 app.use('/api/*', (req, res) => {
+  console.log('❌ 404 - Route not found:', req.originalUrl);
   res.status(404).json({
     success: false,
-    message: 'API endpoint not found'
+    message: `API endpoint not found: ${req.originalUrl}`,
+    availableRoutes: [
+      '/api/auth/login',
+      '/api/auth/verify', 
+      '/api/auth/logout',
+      '/api/nominations',
+      '/api/upload',
+      '/api/health',
+      '/api/test'
+    ]
   });
 });
 
@@ -231,12 +180,11 @@ app.use((error, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
-  console.log(`🚀 Teendom Awards API running on port ${PORT}`);
-  console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`🏆 Nominations API: http://localhost:${PORT}/api/nominations`);
-  console.log(`📁 Upload API: http://localhost:${PORT}/api/upload`);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🔗 API URL: http://localhost:${PORT}/api`);
+  console.log(`🔐 Auth endpoints: /api/auth/login, /api/auth/verify`);
+  console.log(`📊 Admin credentials: ${process.env.ADMIN_EMAIL || 'admin@teendom.africa'}`);
 });
 
 export default app;
