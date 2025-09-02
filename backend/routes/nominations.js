@@ -1,91 +1,9 @@
-// backend/routes/nominations.js
+// File Path: backend/routes/nominations.js
 import express from 'express';
 import Nomination from '../models/Nomination.js';
-import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
 
 const router = express.Router();
-
-// Email transporter configuration
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
-
-// Helper function to send confirmation email
-const sendConfirmationEmail = async (nominatorEmail, nominatorName, nomineeName) => {
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: nominatorEmail,
-    subject: '🏆 Teendom Awards - Nomination Submitted Successfully!',
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 30px; text-align: center;">
-          <h1 style="margin: 0; font-size: 28px; font-weight: bold;">TEENDOM AWARDS 2025</h1>
-          <p style="margin: 10px 0 0 0; font-size: 16px;">Celebrating Teen Excellence</p>
-        </div>
-        
-        <div style="padding: 30px; background: #f9fafb;">
-          <h2 style="color: #1f2937; font-size: 24px; margin-bottom: 20px;">Nomination Confirmed! 🎉</h2>
-          
-          <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-            Dear <strong>${nominatorName}</strong>,
-          </p>
-          
-          <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-            Thank you for nominating <strong>${nomineeName}</strong> for the Teendom Awards 2025! 
-            Your nomination has been successfully submitted and is now under review.
-          </p>
-          
-          <div style="background: #dbeafe; border-left: 4px solid #3b82f6; padding: 15px; margin: 20px 0;">
-            <h3 style="color: #1e40af; margin: 0 0 10px 0;">What happens next?</h3>
-            <ul style="color: #1e40af; margin: 0; padding-left: 20px;">
-              <li>Our judging panel will review all nominations</li>
-              <li>Shortlisted nominees will be contacted in November</li>
-              <li>Public voting opens for finalists</li>
-              <li>Awards ceremony: December 6, 2025 in Nairobi</li>
-            </ul>
-          </div>
-          
-          <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-            <strong>Important:</strong> Only shortlisted nominees will be contacted. 
-            Keep an eye on your inbox and follow us on social media for updates!
-          </p>
-          
-          <div style="text-align: center; margin: 30px 0;">
-            <a href="https://teendom.africa/awards" 
-               style="background: #ef4444; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-              View Awards Page
-            </a>
-          </div>
-          
-          <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 30px;">
-            <p style="color: #6b7280; font-size: 14px; margin: 0;">
-              <strong>Contact Us:</strong><br>
-              📧 info@teendom.africa<br>
-              📱 0742862080<br>
-              🌐 www.teendom.africa
-            </p>
-          </div>
-        </div>
-        
-        <div style="background: #111827; color: #d1d5db; padding: 20px; text-align: center; font-size: 14px;">
-          © 2025 Teendom Africa. Empowering young changemakers across Kenya.
-        </div>
-      </div>
-    `
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    console.log('📧 Confirmation email sent successfully');
-  } catch (error) {
-    console.error('⚠️ Failed to send confirmation email:', error.message);
-  }
-};
 
 // POST /api/nominations - Submit a new nomination
 router.post('/', async (req, res) => {
@@ -106,97 +24,50 @@ router.post('/', async (req, res) => {
 
     console.log('🔍 Key fields:', {
       nominatorName, nomineeName, awardCategory,
-      hasPhoto: !!nomineePhoto,
-      statementLength: nominationStatement?.length,
-      bioLength: shortBio?.length,
-      consents: { accurateInfo, nomineePermission, understandsProcess, noFalseInfo }
+      hasPhoto: !!nomineePhoto
     });
 
-    // Basic validation
-    if (!nominatorName || !nominatorEmail || !nomineeName || !nomineeAge || !nomineeCounty) {
-      console.log('❌ Missing basic required fields');
-      return res.status(400).json({
-        success: false,
-        message: 'Missing required fields: nominator name, email, nominee name, age, and county are required'
-      });
-    }
-
-    if (!awardCategory || !shortBio || !nominationStatement) {
-      console.log('❌ Missing award/bio/statement');
-      return res.status(400).json({
-        success: false,
-        message: 'Award category, bio, and nomination statement are required'
-      });
-    }
-
-    if (!refereeName || !refereeEmail) {
-      console.log('❌ Missing referee info');
-      return res.status(400).json({
-        success: false,
-        message: 'Referee name and email are required'
-      });
-    }
-
-    if (!accurateInfo || !nomineePermission || !understandsProcess || !noFalseInfo) {
-      console.log('❌ Missing required consents');
-      return res.status(400).json({
-        success: false,
-        message: 'All consent checkboxes must be checked'
-      });
-    }
-
-    // Check parental consent for minors
-    const age = parseInt(nomineeAge);
-    if (age < 18 && !parentalConsent) {
-      console.log('❌ Missing parental consent for minor');
-      return res.status(400).json({
-        success: false,
-        message: 'Parental consent is required for nominees under 18'
-      });
-    }
-
-    console.log('✅ All validation passed, creating nomination...');
-
-    // Create nomination document
+    // Create nomination object
     const nominationData = {
       nominator: {
         name: nominatorName,
         email: nominatorEmail,
-        phone: nominatorPhone || '',
-        relationship: nominatorRelationship || ''
+        phone: nominatorPhone,
+        relationship: nominatorRelationship
       },
       nominee: {
         name: nomineeName,
-        age: age,
-        email: nomineeEmail || '',
-        phone: nomineePhone || '',
+        age: parseInt(nomineeAge),
+        email: nomineeEmail || undefined,
+        phone: nomineePhone || undefined,
         county: nomineeCounty,
-        school: nomineeSchool || ''
+        school: nomineeSchool || undefined
       },
-      awardCategory: awardCategory,
+      awardCategory,
       details: {
-        shortBio: shortBio,
-        nominationStatement: nominationStatement
+        shortBio,
+        nominationStatement
       },
       supportingMaterials: {
         nomineePhoto: nomineePhoto || '',
         supportingDocuments: supportingDocuments || [],
-        supportingLinks: (supportingLinks || []).filter(link => link && link.trim() !== '')
+        supportingLinks: supportingLinks || []
       },
-      referee: {
+      referee: (refereeName && refereePosition) ? {
         name: refereeName,
-        position: refereePosition || '',
+        position: refereePosition,
         phone: refereePhone || '',
-        email: refereeEmail,
-        contactPermission: contactReferee || false
-      },
+        email: refereeEmail || ''
+      } : undefined,
       consent: {
-        accurateInfo: true,
-        nomineePermission: true,
-        parentalConsent: age >= 18 ? true : (parentalConsent || false),
-        understandsProcess: true,
-        noFalseInfo: true
-      }
+        accurateInfo: accurateInfo || true,
+        nomineePermission: nomineePermission || true,
+        parentalConsent: parseInt(nomineeAge) < 18 ? (parentalConsent || false) : true,
+        understandsProcess: understandsProcess || true,
+        noFalseInfo: noFalseInfo || true
+      },
+      status: 'submitted',
+      submittedAt: new Date()
     };
 
     console.log('💾 Attempting to save to database...');
@@ -214,13 +85,8 @@ router.post('/', async (req, res) => {
     console.log('📊 Document ID:', savedNomination._id);
     console.log('📊 Collection should now exist in database:', mongoose.connection.name);
 
-    // Send confirmation email
-    try {
-      await sendConfirmationEmail(nominatorEmail, nominatorName, nomineeName);
-      console.log('📧 Confirmation email sent');
-    } catch (emailError) {
-      console.log('⚠️ Email sending failed (but nomination was saved):', emailError.message);
-    }
+    // Note: Email functionality disabled for now
+    console.log('📧 Email functionality disabled (nodemailer not configured)');
 
     res.status(201).json({
       success: true,
@@ -349,15 +215,16 @@ router.put('/:id/status', async (req, res) => {
       });
     }
 
-    console.log(`📊 Updated nomination ${req.params.id} status to: ${status}`);
+    console.log(`📊 Updated nomination ${req.params.id} to status: ${status}`);
 
     res.json({
       success: true,
+      message: 'Status updated successfully',
       nomination
     });
 
   } catch (error) {
-    console.error('Update nomination status error:', error);
+    console.error('Update status error:', error);
     res.status(500).json({
       success: false,
       message: 'Server error: ' + error.message
@@ -365,7 +232,7 @@ router.put('/:id/status', async (req, res) => {
   }
 });
 
-// GET /api/nominations/stats/dashboard - Get statistics
+// GET /api/nominations/stats/dashboard - Get dashboard statistics
 router.get('/stats/dashboard', async (req, res) => {
   try {
     const totalNominations = await Nomination.countDocuments();
@@ -376,6 +243,9 @@ router.get('/stats/dashboard', async (req, res) => {
           _id: '$status',
           count: { $sum: 1 }
         }
+      },
+      {
+        $sort: { _id: 1 }
       }
     ]);
 
@@ -385,38 +255,25 @@ router.get('/stats/dashboard', async (req, res) => {
           _id: '$awardCategory',
           count: { $sum: 1 }
         }
-      }
-    ]);
-
-    const ageStats = await Nomination.aggregate([
+      },
       {
-        $group: {
-          _id: {
-            $cond: [
-              { $lt: ['$nominee.age', 18] },
-              'minor',
-              'adult'
-            ]
-          },
-          count: { $sum: 1 }
-        }
+        $sort: { count: -1 }
       }
     ]);
 
-    console.log(`📊 Dashboard stats: ${totalNominations} total nominations`);
+    console.log('📊 Dashboard stats generated');
 
     res.json({
       success: true,
       stats: {
         total: totalNominations,
         byStatus: statusStats,
-        byCategory: categoryStats,
-        byAge: ageStats
+        byCategory: categoryStats
       }
     });
 
   } catch (error) {
-    console.error('Get stats error:', error);
+    console.error('Stats error:', error);
     res.status(500).json({
       success: false,
       message: 'Server error: ' + error.message
