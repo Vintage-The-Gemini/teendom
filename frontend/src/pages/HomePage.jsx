@@ -92,7 +92,7 @@ function HomePage() {
               {/* Responsive Button Layout */}
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                 <a 
-                  href="https://awards.teendom.africa" 
+                  href="https://teendom-awards.onrender.com" 
                   className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
                 >
                   EXPLORE AWARDS
@@ -214,7 +214,7 @@ function HomePage() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="https://awards.teendom.africa/nominate" 
+              href="https://teendom-awards.onrender.com/nominate" 
               className="bg-white hover:bg-gray-100 text-red-500 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
             >
               NOMINATE A TEEN

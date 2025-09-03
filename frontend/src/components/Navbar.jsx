@@ -63,7 +63,7 @@ function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <a 
-              href="https://awards.teendom.africa/nominate"
+              href="https://teendom-awards.onrender.com/nominate"
               className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold px-6 py-2 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center space-x-2 outline-none focus:outline-none border-none touch-manipulation"
               style={{ WebkitTapHighlightColor: 'transparent' }}
             >
@@ -110,7 +110,7 @@ function Navbar() {
               
               {/* Mobile CTA */}
               <a
-                href="https://awards.teendom.africa/nominate"
+                href="https://teendom-awards.onrender.com/nominate"
                 onClick={() => setIsOpen(false)}
                 className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold px-6 py-2 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center space-x-2 outline-none focus:outline-none border-none touch-manipulation mt-2"
                 style={{ WebkitTapHighlightColor: 'transparent' }}
