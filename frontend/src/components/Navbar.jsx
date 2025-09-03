@@ -10,7 +10,6 @@ function Navbar() {
   const navItems = [
     { name: "HOME", path: "/" },
     { name: "YOUNG CITIZENS", path: "/articles" },
-    { name: "AWARDS", path: "/awards" },
   ];
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
@@ -63,14 +62,14 @@ function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link 
-              to="/awards/nominate"
+            <a 
+              href="https://awards.teendom.africa/nominate"
               className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold px-6 py-2 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center space-x-2 outline-none focus:outline-none border-none touch-manipulation"
               style={{ WebkitTapHighlightColor: 'transparent' }}
             >
               <HiStar className="h-4 w-4" />
               <span>NOMINATE NOW</span>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -110,15 +109,15 @@ function Navbar() {
               ))}
               
               {/* Mobile CTA */}
-              <Link
-                to="/awards/nominate"
+              <a
+                href="https://awards.teendom.africa/nominate"
                 onClick={() => setIsOpen(false)}
                 className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold px-6 py-2 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center space-x-2 outline-none focus:outline-none border-none touch-manipulation mt-2"
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
                 <HiStar className="h-4 w-4" />
                 <span>NOMINATE NOW</span>
-              </Link>
+              </a>
             </div>
           </div>
         )}

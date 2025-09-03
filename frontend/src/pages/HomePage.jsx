@@ -91,13 +91,13 @@ function HomePage() {
 
               {/* Responsive Button Layout */}
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                <Link 
-                  to="/awards" 
+                <a 
+                  href="https://awards.teendom.africa" 
                   className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
                 >
                   EXPLORE AWARDS
                   <HiStar className="ml-3 h-5 w-5" />
-                </Link>
+                </a>
                 <Link 
                   to="/articles" 
                   className="bg-white hover:bg-gray-100 text-red-500 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
@@ -213,13 +213,13 @@ function HomePage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              to="/awards/nominate" 
+            <a 
+              href="https://awards.teendom.africa/nominate" 
               className="bg-white hover:bg-gray-100 text-red-500 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
             >
               NOMINATE A TEEN
               <HiStar className="ml-3 h-5 w-5" />
-            </Link>
+            </a>
             <Link 
               to="/articles" 
               className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"

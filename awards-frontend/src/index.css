@@ -1,0 +1,599 @@
+/* File Path: frontend/src/index.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #1f2937;
+  background-color: #ffffff;
+}
+
+/* Custom Typography */
+.text-mega {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+}
+
+@media (max-width: 640px) {
+  .text-mega {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .text-mega {
+    font-size: 3.5rem;
+  }
+}
+
+/* Section Spacing */
+.section-spacing {
+  padding: 5rem 0;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding: 8rem 0;
+  }
+}
+
+/* Enhanced Buttons */
+.btn-primary {
+  @apply bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-white hover:bg-gray-50 text-gray-900 font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 border-2 border-gray-200;
+}
+
+.btn-outline {
+  @apply bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-3 px-6 rounded-xl transition-all duration-300;
+}
+
+/* Award Category Cards */
+.award-category-card {
+  @apply bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-2xl border border-white border-opacity-20 hover:border-yellow-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl;
+}
+
+/* Category Badge Colors */
+.category-badge {
+  @apply inline-block px-3 py-1 text-xs font-bold tracking-wider rounded-full;
+}
+
+.category-health {
+  @apply bg-green-500 text-white;
+}
+
+.category-leadership {
+  @apply bg-red-500 text-white;
+}
+
+.category-business {
+  @apply bg-purple-500 text-white;
+}
+
+.category-mental-health {
+  @apply bg-blue-500 text-white;
+}
+
+.category-finance {
+  @apply bg-emerald-500 text-white;
+}
+
+.category-beauty {
+  @apply bg-pink-500 text-white;
+}
+
+.category-social {
+  @apply bg-teal-500 text-white;
+}
+
+.category-environment {
+  @apply bg-indigo-500 text-white;
+}
+
+/* Article Content Styling */
+.prose {
+  max-width: none;
+  color: #374151;
+}
+
+.prose h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #1f2937;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.prose h2 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #374151;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  color: #374151;
+  font-size: 1.125rem;
+}
+
+.prose ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.prose ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+  color: #374151;
+  font-size: 1.125rem;
+}
+
+.prose strong {
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.prose em {
+  font-style: italic;
+  color: #6b7280;
+}
+
+.prose blockquote {
+  border-left: 4px solid #ef4444;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: #6b7280;
+  font-size: 1.25rem;
+}
+
+/* Article Image Styling */
+.article-image-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.article-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  margin: 0 auto;
+  display: block;
+}
+
+.image-caption {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Line Clamp Utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Card Hover Effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Form Styling */
+.form-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors duration-300 font-medium;
+}
+
+.form-textarea {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors duration-300 font-medium;
+  resize: vertical;
+}
+
+.form-select {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors duration-300 font-medium bg-white;
+}
+
+.form-checkbox {
+  @apply w-5 h-5 text-red-500 border-2 border-gray-300 rounded focus:ring-red-500;
+}
+
+.form-radio {
+  @apply w-5 h-5 text-red-500 border-2 border-gray-300 focus:ring-red-500;
+}
+
+/* Navigation Enhancements */
+.nav-link {
+  @apply relative px-6 py-3 text-sm font-black rounded-xl transition-all duration-300;
+}
+
+.nav-link.active {
+  @apply bg-red-500 text-white shadow-lg transform scale-105;
+}
+
+.nav-link:not(.active) {
+  @apply text-gray-700 hover:text-red-500 hover:bg-red-50;
+}
+
+/* Modal Styling */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+}
+
+.modal-content {
+  @apply bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-screen overflow-y-auto;
+}
+
+/* Toast Notifications */
+.toast {
+  @apply fixed top-4 right-4 z-50 bg-white shadow-lg rounded-xl border-l-4 p-4 transform transition-all duration-300;
+}
+
+.toast.success {
+  @apply border-l-green-500;
+}
+
+.toast.error {
+  @apply border-l-red-500;
+}
+
+.toast.warning {
+  @apply border-l-yellow-500;
+}
+
+.toast.info {
+  @apply border-l-blue-500;
+}
+
+/* Gradient Backgrounds */
+.bg-persian-gradient {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+}
+
+.bg-golden-gradient {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+}
+
+.bg-red-gradient {
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
+}
+
+/* Accessibility Improvements */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+/* Focus visible for better accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+/* Skip link for screen readers */
+.skip-link {
+  @apply absolute left-0 top-0 bg-red-500 text-white px-4 py-2 z-50 transform -translate-y-full focus:translate-y-0 transition-transform;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-gray-600 {
+    @apply text-gray-800;
+  }
+  
+  .text-gray-500 {
+    @apply text-gray-700;
+  }
+  
+  .bg-gray-50 {
+    @apply bg-gray-100;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    color: black !important;
+    background: white !important;
+  }
+  
+  .bg-red-500,
+  .bg-blue-500,
+  .bg-gray-900 {
+    background: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+  
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: none !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Selection Styling */
+::selection {
+  background-color: #ef4444;
+  color: white;
+}
+
+::-moz-selection {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40%, 43% {
+    transform: translateY(-30px);
+  }
+  70% {
+    transform: translateY(-15px);
+  }
+  90% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out;
+}
+
+.animate-bounce-gentle {
+  animation: bounce 2s infinite;
+}
+
+/* Utility Classes */
+.glass-effect {
+  @apply bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Aspect Ratios */
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: 62.5%;
+}
+
+.aspect-w-16 > * {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Custom Grid */
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* File Path: Add this to the end of frontend/src/index.css */
+
+/* Navbar specific focus fixes - Remove all borders and outlines on mobile */
+nav button,
+nav a,
+nav button:focus,
+nav a:focus,
+nav button:active,
+nav a:active,
+nav button:focus-visible,
+nav a:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Remove touch highlights specifically for navbar */
+nav * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Override the global focus styles specifically for navbar */
+nav button:focus,
+nav a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+nav button:focus-visible,
+nav a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure mobile touch doesn't show any borders */
+@media (max-width: 768px) {
+  nav button,
+  nav a {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    border: none !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  
+  nav button:focus,
+  nav a:focus,
+  nav button:active,
+  nav a:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}

@@ -8,8 +8,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import HomePage from "./pages/HomePage";
 import ArticlesPage from "./pages/ArticlesPage";
 import ArticleDetail from "./pages/ArticleDetail";
-import AwardsPage from "./pages/AwardsPage";
-import NominatePage from "./pages/NominatePage";
 import AdminPanel from "./pages/AdminPanel";
 import "./index.css";
 
@@ -32,8 +30,6 @@ function App() {
                   <Route path="/articles" element={<ArticlesPage />} />
                   <Route path="/young-citizens" element={<ArticlesPage />} />
                   <Route path="/article/:id" element={<ArticleDetail />} />
-                  <Route path="/awards" element={<AwardsPage />} />
-                  <Route path="/awards/nominate" element={<NominatePage />} />
                 </Routes>
                 <Footer />
               </>
