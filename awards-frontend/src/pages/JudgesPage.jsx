@@ -166,19 +166,19 @@ function JudgesPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {judges.map((judge) => (
-              <div key={judge.id} className="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+              <div key={judge.id} className="bg-white shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300">
                 <div className="relative">
                   <img 
                     src={judge.image} 
                     alt={judge.name}
-                    className="w-full h-64 object-cover shadow-2xl"
+                    className="w-full h-80 object-cover object-center shadow-2xl"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
                   {/* Fallback placeholder */}
-                  <div className="w-full h-64 bg-gray-300 flex items-center justify-center text-6xl text-gray-500 hidden shadow-2xl">👤</div>
+                  <div className="w-full h-80 bg-gray-300 flex items-center justify-center text-6xl text-gray-500 hidden shadow-2xl">👤</div>
                   <div className="absolute top-4 right-4 p-2 rounded-full" 
                        style={{backgroundColor: '#DAA520'}}>
                     {judge.icon}
