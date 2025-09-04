@@ -174,9 +174,9 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// Serve static files from frontend build (for production)
+// Serve static files from awards-frontend build (for production)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.use(express.static(path.join(__dirname, "../awards-frontend/dist")));
 
   // Handle client-side routing - serve index.html for all non-API routes
   app.get("*", (req, res) => {
@@ -198,7 +198,7 @@ if (process.env.NODE_ENV === "production") {
     }
 
     // Serve the React app for all other routes (including /admin)
-    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+    res.sendFile(path.join(__dirname, "../awards-frontend/dist/index.html"));
   });
 } else {
   // Development mode - just handle 404s for API routes
