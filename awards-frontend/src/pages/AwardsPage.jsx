@@ -98,7 +98,7 @@ function AwardsPage() {
       </section>
 
       {/* Enhanced Motion Graphics CSS */}
-      <style jsx>{`
+      <style jsx="true">{`
         /* Floating background graphics */
         .floating-graphic {
           position: absolute;

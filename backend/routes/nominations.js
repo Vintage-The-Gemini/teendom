@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
   try {
     const {
       nominatorName, nominatorEmail, nominatorPhone, nominatorRelationship,
-      nomineeName, nomineeAge, nomineeEmail, nomineePhone, nomineeCounty, nomineeSchool,
+      nomineeName, nomineeDateOfBirth, nomineeAge, nomineeGender, nomineeEmail, nomineePhone, nomineeCounty, nomineeNationality, nomineeSchool, nomineeCurrentGrade,
       awardCategory, shortBio, nominationStatement,
       nomineePhoto, supportingDocuments, supportingLinks,
       refereeName, refereePosition, refereePhone, refereeEmail, contactReferee,
@@ -37,11 +37,15 @@ router.post('/', async (req, res) => {
       },
       nominee: {
         name: nomineeName,
+        dateOfBirth: nomineeDateOfBirth ? new Date(nomineeDateOfBirth) : undefined,
         age: parseInt(nomineeAge),
+        gender: nomineeGender || undefined,
         email: nomineeEmail || undefined,
         phone: nomineePhone || undefined,
         county: nomineeCounty,
-        school: nomineeSchool || undefined
+        nationality: nomineeNationality || undefined,
+        school: nomineeSchool || undefined,
+        currentGrade: nomineeCurrentGrade || undefined
       },
       awardCategory,
       details: {
@@ -57,7 +61,8 @@ router.post('/', async (req, res) => {
         name: refereeName,
         position: refereePosition,
         phone: refereePhone || '',
-        email: refereeEmail || ''
+        email: refereeEmail || '',
+        contactPermission: contactReferee || false
       } : undefined,
       consent: {
         accurateInfo: accurateInfo || true,
@@ -225,6 +230,34 @@ router.put('/:id/status', async (req, res) => {
 
   } catch (error) {
     console.error('Update status error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error: ' + error.message
+    });
+  }
+});
+
+// DELETE /api/nominations/:id - Delete nomination (admin)
+router.delete('/:id', async (req, res) => {
+  try {
+    const nomination = await Nomination.findByIdAndDelete(req.params.id);
+    
+    if (!nomination) {
+      return res.status(404).json({
+        success: false,
+        message: 'Nomination not found'
+      });
+    }
+
+    console.log(`🗑️ Deleted nomination ${req.params.id}`);
+
+    res.json({
+      success: true,
+      message: 'Nomination deleted successfully'
+    });
+
+  } catch (error) {
+    console.error('Delete nomination error:', error);
     res.status(500).json({
       success: false,
       message: 'Server error: ' + error.message

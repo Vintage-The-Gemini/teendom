@@ -13,11 +13,15 @@ const nominationSchema = new mongoose.Schema({
   // Section 2: Nominee Information
   nominee: {
     name: { type: String, required: true, trim: true },
+    dateOfBirth: { type: Date }, // Added field for DOB
     age: { type: Number, required: true, min: 13, max: 19 },
+    gender: { type: String, enum: ['Male', 'Female'] }, // Added field
     email: { type: String, trim: true, lowercase: true }, // Optional for minors
     phone: { type: String, trim: true }, // Optional for minors
     county: { type: String, required: true, trim: true },
-    school: { type: String, trim: true } // Optional for minors
+    nationality: { type: String, enum: ['Kenyan Citizen', 'Kenyan Resident'] }, // Added field
+    school: { type: String, trim: true }, // Optional for minors
+    currentGrade: { type: String, trim: true } // Added field
   },
 
   // Section 3: Award Category
@@ -34,7 +38,7 @@ const nominationSchema = new mongoose.Schema({
   // Section 4: Nomination Details
   details: {
     shortBio: { type: String, required: true, maxlength: 1500 }, // ~250 words
-    nominationStatement: { type: String, required: true, minlength: 300, maxlength: 3000 } // 300-500 words
+    nominationStatement: { type: String, required: true, minlength: 100, maxlength: 5000 } // 100-750 words
   },
 
   // Section 5: Supporting Materials
@@ -114,12 +118,37 @@ nominationSchema.virtual('isMinor').get(function() {
   return this.nominee.age < 18;
 });
 
-// Pre-save validation for minors
+// Pre-save validation for minors and nominator requirements
 nominationSchema.pre('save', function(next) {
   // If nominee is under 18, parental consent is required
   if (this.nominee.age < 18 && !this.consent.parentalConsent) {
     return next(new Error('Parental consent required for nominees under 18'));
   }
+  
+  // If not self-nomination, nominator details are required
+  if (!this.isSelfNomination) {
+    if (!this.nominator.name || !this.nominator.email || !this.nominator.phone || !this.nominator.relationship) {
+      return next(new Error('Nominator details are required for non-self nominations'));
+    }
+  }
+  
+  // Calculate age from date of birth to ensure consistency
+  const today = new Date();
+  const birthDate = new Date(this.nominee.dateOfBirth);
+  const calculatedAge = Math.floor((today - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
+  
+  if (Math.abs(calculatedAge - this.nominee.age) > 1) {
+    return next(new Error('Age must match date of birth'));
+  }
+  
+  // Validate age is between 13-19 as of Dec 1, 2025
+  const cutoffDate = new Date('2025-12-01');
+  const ageOnCutoff = Math.floor((cutoffDate - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
+  
+  if (ageOnCutoff < 13 || ageOnCutoff > 19) {
+    return next(new Error('Nominee must be between 13-19 years old as of December 1, 2025'));
+  }
+  
   next();
 });
 

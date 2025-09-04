@@ -80,9 +80,31 @@ function SupportingMaterials({ formData, setFormData, errors, uploadProgress, ha
             )}
             
             {formData.nomineePhoto && (
-              <div className="mt-4 flex items-center justify-center text-green-600">
-                <HiCheck className="h-5 w-5 mr-2" />
-                <span className="font-semibold">Photo uploaded successfully!</span>
+              <div className="mt-4">
+                <div className="flex items-center justify-center text-green-600 mb-3">
+                  <HiCheck className="h-5 w-5 mr-2" />
+                  <span className="font-semibold">Photo uploaded successfully!</span>
+                </div>
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <img 
+                      src={formData.nomineePhoto} 
+                      alt="Nominee preview" 
+                      className="w-32 h-32 object-cover rounded-xl border-2 shadow-lg"
+                      style={{ borderColor: '#DAA520' }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData(prev => ({ ...prev, nomineePhoto: null }));
+                      }}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition-colors duration-200"
+                      title="Remove photo"
+                    >
+                      <HiX className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
             
@@ -126,27 +148,89 @@ function SupportingMaterials({ formData, setFormData, errors, uploadProgress, ha
               Accepted formats: JPEG, PNG, PDF | Max 5MB per file
             </p>
             
+            {uploadProgress.supportingDocuments !== null && uploadProgress.supportingDocuments < 100 && (
+              <div className="mt-4">
+                <div className="bg-gray-200 rounded-full h-3">
+                  <div 
+                    className="h-3 rounded-full transition-all duration-300"
+                    style={{ 
+                      backgroundColor: '#DAA520',
+                      width: `${uploadProgress.supportingDocuments}%` 
+                    }}
+                  ></div>
+                </div>
+                <p className="text-sm mt-2" style={{ color: '#003875' }}>
+                  Uploading document... {uploadProgress.supportingDocuments}%
+                </p>
+              </div>
+            )}
+            
             {formData.supportingDocuments && formData.supportingDocuments.length > 0 && (
-              <div className="mt-4 space-y-2">
-                {formData.supportingDocuments.map((doc, index) => (
-                  <div key={index} className="flex items-center justify-between bg-white p-3 rounded-xl border">
-                    <span className="text-sm font-semibold truncate" style={{ color: '#003875' }}>
-                      {doc.name}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setFormData(prev => ({
-                          ...prev,
-                          supportingDocuments: prev.supportingDocuments.filter((_, i) => i !== index)
-                        }));
-                      }}
-                      className="text-red-500 hover:text-red-700 ml-3"
-                    >
-                      <HiX className="h-5 w-5" />
-                    </button>
-                  </div>
-                ))}
+              <div className="mt-4">
+                <p className="text-sm font-semibold mb-3" style={{ color: '#003875' }}>
+                  Uploaded Documents ({formData.supportingDocuments.length}):
+                </p>
+                <div className="grid gap-3">
+                  {formData.supportingDocuments.map((doc, index) => {
+                    const isImage = doc.name.match(/\.(jpg|jpeg|png|gif)$/i);
+                    const isPDF = doc.name.match(/\.pdf$/i);
+                    
+                    return (
+                      <div key={index} className="flex items-center justify-between bg-white p-4 rounded-xl border-2 hover:shadow-md transition-all duration-200" style={{ borderColor: '#DAA520' }}>
+                        <div className="flex items-center space-x-3 flex-grow">
+                          <div className="flex-shrink-0">
+                            {isImage ? (
+                              <img 
+                                src={doc.url} 
+                                alt={doc.name}
+                                className="w-12 h-12 object-cover rounded-lg border"
+                                style={{ borderColor: '#DAA520' }}
+                              />
+                            ) : isPDF ? (
+                              <div className="w-12 h-12 flex items-center justify-center rounded-lg" style={{ backgroundColor: '#ef4444' }}>
+                                <HiDocumentText className="h-6 w-6 text-white" />
+                              </div>
+                            ) : (
+                              <div className="w-12 h-12 flex items-center justify-center rounded-lg" style={{ backgroundColor: '#6b7280' }}>
+                                <HiDocumentText className="h-6 w-6 text-white" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-grow min-w-0">
+                            <p className="text-sm font-semibold truncate" style={{ color: '#003875' }}>
+                              {doc.name}
+                            </p>
+                            <div className="flex items-center space-x-2 mt-1">
+                              <a 
+                                href={doc.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-xs hover:underline flex items-center"
+                                style={{ color: '#DAA520' }}
+                              >
+                                <HiExternalLink className="h-3 w-3 mr-1" />
+                                View
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData(prev => ({
+                              ...prev,
+                              supportingDocuments: prev.supportingDocuments.filter((_, i) => i !== index)
+                            }));
+                          }}
+                          className="text-red-500 hover:text-red-700 ml-3 p-1 rounded-full hover:bg-red-50 transition-colors duration-200"
+                          title="Remove document"
+                        >
+                          <HiX className="h-5 w-5" />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>

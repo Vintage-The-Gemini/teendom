@@ -111,7 +111,7 @@ function NomineeSection({ formData, handleInputChange, errors }) {
 
         <div>
           <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
-            School Name {!isMinor && "(Optional)"}
+            School Name (Optional)
           </label>
           <input
             type="text"

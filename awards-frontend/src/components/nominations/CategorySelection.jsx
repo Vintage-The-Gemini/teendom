@@ -5,52 +5,52 @@ import { HiStar } from "react-icons/hi";
 function CategorySelection({ formData, handleInputChange, errors }) {
   const awardCategories = [
     {
-      value: "Academic Excellence Award",
+      value: "academic",
       title: "Academic Excellence Award",
       description: "Outstanding academic achievements and educational excellence"
     },
     {
-      value: "Leadership Excellence Award", 
+      value: "leadership", 
       title: "Leadership Excellence Award",
       description: "Exceptional leadership skills and inspiring others"
     },
     {
-      value: "Teen Innovator Award",
+      value: "innovation",
       title: "Teen Innovator Award", 
       description: "Creative problem-solving and innovative thinking"
     },
     {
-      value: "Teenpreneur Award",
+      value: "teenpreneur",
       title: "Teenpreneur Award",
       description: "Entrepreneurial spirit and business achievements"
     },
     {
-      value: "Sports & Wellness Award",
+      value: "sports",
       title: "Sports & Wellness Award",
       description: "Excellence in sports and promoting healthy lifestyles"
     },
     {
-      value: "Advocate for Change Award",
+      value: "advocate",
       title: "Advocate for Change Award", 
       description: "Social activism and driving positive community change"
     },
     {
-      value: "Environmental Champion Award",
+      value: "environmental",
       title: "Environmental Champion Award",
       description: "Environmental conservation and sustainability efforts"
     },
     {
-      value: "Digital Impact Award",
+      value: "digital",
       title: "Digital Impact Award",
       description: "Positive influence through digital platforms and technology"
     },
     {
-      value: "Teen of the Year Award",
+      value: "teen-year",
       title: "Teen of the Year Award",
       description: "Overall excellence across multiple areas - the ultimate recognition"
     },
     {
-      value: "Creative Arts Award", 
+      value: "creative", 
       title: "Creative Arts Award",
       description: "Outstanding achievements in visual, performing, or literary arts"
     }

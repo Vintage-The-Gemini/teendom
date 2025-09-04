@@ -62,7 +62,7 @@ function NominationDetails({ formData, handleInputChange, errors }) {
         {/* Nomination Statement */}
         <div>
           <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
-            Why does this teen deserve this award? (300-500 words) *
+            Why does this teen deserve this award? (100-750 words) *
           </label>
           <p className="text-sm mb-3" style={{ color: '#003875' }}>
             Share detailed examples of what they have done, the impact of their work, and any challenges they've overcome.
@@ -91,9 +91,9 @@ function NominationDetails({ formData, handleInputChange, errors }) {
               )}
             </div>
             <span className={`text-sm font-medium ${
-              statementWordCount < 300 || statementWordCount > 500 ? 'text-red-500' : 'text-green-600'
+              statementWordCount < 100 || statementWordCount > 750 ? 'text-red-500' : 'text-green-600'
             }`}>
-              {statementWordCount}/300-500 words
+              {statementWordCount}/100-750 words
             </span>
           </div>
         </div>

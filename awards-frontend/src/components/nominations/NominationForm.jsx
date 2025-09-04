@@ -22,7 +22,8 @@ function NominationForm() {
     
     return {
       nominatorName: "", nominatorEmail: "", nominatorPhone: "", nominatorRelationship: "",
-      nomineeName: "", nomineeAge: "", nomineeEmail: "", nomineePhone: "", nomineeCounty: "", nomineeSchool: "",
+      nomineeName: "", nomineeDateOfBirth: "", nomineeAge: "", nomineeGender: "", nomineeEmail: "", nomineePhone: "", 
+      nomineeCounty: "", nomineeNationality: "", nomineeSchool: "", nomineeCurrentGrade: "",
       awardCategory: "", shortBio: "", nominationStatement: "",
       nomineePhoto: null, supportingDocuments: [], supportingLinks: [""],
       refereeName: "", refereePosition: "", refereePhone: "", refereeEmail: "", contactReferee: false,
@@ -33,13 +34,52 @@ function NominationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const [uploadProgress, setUploadProgress] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
 
-  // Auto-save form data
+  // Enhanced auto-save form data
   useEffect(() => {
+    setIsSaving(true);
     const timer = setTimeout(() => {
-      sessionStorage.setItem('nomination-form', JSON.stringify(formData));
+      try {
+        sessionStorage.setItem('nomination-form', JSON.stringify(formData));
+        console.log('💾 Form data auto-saved');
+      } catch (error) {
+        console.error('Failed to save form data:', error);
+      }
+      setIsSaving(false);
     }, 1000);
     return () => clearTimeout(timer);
+  }, [formData]);
+
+  // Save data when page becomes hidden (user switching tabs, closing browser)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        try {
+          sessionStorage.setItem('nomination-form', JSON.stringify(formData));
+          console.log('💾 Form data saved on page visibility change');
+        } catch (error) {
+          console.error('Failed to save form data on visibility change:', error);
+        }
+      }
+    };
+
+    const handleBeforeUnload = () => {
+      try {
+        sessionStorage.setItem('nomination-form', JSON.stringify(formData));
+        console.log('💾 Form data saved before unload');
+      } catch (error) {
+        console.error('Failed to save form data before unload:', error);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, [formData]);
 
   const handleInputChange = (e) => {
@@ -77,7 +117,7 @@ function NominationForm() {
         xhr.onerror = () => reject(new Error('Upload failed'));
       });
       
-      xhr.open('POST', 'http://localhost:5000/api/upload');
+      xhr.open('POST', 'https://teendom-africa-backend.onrender.com/api/upload');
       xhr.send(uploadFormData);
       
       const result = await uploadPromise;
@@ -122,22 +162,22 @@ function NominationForm() {
       newErrors.nomineeAge = "Age must be between 13-19";
     }
 
-    // Bio length validation (100 words max)
+    // Bio length validation (250 words max)
     if (formData.shortBio) {
       const bioWords = formData.shortBio.trim().split(/\s+/).length;
-      if (bioWords > 100) {
-        newErrors.shortBio = `Bio too long: ${bioWords}/100 words`;
+      if (bioWords > 250) {
+        newErrors.shortBio = `Bio too long: ${bioWords}/250 words`;
       }
     }
 
-    // Statement length validation (100 words max)
+    // Statement length validation (100-750 words)
     if (formData.nominationStatement) {
       const statementWords = formData.nominationStatement.trim().split(/\s+/).length;
-      if (statementWords > 100) {
-        newErrors.nominationStatement = `Statement too long: ${statementWords}/100 words`;
+      if (statementWords > 750) {
+        newErrors.nominationStatement = `Statement too long: ${statementWords}/750 words`;
       }
-      if (statementWords < 50) {
-        newErrors.nominationStatement = `Statement too short: ${statementWords}/50 words minimum`;
+      if (statementWords < 100) {
+        newErrors.nominationStatement = `Statement too short: ${statementWords}/100 words minimum`;
       }
     }
 
@@ -168,6 +208,11 @@ function NominationForm() {
     return newErrors;
   };
 
+  const clearSavedData = () => {
+    sessionStorage.removeItem('nomination-form');
+    window.location.reload();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -176,11 +221,24 @@ function NominationForm() {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitting(false);
+      
+      // Show alert with count of errors
+      alert(`⚠️ Please fix ${Object.keys(validationErrors).length} error(s) before submitting. Check the red highlighted sections above.`);
+      
+      // Scroll to top to show error summary
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+      
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/nominations', {
+      // Debug: Log the data being sent
+      console.log('🚀 Submitting form data:', formData);
+      console.log('📊 Award category value:', formData.awardCategory);
+      
+      const response = await fetch('https://teendom-africa-backend.onrender.com/api/nominations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -209,10 +267,10 @@ function NominationForm() {
     <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl border border-blue-300 shadow-2xl overflow-hidden" style={{fontFamily: "'Inter', 'Segoe UI', 'Roboto', sans-serif"}}>
       
       {/* Form Header with Logo */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-center relative">
+      <div className="p-6 text-center relative" style={{background: 'linear-gradient(135deg, #0b1426 0%, #162a4a 50%, #0b1426 100%)'}}>
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-2 left-4 w-8 h-8 border-2 border-yellow-400 rounded-full"></div>
+          <div className="absolute top-2 left-4 w-8 h-8 border-2 rounded-full" style={{borderColor: '#DAA520'}}></div>
           <div className="absolute bottom-2 right-4 w-6 h-6 border-2 border-white rounded-full"></div>
         </div>
         
@@ -226,12 +284,98 @@ function NominationForm() {
               />
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">NOMINATION FORM</h2>
-          <p className="text-blue-100 font-medium">Complete all sections to nominate an exceptional teenager</p>
+          <div className="flex items-center justify-between">
+            <div className="text-center flex-grow">
+              <h2 className="text-2xl font-bold mb-2" style={{color: '#DAA520'}}>NOMINATION FORM</h2>
+              <p className="font-medium" style={{color: '#E8EAF6'}}>Complete all sections to nominate an exceptional teenager</p>
+            </div>
+            {isSaving && (
+              <div className="flex items-center space-x-2 text-sm" style={{color: '#E8EAF6'}}>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2" style={{borderColor: '#DAA520'}}></div>
+                <span>Saving...</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
       <div className="p-6 bg-white">
+        {/* Data persistence info */}
+        <div className="mb-6 p-4 rounded-xl" style={{ backgroundColor: '#f0f9ff', border: '1px solid #DAA520' }}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <p className="text-sm font-medium" style={{ color: '#003875' }}>
+                💾 Your progress is automatically saved as you type
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={clearSavedData}
+              className="text-xs px-3 py-1 rounded-lg text-red-600 border border-red-200 hover:bg-red-50 transition-colors duration-200"
+            >
+              Clear & Restart
+            </button>
+          </div>
+        </div>
+        
+        {/* Error Summary */}
+        {Object.keys(errors).length > 0 && (
+          <div className="mb-6 p-6 rounded-2xl border-2 border-red-400 bg-red-50 animate-bounce">
+            <div className="flex items-center mb-4">
+              <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-3">
+                <span className="text-white font-bold text-lg">!</span>
+              </div>
+              <h3 className="text-xl font-bold text-red-700">
+                Please fix the following issues to submit your nomination:
+              </h3>
+            </div>
+            
+            <div className="bg-white rounded-xl p-4 border border-red-200">
+              <div className="grid gap-3">
+                {Object.entries(errors).map(([field, message]) => {
+                  const sectionMap = {
+                    nominatorName: 'Section 1: Nominator Details',
+                    nominatorEmail: 'Section 1: Nominator Details',
+                    nominatorPhone: 'Section 1: Nominator Details', 
+                    nominatorRelationship: 'Section 1: Nominator Details',
+                    nomineeName: 'Section 2: Nominee Information',
+                    nomineeAge: 'Section 2: Nominee Information',
+                    nomineeCounty: 'Section 2: Nominee Information',
+                    awardCategory: 'Section 3: Award Category',
+                    shortBio: 'Section 4: Nomination Details',
+                    nominationStatement: 'Section 4: Nomination Details',
+                    nomineePhoto: 'Section 5: Supporting Materials',
+                    refereeName: 'Section 6: Referee Information',
+                    refereeEmail: 'Section 6: Referee Information',
+                    accurateInfo: 'Section 7: Consent & Declaration',
+                    nomineePermission: 'Section 7: Consent & Declaration',
+                    understandsProcess: 'Section 7: Consent & Declaration',
+                    noFalseInfo: 'Section 7: Consent & Declaration',
+                    parentalConsent: 'Section 7: Consent & Declaration'
+                  };
+                  
+                  return (
+                    <div key={field} className="flex items-start space-x-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <p className="font-semibold text-red-700 text-sm">{sectionMap[field] || 'Form Error'}</p>
+                        <p className="text-red-600 text-sm">{message}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            
+            <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+              <p className="text-sm text-yellow-800 font-medium">
+                💡 <strong>Tip:</strong> Complete all required fields and consent checkboxes before submitting.
+              </p>
+            </div>
+          </div>
+        )}
+        
         <div className="space-y-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <NominatorSection formData={formData} handleInputChange={handleInputChange} errors={errors} />
@@ -248,18 +392,31 @@ function NominationForm() {
             <div className="text-center py-8">
               <button
                 type="submit" disabled={isSubmitting}
-                className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-6 px-16 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-400/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="font-bold py-6 px-16 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  background: 'linear-gradient(135deg, #DAA520 0%, #B8860B 100%)',
+                  color: '#003875',
+                  boxShadow: '0 10px 30px rgba(218, 165, 32, 0.3)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'linear-gradient(135deg, #B8860B 0%, #DAA520 100%)';
+                  e.target.style.boxShadow = '0 15px 40px rgba(218, 165, 32, 0.5)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'linear-gradient(135deg, #DAA520 0%, #B8860B 100%)';
+                  e.target.style.boxShadow = '0 10px 30px rgba(218, 165, 32, 0.3)';
+                }}
               >
                 {isSubmitting ? (
                   <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 mr-3" style={{borderColor: '#003875'}}></div>
                     SUBMITTING...
                   </div>
                 ) : (
                   'SUBMIT NOMINATION'
                 )}
               </button>
-              <p className="text-blue-200 text-sm mt-4 font-medium">
+              <p className="text-sm mt-4 font-medium" style={{color: '#003875'}}>
                 By submitting, you confirm all information is accurate and complete.
               </p>
             </div>
