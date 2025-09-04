@@ -16,42 +16,58 @@ function AwardsPage() {
             <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
               Ready to Celebrate Teen Greatness?
             </h1>
-            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-8" style={{color: '#E8EAF6'}}>
-              Nominate a teen. Tell their story. Join the movement.
+            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-12" style={{color: '#E8EAF6'}}>
+              👇 Nominate a teen. Tell their story. Join the movement.
             </p>
             
-            {/* Free Floating Action Sections */}
-            <div className="grid md:grid-cols-3 gap-12 mb-16 max-w-6xl mx-auto">
-              <div className="text-center floating-text" style={{animation: 'float 3s ease-in-out infinite'}}>
-                <div className="text-6xl mb-4 golden-glow">🔸</div>
-                <h3 className="text-2xl font-bold mb-4" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Montserrat', sans-serif"}}>
-                  Are you a teen making a difference?
-                </h3>
-                <p className="text-lg leading-relaxed" style={{color: '#E8EAF6', textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
-                  Nominate yourself. Your voice matters.
-                </p>
+            {/* Call to Action Sections */}
+            <div className="max-w-6xl mx-auto mb-16">
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group">
+                  <div className="text-center">
+                    <div className="text-4xl mb-6">🔸</div>
+                    <h3 className="text-xl font-bold mb-4 text-white">Are you a teen making a difference?</h3>
+                    <p className="text-base leading-relaxed text-white/80">Nominate yourself. Your voice matters.</p>
+                  </div>
+                </div>
+                
+                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group">
+                  <div className="text-center">
+                    <div className="text-4xl mb-6">🔸</div>
+                    <h3 className="text-xl font-bold mb-4 text-white">Know an inspiring teen?</h3>
+                    <p className="text-base leading-relaxed text-white/80">Nominate them. Let's give them their flowers now — not later.</p>
+                  </div>
+                </div>
+                
+                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group">
+                  <div className="text-center">
+                    <div className="text-4xl mb-6">💛</div>
+                    <h3 className="text-xl font-bold mb-4 text-white">Want to support this vision?</h3>
+                    <p className="text-base leading-relaxed text-white/80">Partner with us, amplify the stories, or sponsor a category.</p>
+                  </div>
+                </div>
               </div>
               
-              <div className="text-center floating-text" style={{animation: 'float 3s ease-in-out infinite 1s'}}>
-                <div className="text-6xl mb-4 golden-glow">🔸</div>
-                <h3 className="text-2xl font-bold mb-4" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Montserrat', sans-serif"}}>
-                  Know an inspiring teen?
-                </h3>
-                <p className="text-lg leading-relaxed" style={{color: '#E8EAF6', textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
-                  Nominate them. Let's give them their flowers now — not later.
-                </p>
-              </div>
-              
-              <div className="text-center floating-text" style={{animation: 'float 3s ease-in-out infinite 2s'}}>
-                <div className="text-6xl mb-4 golden-glow">🔸</div>
-                <h3 className="text-2xl font-bold mb-4" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Montserrat', sans-serif"}}>
-                  Want to support this vision?
-                </h3>
-                <p className="text-lg leading-relaxed" style={{color: '#E8EAF6', textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
-                  Partner with us, amplify the stories, or sponsor a category.
-                </p>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
+                <Link
+                  to="/get-involved"
+                  className="inline-flex items-center space-x-2 px-6 py-3 font-bold transition-all duration-300 hover:scale-105 text-lg underline hover:no-underline"
+                  style={{color: '#E8EAF6'}}
+                >
+                  <span>Partner With Us</span>
+                </Link>
+                
+                <Link
+                  to="/get-involved"
+                  className="inline-flex items-center space-x-2 px-6 py-3 font-bold transition-all duration-300 hover:scale-105 text-lg underline hover:no-underline"
+                  style={{color: '#E8EAF6'}}
+                >
+                  <span>Volunteer or Join the Movement</span>
+                </Link>
               </div>
             </div>
+            
             
             {/* Big Golden CTA Button */}
             <div className="text-center">
