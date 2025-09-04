@@ -27,11 +27,9 @@ function AwardsPage() {
           <div className="max-w-6xl mx-auto text-center">
             
             <div className="hero-text-container mb-8">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6 hero-title" style={{color: '#DAA520', textShadow: '0 4px 8px rgba(0, 0, 0, 0.4)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic', animation: 'titleGlow 3s ease-in-out infinite alternate'}}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6 hero-title" style={{color: '#DAA520', textShadow: '0 4px 8px rgba(0, 0, 0, 0.4)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
                 Ready to Celebrate Teen Greatness?
               </h1>
-              {/* Energy burst animation */}
-              <div className="energy-burst"></div>
             </div>
             <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-12" style={{color: '#E8EAF6'}}>
               👇 Nominate a teen. Tell their story. Join the movement.

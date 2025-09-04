@@ -160,16 +160,16 @@ function FAQPage() {
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#003875' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0b1426 0%, #162a4a 50%, #0b1426 100%)' }}>
       <Navbar />
       
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-6">
         <div className="container mx-auto max-w-6xl text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-white">
-            FREQUENTLY ASKED <span style={{color: '#DAA520'}}>QUESTIONS</span>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
+            Frequently Asked Questions
           </h1>
-          <p className="text-xl md:text-2xl text-white max-w-4xl mx-auto leading-relaxed mb-8">
+          <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-8" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
             Everything you need to know about the Teendom Awards
           </p>
         </div>
@@ -180,9 +180,9 @@ function FAQPage() {
         <div className="container mx-auto max-w-4xl">
           <div className="space-y-8">
             {faqSections.map((section, sectionIndex) => (
-              <div key={sectionIndex} className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-                <div className="p-6 border-b-2" style={{ borderColor: '#DAA520' }}>
-                  <h2 className="text-2xl md:text-3xl font-black" style={{ color: '#003875' }}>
+              <div key={sectionIndex} className="bg-black/20 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden border border-white/10">
+                <div className="p-6 border-b border-white/20">
+                  <h2 className="text-2xl md:text-3xl font-bold" style={{ color: '#DAA520', fontFamily: "'Didot', 'Times New Roman', serif" }}>
                     {section.title}
                   </h2>
                 </div>
@@ -191,13 +191,13 @@ function FAQPage() {
                   {section.items.map((item, itemIndex) => {
                     const uniqueIndex = `${sectionIndex}-${itemIndex}`;
                     return (
-                      <div key={itemIndex} className="border-b border-gray-200 last:border-b-0">
+                      <div key={itemIndex} className="border-b border-white/10 last:border-b-0">
                         <button
                           className="w-full text-left py-4 focus:outline-none"
                           onClick={() => setExpandedFAQ(expandedFAQ === uniqueIndex ? null : uniqueIndex)}
                         >
                           <div className="flex items-center justify-between">
-                            <h3 className="text-lg font-bold pr-4" style={{ color: '#003875' }}>
+                            <h3 className="text-lg font-bold pr-4" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                               {item.question}
                             </h3>
                             {expandedFAQ === uniqueIndex ? (
@@ -210,7 +210,7 @@ function FAQPage() {
                         
                         {expandedFAQ === uniqueIndex && (
                           <div className="pb-4">
-                            <div className="prose prose-lg max-w-none" style={{ color: '#003875' }}>
+                            <div className="prose prose-lg max-w-none" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300' }}>
                               {item.answer.split('\\n').map((line, index) => (
                                 <p key={index} className="mb-2 last:mb-0 whitespace-pre-line">
                                   {line}
@@ -229,25 +229,25 @@ function FAQPage() {
           
           {/* CTA Section */}
           <div className="text-center mt-12">
-            <div className="bg-white rounded-3xl p-8 shadow-2xl">
-              <h2 className="text-2xl md:text-3xl font-black mb-4" style={{ color: '#003875' }}>
+            <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/10">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: '#DAA520', fontFamily: "'Didot', 'Times New Roman', serif" }}>
                 Still have questions?
               </h2>
-              <p className="text-lg mb-6" style={{ color: '#003875' }}>
+              <p className="text-lg mb-6" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300' }}>
                 We're here to help! Reach out to our team.
               </p>
               <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
                 <Link
                   to="/get-involved"
                   className="inline-flex items-center space-x-2 px-8 py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                  style={{backgroundColor: '#003875', color: 'white'}}
+                  style={{backgroundColor: '#162a4a', color: '#E8EAF6', border: '1px solid rgba(255,255,255,0.2)'}}
                 >
                   Contact Us
                 </Link>
                 <Link
                   to="/nominate"
                   className="inline-flex items-center space-x-2 px-8 py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                  style={{backgroundColor: '#DAA520', color: '#003875'}}
+                  style={{backgroundColor: '#DAA520', color: '#0b1426'}}
                 >
                   <HiStar className="h-5 w-5" />
                   <span>Ready to Nominate?</span>

@@ -15,7 +15,10 @@
       "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
       "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\public\\awards page resources/**)",
       "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)"
     ],
     "deny": [],
     "ask": []

@@ -25,7 +25,7 @@ function GetInvolvedPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* Partners & Sponsors */}
-            <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
+            <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', boxShadow: '0 10px 30px #DAA52040'}}>
                 <span className="text-3xl" style={{color: '#ffffff'}}>🤝</span>
               </div>
@@ -35,17 +35,17 @@ function GetInvolvedPage() {
               <p className="text-lg mb-8" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
                 Support teen excellence through sponsorship and partnerships.
               </p>
-              <button className="w-full px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl" style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', color: '#ffffff', border: '2px solid #DAA52080'}}>
+              <button className="w-full px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl" style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', color: '#0b1426', border: '2px solid #DAA52080'}}>
                 Request Partnership Kit
               </button>
             </div>
 
             {/* Volunteers */}
-            <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(145deg, #FF6B6B, #FF6B6BCC)', boxShadow: '0 10px 30px #FF6B6B40'}}>
+            <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', boxShadow: '0 10px 30px #DAA52040'}}>
                 <span className="text-3xl" style={{color: '#ffffff'}}>🙋</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4" style={{color: '#FF6B6B', fontFamily: "'Montserrat', sans-serif"}}>
+              <h3 className="text-2xl font-bold mb-4" style={{color: '#DAA520', fontFamily: "'Montserrat', sans-serif"}}>
                 VOLUNTEERS
               </h3>
               <p className="text-lg mb-8" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
@@ -53,24 +53,24 @@ function GetInvolvedPage() {
               </p>
               <button
                 className="w-full px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl"
-                style={{background: 'linear-gradient(145deg, #FF6B6B, #FF6B6BCC)', color: '#ffffff', border: '2px solid #FF6B6B80'}}
+                style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', color: '#0b1426', border: '2px solid #DAA52080'}}
               >
                 Sign Up to Volunteer
               </button>
             </div>
 
             {/* Mentors & Advisors */}
-            <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(145deg, #4ECDC4, #4ECDC4CC)', boxShadow: '0 10px 30px #4ECDC440'}}>
+            <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', boxShadow: '0 10px 30px #DAA52040'}}>
                 <span className="text-3xl" style={{color: '#ffffff'}}>🎓</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4" style={{color: '#4ECDC4', fontFamily: "'Montserrat', sans-serif"}}>
+              <h3 className="text-2xl font-bold mb-4" style={{color: '#DAA520', fontFamily: "'Montserrat', sans-serif"}}>
                 MENTORS & ADVISORS
               </h3>
               <p className="text-lg mb-8" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
                 Guide and support our teen finalists through mentorship.
               </p>
-              <button className="w-full px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl" style={{background: 'linear-gradient(145deg, #4ECDC4, #4ECDC4CC)', color: '#ffffff', border: '2px solid #4ECDC480'}}>
+              <button className="w-full px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl" style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', color: '#0b1426', border: '2px solid #DAA52080'}}>
                 Become a Mentor
               </button>
             </div>
@@ -81,51 +81,51 @@ function GetInvolvedPage() {
       {/* Contact Section */}
       <section className="pb-16 px-6">
         <div className="container mx-auto max-w-4xl">
-          <div className="bg-white rounded-3xl p-12 shadow-2xl">
-            <h2 className="text-3xl md:text-4xl font-black text-center mb-8" style={{ color: '#003875' }}>
-              Ready to Get <span style={{ color: '#DAA520' }}>INVOLVED?</span>
+          <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-12 shadow-2xl border border-white/10">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8" style={{ color: '#DAA520', fontFamily: "'Didot', 'Times New Roman', serif" }}>
+              Ready to Get <span>INVOLVED?</span>
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div className="text-center">
                 <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#DAA520' }}>
-                  <HiMail className="h-8 w-8" style={{ color: '#003875' }} />
+                  <HiMail className="h-8 w-8" style={{ color: '#0b1426' }} />
                 </div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: '#003875' }}>
+                <h3 className="text-xl font-bold mb-2" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                   Email Us
                 </h3>
-                <p className="text-lg" style={{ color: '#003875' }}>
+                <p className="text-lg" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                   info@teendom.africa
                 </p>
-                <p className="text-sm mt-2" style={{ color: '#666' }}>
+                <p className="text-sm mt-2" style={{ color: '#E8EAF6', opacity: 0.7, fontFamily: "'Montserrat', sans-serif", fontWeight: '300' }}>
                   For partnerships, volunteering, and general inquiries
                 </p>
               </div>
               
               <div className="text-center">
                 <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#DAA520' }}>
-                  <HiPhone className="h-8 w-8" style={{ color: '#003875' }} />
+                  <HiPhone className="h-8 w-8" style={{ color: '#0b1426' }} />
                 </div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: '#003875' }}>
+                <h3 className="text-xl font-bold mb-2" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                   WhatsApp
                 </h3>
-                <p className="text-lg" style={{ color: '#003875' }}>
+                <p className="text-lg" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                   0742862080
                 </p>
-                <p className="text-sm mt-2" style={{ color: '#666' }}>
+                <p className="text-sm mt-2" style={{ color: '#E8EAF6', opacity: 0.7, fontFamily: "'Montserrat', sans-serif", fontWeight: '300' }}>
                   Quick questions and direct support
                 </p>
               </div>
             </div>
             
             <div className="text-center mb-8">
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#DAA520' }}>
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#DAA520', fontFamily: "'Montserrat', sans-serif" }}>
                 Follow Our Journey
               </h3>
-              <p className="text-lg mb-4" style={{ color: '#003875' }}>
+              <p className="text-lg mb-4" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                 Instagram, Facebook, TikTok: @teendomafrica
               </p>
-              <p className="text-lg" style={{ color: '#003875' }}>
+              <p className="text-lg" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                 Website: www.teendomafrica.org
               </p>
             </div>
@@ -134,7 +134,7 @@ function GetInvolvedPage() {
               <Link
                 to="/nominate"
                 className="inline-flex items-center space-x-2 px-8 py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                style={{backgroundColor: '#003875', color: 'white'}}
+                style={{backgroundColor: '#DAA520', color: '#0b1426'}}
               >
                 <HiStar className="h-5 w-5" />
                 <span>Start by Nominating a Teen</span>
