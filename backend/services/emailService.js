@@ -5,7 +5,7 @@ dotenv.config();
 
 class EmailService {
   constructor() {
-    this.transporter = nodemailer.createTransporter({
+    this.transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.EMAIL_PORT) || 587,
       secure: parseInt(process.env.EMAIL_PORT) === 465, // true for 465, false for other ports
