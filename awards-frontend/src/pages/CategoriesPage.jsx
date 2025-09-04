@@ -145,24 +145,149 @@ function CategoriesPage() {
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#003875' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0b1426 0%, #162a4a 50%, #0b1426 100%)' }}>
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-12 px-6">
+      <section className="pt-24 pb-16 px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-white">
-              AWARD <span style={{color: '#DAA520'}}>CATEGORIES</span>
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl mb-8" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
+              Award Categories
             </h1>
-            <p className="text-xl md:text-2xl text-white max-w-4xl mx-auto leading-relaxed mb-8">
-              Ten categories celebrating different forms of excellence across Africa
+            <p className="text-xl md:text-2xl max-w-5xl mx-auto leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+              We are on a mission to recognize and celebrate Kenya's extraordinary teenagers — the thinkers, leaders, creators, and changemakers, between the ages of 13 to 19 who are leading change in their communities.
             </p>
-            <div className="inline-flex items-center space-x-2 px-8 py-4 rounded-2xl text-lg font-bold shadow-xl" 
-                 style={{backgroundColor: '#DAA520', color: '#003875'}}>
-              <HiStar className="h-6 w-6" />
-              <span>Ages 13-19 • Kenya</span>
+          </div>
+          
+          {/* Eligibility & Submission - Side by Side */}
+          <div className="max-w-7xl mx-auto mb-16 grid md:grid-cols-2 gap-8">
+            {/* General Eligibility */}
+            <div className="p-6 rounded-3xl floating-text" 
+                 style={{
+                   background: 'rgba(255, 255, 255, 0.05)',
+                   backdropFilter: 'blur(10px)',
+                   border: '1px solid rgba(218, 165, 32, 0.1)',
+                   animation: 'float 3s ease-in-out infinite'
+                 }}>
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-6" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
+                GENERAL ELIGIBILITY
+              </h2>
+              <ul className="space-y-3 text-left">
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Nominees must be between 13 to 19 years old as of December 1, 2025.
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Must be a Kenyan citizen or resident
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Must show exceptional achievement, impact, or leadership in the selected category.
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Nominations can be self-submitted or submitted by another person (parent, teacher, peer, mentor, etc.)
+                  </span>
+                </li>
+              </ul>
             </div>
+            
+            {/* Required Submission Materials */}
+            <div className="p-6 rounded-3xl floating-text" 
+                 style={{
+                   background: 'rgba(255, 255, 255, 0.05)',
+                   backdropFilter: 'blur(10px)',
+                   border: '1px solid rgba(218, 165, 32, 0.1)',
+                   animation: 'float 3s ease-in-out infinite 1s'
+                 }}>
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-6" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
+                REQUIRED SUBMISSION MATERIALS
+              </h2>
+              <ul className="space-y-3 text-left">
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Full name, age, county, and contact details of the nominee
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    A recent, high-quality photo of the nominee
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Short bio (max 250 words)
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Detailed nomination statement (300–500 words) describing why they deserve the award
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Supporting documents or links (e.g. certificates, media features, photos, social media, videos, etc.)
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="text-lg mt-1" style={{color: '#DAA520'}}>•</span>
+                  <span className="text-base leading-relaxed" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    Referee contacts (e.g. teacher, coach, community leader)
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          {/* How to Nominate - Shortened */}
+          <div className="text-center mb-16 floating-text" style={{animation: 'float 3s ease-in-out infinite 2s'}}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
+              HOW TO NOMINATE
+            </h2>
+            <p className="text-lg mb-8 max-w-3xl mx-auto" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+              Click "Nominate Now", fill the form, upload documents, and submit. Deadline: 30th September, 2025
+            </p>
+            <Link
+              to="/nominate"
+              className="inline-flex items-center px-12 py-5 text-xl font-black rounded-full transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-3xl relative overflow-hidden big-golden-button"
+              style={{
+                background: 'linear-gradient(145deg, #DAA520, #B8860B)',
+                color: '#0b1426',
+                boxShadow: '0 20px 60px rgba(218, 165, 32, 0.4)',
+                letterSpacing: '2px',
+                border: '3px solid rgba(218, 165, 32, 0.6)',
+                animation: 'pulse-big 2s infinite, glow 3s ease-in-out infinite alternate'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.15) translateY(-10px)';
+                e.currentTarget.style.boxShadow = '0 30px 80px rgba(218, 165, 32, 0.8)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                e.currentTarget.style.boxShadow = '0 20px 60px rgba(218, 165, 32, 0.4)';
+              }}
+            >
+              <HiStar className="h-6 w-6 mr-3 animate-spin" style={{animationDuration: '4s'}} />
+              <span>NOMINATE NOW</span>
+              <div className="absolute inset-0 rounded-full opacity-30" style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%)',
+                animation: 'shimmer-big 3s infinite'
+              }}></div>
+            </Link>
           </div>
         </div>
       </section>
@@ -172,20 +297,24 @@ function CategoriesPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => (
-              <div key={category.id} className="bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200">
+              <div key={category.id} className="shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200" 
+                   style={{
+                     background: 'rgba(11, 20, 38, 0.95)',
+                     backdropFilter: 'blur(10px)'
+                   }}>
                 <div 
                   className="p-4 transition-all duration-300"
-                  style={{backgroundColor: '#003875'}}
+                  style={{backgroundColor: '#0b1426'}}
                 >
                   <div className="text-center mb-4">
-                    <div className="inline-flex p-3 mb-3" 
-                         style={{backgroundColor: '#DAA520', color: '#003875'}}>
+                    <div className="inline-flex p-3 mb-3 rounded-lg" 
+                         style={{backgroundColor: '#DAA520', color: '#0b1426'}}>
                       {category.icon}
                     </div>
-                    <h3 className="text-lg font-black mb-2 text-white">
+                    <h3 className="text-lg font-black mb-2" style={{color: '#DAA520', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
                       {category.title}
                     </h3>
-                    <p className="text-sm text-white opacity-90">
+                    <p className="text-sm opacity-90" style={{color: '#E8EAF6'}}>
                       {category.description}
                     </p>
                   </div>
@@ -193,14 +322,14 @@ function CategoriesPage() {
                 
                 <div className="p-4">
                     {category.fullDescription && (
-                      <p className="text-gray-700 leading-relaxed mb-4 text-sm">
+                      <p className="leading-relaxed mb-4 text-sm" style={{color: '#E8EAF6', textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'}}>
                         {category.fullDescription}
                       </p>
                     )}
                     
                     {category.subCategories && (
                       <div className="mb-4">
-                        <h4 className="text-sm font-bold mb-2" style={{color: '#003875'}}>
+                        <h4 className="text-sm font-bold mb-2" style={{color: '#DAA520'}}>
                           Sub-Categories:
                         </h4>
                         <ul className="space-y-1 mb-3">
@@ -208,14 +337,14 @@ function CategoriesPage() {
                             <li key={index} className="flex items-start space-x-2">
                               <div className="w-1 h-1 rounded-full mt-2 flex-shrink-0" 
                                    style={{backgroundColor: '#DAA520'}}></div>
-                              <span className="text-gray-700 leading-relaxed text-xs">{subCat}</span>
+                              <span className="leading-relaxed text-xs" style={{color: '#E8EAF6', opacity: '0.9'}}>{subCat}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     )}
                     
-                    <h4 className="text-sm font-bold mb-2" style={{color: '#003875'}}>
+                    <h4 className="text-sm font-bold mb-2" style={{color: '#DAA520'}}>
                       What We're Looking For:
                     </h4>
                     <ul className="space-y-1 mb-4">
@@ -223,15 +352,27 @@ function CategoriesPage() {
                         <li key={index} className="flex items-start space-x-2">
                           <div className="w-1 h-1 rounded-full mt-2 flex-shrink-0" 
                                style={{backgroundColor: '#DAA520'}}></div>
-                          <span className="text-gray-700 leading-relaxed text-xs">{criterion}</span>
+                          <span className="leading-relaxed text-xs" style={{color: '#E8EAF6', opacity: '0.9'}}>{criterion}</span>
                         </li>
                       ))}
                     </ul>
                     <div className="text-center">
                       <Link
                         to="/nominate"
-                        className="inline-flex items-center space-x-2 px-4 py-2 font-bold transition-all duration-300 hover:shadow-lg text-xs"
-                        style={{backgroundColor: '#DAA520', color: '#003875'}}
+                        className="inline-flex items-center space-x-2 px-4 py-2 font-bold transition-all duration-300 hover:shadow-lg text-xs rounded-lg"
+                        style={{
+                          background: 'linear-gradient(145deg, #DAA520, #B8860B)',
+                          color: '#0b1426',
+                          border: '1px solid rgba(218, 165, 32, 0.3)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'scale(1.05)';
+                          e.currentTarget.style.boxShadow = '0 8px 20px rgba(218, 165, 32, 0.4)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
                       >
                         <HiStar className="h-4 w-4" />
                         <span>Nominate</span>
@@ -243,6 +384,78 @@ function CategoriesPage() {
           </div>
         </div>
       </section>
+      {/* Motion Graphics CSS */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+        
+        @keyframes pulse-big {
+          0%, 100% {
+            box-shadow: 0 20px 60px rgba(218, 165, 32, 0.4);
+          }
+          50% {
+            box-shadow: 0 25px 80px rgba(218, 165, 32, 0.7);
+          }
+        }
+        
+        @keyframes glow {
+          0% {
+            filter: drop-shadow(0 0 20px rgba(218, 165, 32, 0.5));
+          }
+          100% {
+            filter: drop-shadow(0 0 40px rgba(218, 165, 32, 0.9));
+          }
+        }
+        
+        @keyframes shimmer-big {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        
+        .floating-text {
+          transition: all 0.3s ease;
+        }
+        
+        .floating-text:hover {
+          transform: translateY(-10px) scale(1.02);
+        }
+        
+        .big-golden-button {
+          position: relative;
+        }
+        
+        .big-golden-button::before {
+          content: '';
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          background: linear-gradient(45deg, #DAA520, #FFD700, #DAA520);
+          border-radius: inherit;
+          z-index: -1;
+          animation: rotate-border 3s linear infinite;
+        }
+        
+        @keyframes rotate-border {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 }

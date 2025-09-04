@@ -6,6 +6,8 @@ import CategoriesPage from "./pages/CategoriesPage";
 import JudgesPage from "./pages/JudgesPage";
 import FAQPage from "./pages/FAQPage";
 import GalleryPage from "./pages/GalleryPage";
+import GetInvolvedPage from "./pages/GetInvolvedPage";
+import AboutPage from "./pages/AboutPage";
 import "./index.css";
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route path="/judges" element={<JudgesPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/get-involved" element={<GetInvolvedPage />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </div>
     </Router>
