@@ -209,10 +209,10 @@ function FAQPage() {
                         </button>
                         
                         {expandedFAQ === uniqueIndex && (
-                          <div className="pb-4">
-                            <div className="prose prose-lg max-w-none" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300' }}>
+                          <div className="pb-4 bg-white/10 p-4 rounded-lg mt-2">
+                            <div className="max-w-none" style={{ color: '#ffffff', fontFamily: "'Montserrat', sans-serif", fontWeight: '250', fontSize: '16px', lineHeight: '1.7', textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
                               {item.answer.split('\\n').map((line, index) => (
-                                <p key={index} className="mb-2 last:mb-0 whitespace-pre-line">
+                                <p key={index} className="mb-3 last:mb-0 whitespace-pre-line" style={{ color: '#ffffff' }}>
                                   {line}
                                 </p>
                               ))}

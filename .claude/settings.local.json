@@ -18,7 +18,8 @@
       "Bash(dir:*)",
       "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
       "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
-      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)"
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

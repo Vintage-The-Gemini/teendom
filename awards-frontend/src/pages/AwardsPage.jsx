@@ -10,18 +10,6 @@ function AwardsPage() {
       
       {/* Hero Section - Enhanced with energy */}
       <section className="pt-24 pb-16 px-6 relative overflow-hidden" style={{background: 'transparent'}}>
-        {/* Subtle Background Graphics */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="floating-graphic" style={{top: '15%', left: '10%', animationDelay: '0s'}}>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 opacity-20"></div>
-          </div>
-          <div className="floating-graphic" style={{top: '30%', right: '15%', animationDelay: '3s'}}>
-            <div className="w-6 h-6 bg-gradient-to-r from-blue-400 to-blue-600 opacity-15 transform rotate-45"></div>
-          </div>
-          <div className="floating-graphic" style={{top: '70%', left: '8%', animationDelay: '6s'}}>
-            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-green-600 opacity-25"></div>
-          </div>
-        </div>
         
         <div className="container mx-auto relative z-10">
           <div className="max-w-6xl mx-auto text-center">
@@ -38,49 +26,19 @@ function AwardsPage() {
             {/* Call to Action Sections */}
             <div className="max-w-6xl mx-auto mb-16">
               <div className="grid md:grid-cols-3 gap-8">
-                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-500 hover:transform hover:scale-110 hover:rotate-1 group card-hover-glow overflow-hidden">
-                  <div className="text-center relative">
-                    <div className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500 overflow-hidden">
-                      <img 
-                        src="https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?w=400&h=400&fit=crop"
-                        alt="Abstract colorful design" 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-golden transition-colors duration-300">Are you a teen making a difference?</h3>
-                    <p className="text-lg leading-relaxed text-white/80 group-hover:text-white transition-colors duration-300">Nominate yourself. Your voice matters.</p>
-                    <div className="card-glow"></div>
-                  </div>
+                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-300 text-center">
+                  <h3 className="text-2xl font-bold mb-4 text-white" style={{color: '#DAA520'}}>Are you a teen making a difference?</h3>
+                  <p className="text-lg leading-relaxed text-white/90">Nominate yourself. Your voice matters.</p>
                 </div>
                 
-                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-500 hover:transform hover:scale-110 hover:-rotate-1 group card-hover-glow overflow-hidden">
-                  <div className="text-center relative">
-                    <div className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500 overflow-hidden">
-                      <img 
-                        src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&h=400&fit=crop"
-                        alt="Abstract geometric pattern" 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-golden transition-colors duration-300">Know an inspiring teen?</h3>
-                    <p className="text-lg leading-relaxed text-white/80 group-hover:text-white transition-colors duration-300">Nominate them. Let's give them their flowers now — not later.</p>
-                    <div className="card-glow"></div>
-                  </div>
+                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-300 text-center">
+                  <h3 className="text-2xl font-bold mb-4" style={{color: '#DAA520'}}>Know an inspiring teen?</h3>
+                  <p className="text-lg leading-relaxed text-white/90">Nominate them. Let's give them their flowers now — not later.</p>
                 </div>
                 
-                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-500 hover:transform hover:scale-110 hover:rotate-1 group card-hover-glow overflow-hidden">
-                  <div className="text-center relative">
-                    <div className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500 overflow-hidden">
-                      <img 
-                        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop"
-                        alt="Abstract flowing shapes" 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-golden transition-colors duration-300">Want to support this vision?</h3>
-                    <p className="text-lg leading-relaxed text-white/80 group-hover:text-white transition-colors duration-300">Partner with us, amplify the stories, or sponsor a category.</p>
-                    <div className="card-glow"></div>
-                  </div>
+                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-300 text-center">
+                  <h3 className="text-2xl font-bold mb-4" style={{color: '#DAA520'}}>Want to support this vision?</h3>
+                  <p className="text-lg leading-relaxed text-white/90">Partner with us, amplify the stories, or sponsor a category.</p>
                 </div>
               </div>
               
