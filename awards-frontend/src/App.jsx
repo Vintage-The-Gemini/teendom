@@ -8,6 +8,7 @@ import FAQPage from "./pages/FAQPage";
 import GalleryPage from "./pages/GalleryPage";
 import GetInvolvedPage from "./pages/GetInvolvedPage";
 import AboutPage from "./pages/AboutPage";
+import AdminPanel from "./pages/AdminPanel";
 import "./index.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <div className="min-h-screen bg-white">
         <Routes>
           <Route path="/" element={<AwardsPage />} />
+          <Route path="/awards" element={<AwardsPage />} />
           <Route path="/nominate" element={<NominatePage />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/judges" element={<JudgesPage />} />
@@ -23,6 +25,7 @@ function App() {
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/get-involved" element={<GetInvolvedPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </div>
     </Router>

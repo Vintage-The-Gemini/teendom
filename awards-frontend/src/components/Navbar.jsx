@@ -193,7 +193,7 @@ function Navbar() {
       </div>
       
       {/* Custom CSS Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes pulse-gold {
           0%, 100% {
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
