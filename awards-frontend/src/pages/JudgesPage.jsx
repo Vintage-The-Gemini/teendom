@@ -58,7 +58,7 @@ function JudgesPage() {
     {
       id: 7,
       name: "Ms. LORETTA AKATCH",
-      title: "Educator, Tutor and Mentor",
+      title: "Educator",
       category: "ACADEMIC EXCELLENCE CATEGORY",
       image: "/judges/judge Loretta Akatch.jpg",
       quote: "Teen changemakers spark change today, proving that bold hearts and bright ideas shape the world. Honouring their vision inspires us all."
@@ -75,7 +75,7 @@ function JudgesPage() {
       id: 9,
       name: "Anne Njoroge",
       title: "Business Strategist and User Experience Designer",
-      category: "INNOVATION AWARD",
+      category: "TEEN INNOVATOR AWARD",
       image: "/judges/judge Anne Njoroge.jpg",
       quote: "If we nurture the dreams of the young in our generation, our nation will be blessed. If we destroy them, our nation and world at large is doomed."
     },
@@ -83,7 +83,7 @@ function JudgesPage() {
       id: 10,
       name: "Peggy Olwalo",
       title: "Program Associate at CAVU",
-      category: "Environmental Champion Award",
+      category: "ENVIRONMENTAL CHAMPION AWARD",
       image: "/judges/judge Peggy Olwalo.jpeg",
       quote: "Young people carry within them the spark of transformation. Recognizing their leadership today inspires a legacy of courage, purpose, and impact."
     },
@@ -91,16 +91,16 @@ function JudgesPage() {
       id: 11,
       name: "Alisa Lilian Ondigi",
       title: "Trainer and Consultancy Assistant",
-      category: "Teenpreneur Award",
+      category: "TEENPRENEUR AWARD",
       image: "/judges/judge Alisa Ondigi.jpg",
       quote: "Invest in young people, harvest their innovation. A spark of guidance can light a lifetime of entrepreneurship"
     },
     {
       id: 12,
       name: "Arnold Osano",
-      title: "Co-Founder of WeCare Youth Organization",
-      category: "Advocate for Change Award",
-      image: "/judges/judge Arnold Osano.png",
+      title: "Program Coordinator, WeCare Youth Organization",
+      category: "ADVOCATE FOR CHANGE AWARD",
+      image: "/judges/Judge Arnold osano.jpeg",
       quote: "Youth empowerment means giving young people the voice, space, and tools to shape the future they want. Let us create those opportunities at every level."
     }
   ];
@@ -109,7 +109,7 @@ function JudgesPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentQuote((prev) => (prev + 1) % judges.length);
-    }, 4000);
+    }, 8000);
     return () => clearInterval(interval);
   }, [judges.length]);
 
@@ -181,7 +181,7 @@ function JudgesPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Montserrat', sans-serif"}}>
-              Voices of Our Judges
+              From Our Judges
             </h2>
             <p className="text-lg text-white max-w-3xl mx-auto">
               Inspiring words from our esteemed panel
@@ -190,7 +190,7 @@ function JudgesPage() {
           
           <div className="relative">
             {/* Quote Display */}
-            <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-opacity-20 border-white min-h-[200px] flex items-center justify-center">
+            <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl min-h-[200px] flex items-center justify-center">
               <div className="text-center max-w-4xl mx-auto">
                 <div className="quote-container" style={{
                   animation: 'fadeInSlide 1s ease-in-out',

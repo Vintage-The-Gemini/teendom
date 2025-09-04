@@ -8,7 +8,7 @@ function CategoriesPage() {
   const categories = [
     {
       id: 1,
-      title: "Academic Excellence Award",
+      title: "ACADEMIC EXCELLENCE AWARD",
       description: "Spotlights brilliance in the classroom and beyond.",
       fullDescription: "This award honors teens who achieve outstanding academic results, whether in national exams or international competitions. It celebrates effort, curiosity, and those using their academic strengths to inspire others.",
       criteria: [
@@ -21,7 +21,7 @@ function CategoriesPage() {
     },
     {
       id: 2,
-      title: "Leadership Excellence Award",
+      title: "LEADERSHIP EXCELLENCE AWARD",
       description: "For those who lead with courage, purpose, and vision.",
       fullDescription: "This award recognizes teens who step up — as school prefects, club leaders, or community organizers — and lead others toward meaningful change.",
       criteria: [
@@ -34,7 +34,7 @@ function CategoriesPage() {
     },
     {
       id: 3,
-      title: "Teen Innovator Award",
+      title: "TEEN INNOVATOR AWARD",
       description: "For teen trailblazers solving tomorrow's challenges today.",
       fullDescription: "This award celebrates creative problem-solvers developing new ideas, solutions, or products to tackle real-life issues.",
       criteria: [
@@ -47,7 +47,7 @@ function CategoriesPage() {
     },
     {
       id: 4,
-      title: "Teenpreneur Award",
+      title: "TEENPRENEUR AWARD",
       description: "For bold builders turning ideas into impact.",
       fullDescription: "This award honors teen entrepreneurs who've launched businesses, side hustles, or creative ventures — demonstrating originality, grit, and social impact.",
       criteria: [
@@ -60,7 +60,7 @@ function CategoriesPage() {
     },
     {
       id: 5,
-      title: "Creative Arts Award",
+      title: "CREATIVE ARTS AWARD",
       description: "For dreamers, storytellers, and visionaries shaping culture.",
       fullDescription: "This award celebrates extraordinary talent in visual, performing, literary, or digital media arts.",
       criteria: [
@@ -79,7 +79,7 @@ function CategoriesPage() {
     },
     {
       id: 6,
-      title: "Sports & Wellness Award",
+      title: "SPORTS & WELLNESS AWARD",
       description: "For champions of strength, balance, and discipline.",
       fullDescription: "This award honors teens who excel in sports or promote physical and mental well-being through training, competition, or health advocacy.",
       criteria: [
@@ -92,7 +92,7 @@ function CategoriesPage() {
     },
     {
       id: 7,
-      title: "Advocate for Change Award",
+      title: "ADVOCATE FOR CHANGE AWARD",
       description: "For teens raising their voice for a better world.",
       fullDescription: "This award recognizes teens championing issues like mental health, gender equality, disability rights, peacebuilding, or justice.",
       criteria: [
@@ -105,7 +105,7 @@ function CategoriesPage() {
     },
     {
       id: 8,
-      title: "Environmental Champion Award",
+      title: "ENVIRONMENTAL CHAMPION AWARD",
       description: "For eco-heroes safeguarding our planet's future.",
       fullDescription: "This award honors teens working on climate action, clean-ups, reforestation, conservation, or sustainable living.",
       criteria: [
@@ -118,7 +118,7 @@ function CategoriesPage() {
     },
     {
       id: 9,
-      title: "Digital Impact Award",
+      title: "DIGITAL IMPACT AWARD",
       description: "For digital voices making real-world impact.",
       fullDescription: "From Instagram reels to YouTube channels, this award celebrates teens using digital platforms to inspire, educate, or mobilize online audiences for good.",
       criteria: [
@@ -131,7 +131,7 @@ function CategoriesPage() {
     },
     {
       id: 10,
-      title: "Teen of the Year Award",
+      title: "TEEN OF THE YEAR AWARD",
       description: "The ultimate changemaker. A true Teendom icon.",
       fullDescription: "The highest honor of the Teendom Awards. For a teen who exemplifies excellence across multiple fields, uplifts others, and stands out as a national inspiration.",
       criteria: [
@@ -299,22 +299,22 @@ function CategoriesPage() {
             {categories.map((category) => (
               <div key={category.id} className="shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200" 
                    style={{
-                     background: 'rgba(11, 20, 38, 0.95)',
+                     background: 'rgba(255, 255, 255, 0.15)',
                      backdropFilter: 'blur(10px)'
                    }}>
                 <div 
                   className="p-4 transition-all duration-300"
-                  style={{backgroundColor: '#0b1426'}}
+                  style={{backgroundColor: '#ffffff'}}
                 >
                   <div className="text-center mb-4">
                     <div className="inline-flex p-3 mb-3 rounded-lg" 
                          style={{backgroundColor: '#DAA520', color: '#0b1426'}}>
                       {category.icon}
                     </div>
-                    <h3 className="text-lg font-black mb-2" style={{color: '#DAA520', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+                    <h3 className="text-lg font-black mb-2" style={{color: '#000000', textShadow: 'none', fontWeight: 'bold'}}>
                       {category.title}
                     </h3>
-                    <p className="text-sm opacity-90" style={{color: '#E8EAF6'}}>
+                    <p className="text-sm opacity-90" style={{color: '#333333'}}>
                       {category.description}
                     </p>
                   </div>

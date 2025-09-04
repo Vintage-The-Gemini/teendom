@@ -11,6 +11,7 @@ function Navbar() {
     { name: "ABOUT", path: "/about" },
     { name: "CATEGORIES", path: "/categories" },
     { name: "JUDGES", path: "/judges" },
+    { name: "GET INVOLVED", path: "/get-involved" },
     { name: "FAQ", path: "/faq" },
     // { name: "GALLERY", path: "/gallery" },
   ];
@@ -130,7 +131,9 @@ function Navbar() {
               className="p-2 rounded-lg transition-colors duration-300 outline-none focus:outline-none border-none touch-manipulation"
               style={{ 
                 WebkitTapHighlightColor: 'transparent',
-                color: '#1a237e'
+                color: '#FFD700',
+                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                border: '2px solid rgba(255, 215, 0, 0.3)'
               }}
             >
               {isOpen ? (
@@ -144,7 +147,10 @@ function Navbar() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-white/95 backdrop-blur-md">
+          <div className="md:hidden border-t border-yellow-400/20" style={{
+            background: 'linear-gradient(135deg, rgba(11, 20, 38, 0.98) 0%, rgba(22, 42, 74, 0.98) 50%, rgba(11, 20, 38, 0.98) 100%)',
+            backdropFilter: 'blur(20px)'
+          }}>
             <div className="py-3 space-y-1">
               {navItems.map((item) => (
                 <Link
@@ -158,8 +164,9 @@ function Navbar() {
                   }`}
                   style={{ 
                     WebkitTapHighlightColor: 'transparent',
-                    backgroundColor: isActive(item.path) ? '#1a237e' : 'transparent',
-                    color: isActive(item.path) ? '#FFD700' : '#1a237e'
+                    backgroundColor: isActive(item.path) ? 'rgba(255, 215, 0, 0.2)' : 'transparent',
+                    color: isActive(item.path) ? '#FFD700' : '#E8EAF6',
+                    border: isActive(item.path) ? '1px solid rgba(255, 215, 0, 0.3)' : '1px solid transparent'
                   }}
                 >
                   <span>{item.name}</span>

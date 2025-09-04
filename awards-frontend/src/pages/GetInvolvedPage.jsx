@@ -5,17 +5,17 @@ import { HiStar, HiHeart, HiUserGroup, HiAcademicCap, HiMail, HiPhone } from "re
 
 function GetInvolvedPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#003875' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0b1426 0%, #162a4a 50%, #0b1426 100%)' }}>
       <Navbar />
       
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-6">
         <div className="container mx-auto max-w-6xl text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-white">
-            GET <span style={{color: '#DAA520'}}>INVOLVED</span>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
+            Get Involved
           </h1>
-          <p className="text-xl md:text-2xl text-white max-w-4xl mx-auto leading-relaxed mb-8">
-            Join the movement. Support Africa's next generation of leaders.
+          <p className="text-xl md:text-2xl max-w-5xl mx-auto leading-relaxed mb-12" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
+            Join the movement to celebrate, support, and empower Kenya's most exceptional teenagers. Together, we can create a nation where teen excellence is recognized, celebrated, and nurtured.
           </p>
         </div>
       </section>
@@ -25,107 +25,52 @@ function GetInvolvedPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* Partners & Sponsors */}
-            <div className="bg-white rounded-3xl p-8 shadow-2xl text-center">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#DAA520' }}>
-                <span className="text-3xl">🤝</span>
+            <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', boxShadow: '0 10px 30px #DAA52040'}}>
+                <span className="text-3xl" style={{color: '#ffffff'}}>🤝</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4" style={{ color: '#003875' }}>
-                Partners & Sponsors
+              <h3 className="text-2xl font-bold mb-4" style={{color: '#DAA520', fontFamily: "'Montserrat', sans-serif"}}>
+                PARTNERS & SPONSORS
               </h3>
-              <p className="text-base mb-6" style={{ color: '#003875' }}>
-                Support through sponsorship, in-kind contributions, mentorship, or media collaborations. Help us amplify teen voices and create lasting impact.
+              <p className="text-lg mb-8" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
+                Support teen excellence through sponsorship and partnerships.
               </p>
-              <ul className="text-left mb-6 space-y-2" style={{ color: '#003875' }}>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Category sponsorship opportunities</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Event partnership and co-branding</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Media and digital content collaboration</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Mentorship program support</span>
-                </li>
-              </ul>
-              <button className="w-full px-6 py-3 rounded-2xl font-bold transition-all hover:shadow-lg" style={{ backgroundColor: '#DAA520', color: '#003875' }}>
+              <button className="w-full px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl" style={{background: 'linear-gradient(145deg, #DAA520, #DAA520CC)', color: '#ffffff', border: '2px solid #DAA52080'}}>
                 Request Partnership Kit
               </button>
             </div>
 
             {/* Volunteers */}
-            <div className="bg-white rounded-3xl p-8 shadow-2xl text-center">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#DAA520' }}>
-                <span className="text-3xl">🙋</span>
+            <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(145deg, #FF6B6B, #FF6B6BCC)', boxShadow: '0 10px 30px #FF6B6B40'}}>
+                <span className="text-3xl" style={{color: '#ffffff'}}>🙋</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4" style={{ color: '#003875' }}>
-                Volunteers
+              <h3 className="text-2xl font-bold mb-4" style={{color: '#FF6B6B', fontFamily: "'Montserrat', sans-serif"}}>
+                VOLUNTEERS
               </h3>
-              <p className="text-base mb-6" style={{ color: '#003875' }}>
-                Help with events, storytelling, logistics, social media, and community outreach. Be part of the movement celebrating teen excellence.
+              <p className="text-lg mb-8" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
+                Help with events, outreach, and celebrating teen excellence.
               </p>
-              <ul className="text-left mb-6 space-y-2" style={{ color: '#003875' }}>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Event support and logistics</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Social media and content creation</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Community outreach and engagement</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Storytelling and documentation</span>
-                </li>
-              </ul>
-              <Link 
-                to="https://www.teendomafrica.org/volunteer"
-                className="w-full block px-6 py-3 rounded-2xl font-bold transition-all hover:shadow-lg text-center"
-                style={{ backgroundColor: '#DAA520', color: '#003875' }}
+              <button
+                className="w-full px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+                style={{background: 'linear-gradient(145deg, #FF6B6B, #FF6B6BCC)', color: '#ffffff', border: '2px solid #FF6B6B80'}}
               >
                 Sign Up to Volunteer
-              </Link>
+              </button>
             </div>
 
             {/* Mentors & Advisors */}
-            <div className="bg-white rounded-3xl p-8 shadow-2xl text-center">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#DAA520' }}>
-                <span className="text-3xl">🎓</span>
+            <div className="bg-black/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:transform hover:scale-105 group text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'linear-gradient(145deg, #4ECDC4, #4ECDC4CC)', boxShadow: '0 10px 30px #4ECDC440'}}>
+                <span className="text-3xl" style={{color: '#ffffff'}}>🎓</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4" style={{ color: '#003875' }}>
-                Mentors & Advisors
+              <h3 className="text-2xl font-bold mb-4" style={{color: '#4ECDC4', fontFamily: "'Montserrat', sans-serif"}}>
+                MENTORS & ADVISORS
               </h3>
-              <p className="text-base mb-6" style={{ color: '#003875' }}>
-                Guide and support our finalists in their 12-month development journey. Share your expertise and help shape the next generation.
+              <p className="text-lg mb-8" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300'}}>
+                Guide and support our teen finalists through mentorship.
               </p>
-              <ul className="text-left mb-6 space-y-2" style={{ color: '#003875' }}>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>One-on-one mentorship programs</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Industry expertise and guidance</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Portfolio and project development</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span style={{ color: '#DAA520' }}>•</span>
-                  <span>Leadership development support</span>
-                </li>
-              </ul>
-              <button className="w-full px-6 py-3 rounded-2xl font-bold transition-all hover:shadow-lg" style={{ backgroundColor: '#DAA520', color: '#003875' }}>
+              <button className="w-full px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl" style={{background: 'linear-gradient(145deg, #4ECDC4, #4ECDC4CC)', color: '#ffffff', border: '2px solid #4ECDC480'}}>
                 Become a Mentor
               </button>
             </div>

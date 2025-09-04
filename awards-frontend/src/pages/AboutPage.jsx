@@ -36,18 +36,10 @@ function AboutPage() {
                   <img 
                     src="/Sandra Ochola.jpg" 
                     alt="Sandra Ochola - Founder, Teendom Africa"
-                    className="w-full max-w-md lg:max-w-lg h-[40rem] lg:h-[45rem] object-cover object-center shadow-2xl rounded-2xl"
+                    className="w-full max-w-md lg:max-w-lg h-[40rem] lg:h-[45rem] object-cover object-center shadow-2xl"
                     style={{filter: 'drop-shadow(0 20px 40px rgba(218, 165, 32, 0.3))'}}
                   />
                   
-                  <div className="absolute -bottom-6 left-4 right-4 px-8 py-4 rounded-xl shadow-2xl" style={{ background: 'linear-gradient(145deg, #DAA520, #B8860B)', border: '2px solid rgba(255, 215, 0, 0.5)' }}>
-                    <h3 className="text-xl font-black text-center" style={{ color: '#0b1426', fontFamily: "'Montserrat', sans-serif" }}>
-                      SANDRA OCHOLA
-                    </h3>
-                    <p className="text-sm font-bold text-center mt-1" style={{ color: '#0b1426', fontFamily: "'Montserrat', sans-serif" }}>
-                      Founder & CEO, Teendom Africa
-                    </p>
-                  </div>
                 </div>
               </div>
 
@@ -64,13 +56,13 @@ function AboutPage() {
                   "I founded the Teendom Awards because I believe in the extraordinary potential of teenagers to transform the social, economic, political, and cultural fabric of our nation."
                 </blockquote>
 
-                <div className="space-y-6 text-lg lg:text-xl leading-relaxed" style={{ 
+                <div className="space-y-6 text-lg lg:text-xl leading-relaxed text-justify" style={{ 
                   color: '#E8EAF6', 
                   fontFamily: "'Montserrat', sans-serif",
                   fontWeight: '300',
                   textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
                 }}>
-                  <p>
+                  <p className="text-justify">
                     As a lawyer, author, and civic educator who has worked closely with teenagers and young adults for nearly a decade, I have seen first-hand their ability to lead movements, create innovative solutions, and inspire entire communities. Yet too often, their voices go unheard, their achievements unnoticed, and their dreams unsupported.
                   </p>
                   
@@ -78,11 +70,11 @@ function AboutPage() {
                     I wanted to change that.
                   </p>
                   
-                  <p>
+                  <p className="text-justify">
                     The Teendom Awards was born to be more than just a celebration — it is Kenya's first national platform dedicated to applauding and equipping teenage innovators, advocates, and creators. It is about shining a light on those already shaping our future, and surrounding them with the mentorship, networks, and opportunities they need to go even further.
                   </p>
                   
-                  <p>
+                  <p className="text-justify">
                     This year, we open the awards to every Kenyan who knows a teenager making a difference - so their story can inspire the nation. If you are a parent, educator, or a teen yourself, you are part of this story. If you are a sponsor, partner, or mentor, you have the chance to invest in Kenya's next generation of trailblazers.
                   </p>
                   

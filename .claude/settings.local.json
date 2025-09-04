@@ -5,7 +5,17 @@
       "Bash(npm run dev:*)",
       "Bash(git add:*)",
       "Bash(git reset:*)",
-      "Bash(dir \"C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\public\" /b)"
+      "Bash(dir \"C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\public\" /b)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\public\\awards page resources/**)",
+      "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\pages/**)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []
