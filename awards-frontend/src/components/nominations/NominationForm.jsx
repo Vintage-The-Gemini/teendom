@@ -1,5 +1,6 @@
 // File Path: frontend/src/components/nominations/NominationForm.jsx
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import NominatorSection from "./NominatorSection";
 import NomineeSection from "./NomineeSection";
 import CategorySelection from "./CategorySelection";
@@ -9,6 +10,7 @@ import RefereeSection from "./RefereeSection";
 import ConsentSection from "./ConsentSection";
 
 function NominationForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(() => {
     try {
       const saved = sessionStorage.getItem('nomination-form');
@@ -262,7 +264,7 @@ function NominationForm() {
         console.log('✅ Nomination submitted successfully');
         alert('🎉 Nomination submitted successfully! Thank you for celebrating teen excellence.');
         sessionStorage.removeItem('nomination-form');
-        window.location.href = '/awards';
+        navigate('/awards');
       } else {
         throw new Error(result.message || 'Submission failed');
       }
