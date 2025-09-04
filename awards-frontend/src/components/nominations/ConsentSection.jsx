@@ -18,34 +18,9 @@ function ConsentSection({ formData, handleInputChange, errors }) {
       </h2>
 
       <div className="space-y-6">
-        {/* Important Notice */}
-        <div className="rounded-2xl p-6" style={{ backgroundColor: '#eff6ff', border: '1px solid #3b82f6' }}>
-          <h3 className="text-lg font-bold mb-4 flex items-center" style={{ color: '#1e40af' }}>
-            <HiShieldCheck className="mr-2 h-5 w-5" />
-            Important Information
-          </h3>
-          <ul className="space-y-2 text-sm font-medium" style={{ color: '#1e40af' }}>
-            <li className="flex items-start">
-              <span className="text-blue-500 mr-2">•</span>
-              Only shortlisted nominees will be contacted directly
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-500 mr-2">•</span>
-              No nominee details will be published without explicit consent
-            </li>
-            <li className="flex items-start">
-              <span className="text-blue-500 mr-2">•</span>
-              All information is kept confidential during the judging process
-            </li>
-          </ul>
-        </div>
-
         {/* Consent Checkboxes */}
         <div className="space-y-4">
           <div className="space-y-4 rounded-2xl p-6" style={{ backgroundColor: '#f8fafc', border: '2px solid #DAA520' }}>
-            <h4 className="font-bold text-lg mb-4" style={{ color: '#003875' }}>
-              Required Confirmations
-            </h4>
             
             <div className="space-y-4">
               <label className="flex items-start space-x-3 cursor-pointer">
@@ -162,8 +137,8 @@ function ConsentSection({ formData, handleInputChange, errors }) {
               <p className="text-sm">0742862080</p>
             </div>
             <div>
-              <h4 className="font-bold mb-2" style={{ color: '#DAA520' }}>Website</h4>
-              <p className="text-sm">www.teendom.africa</p>
+              <h4 className="font-bold mb-2" style={{ color: '#DAA520' }}>Email</h4>
+              <p className="text-sm">info@teendom.africa</p>
             </div>
           </div>
         </div>

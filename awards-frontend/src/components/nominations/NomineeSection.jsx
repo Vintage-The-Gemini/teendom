@@ -81,6 +81,87 @@ function NomineeSection({ formData, handleInputChange, errors }) {
 
         <div>
           <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Gender *
+          </label>
+          <select
+            name="nomineeGender"
+            value={formData.nomineeGender || ''}
+            onChange={handleInputChange}
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
+              errors.nomineeGender ? 'border-red-500' : 'border-gray-300'
+            }`}
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.nomineeGender ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520',
+              color: '#003875'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.nomineeGender ? '#ef4444' : '#d1d5db'}
+          >
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          {errors.nomineeGender && (
+            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.nomineeGender}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            School/Institution
+          </label>
+          <input
+            type="text"
+            name="nomineeSchool"
+            value={formData.nomineeSchool || ''}
+            onChange={handleInputChange}
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
+              errors.nomineeSchool ? 'border-red-500' : 'border-gray-300'
+            }`}
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.nomineeSchool ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.nomineeSchool ? '#ef4444' : '#d1d5db'}
+            placeholder="Enter school or institution name"
+          />
+          {errors.nomineeSchool && (
+            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.nomineeSchool}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
+            Current Grade/Level
+          </label>
+          <input
+            type="text"
+            name="nomineeCurrentGrade"
+            value={formData.nomineeCurrentGrade || ''}
+            onChange={handleInputChange}
+            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
+              errors.nomineeCurrentGrade ? 'border-red-500' : 'border-gray-300'
+            }`}
+            style={{
+              backgroundColor: '#f8fafc',
+              borderColor: errors.nomineeCurrentGrade ? '#ef4444' : '#d1d5db',
+              '--tw-ring-color': '#DAA520'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+            onBlur={(e) => e.target.style.borderColor = errors.nomineeCurrentGrade ? '#ef4444' : '#d1d5db'}
+            placeholder="e.g., Form 4, Year 2, Grade 12"
+          />
+          {errors.nomineeCurrentGrade && (
+            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.nomineeCurrentGrade}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
             County of Residence *
           </label>
           <select

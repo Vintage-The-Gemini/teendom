@@ -121,10 +121,10 @@ function SupportingMaterials({ formData, setFormData, errors, uploadProgress, ha
         {/* Supporting Documents */}
         <div>
           <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
-            Supporting Documents (Optional)
+            Supporting Documents (Required)
           </label>
           <p className="text-sm mb-4" style={{ color: '#003875' }}>
-            Upload certificates, awards, media features, recommendation letters, or other relevant documents that support the nomination.
+            Upload certificates, awards, media features, recommendation letters, or other relevant documents that support the nomination. This is required to complete your nomination.
           </p>
           <div className="border-2 border-dashed rounded-2xl p-6 text-center transition-colors duration-200 hover:bg-blue-50"
                style={{ borderColor: '#d1d5db' }}>
@@ -246,34 +246,47 @@ function SupportingMaterials({ formData, setFormData, errors, uploadProgress, ha
           </p>
           
           <div className="space-y-3">
-            {(formData.supportingLinks || ['']).map((link, index) => (
-              <div key={index} className="flex items-center space-x-3">
-                <div className="flex-grow">
-                  <input
-                    type="url"
-                    value={link}
-                    onChange={(e) => handleLinkChange(index, e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200"
-                    style={{
-                      backgroundColor: '#f8fafc',
-                      '--tw-ring-color': '#DAA520'
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = '#DAA520'}
-                    onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
-                    placeholder={`Link ${index + 1}: https://example.com`}
-                  />
+            {(formData.supportingLinks || ['']).map((link, index) => {
+              const placeholders = [
+                'https://www.youtube.com/watch?v=example - Video showcasing achievements',
+                'https://www.instagram.com/username - Social media profile',
+                'https://linkedin.com/in/profile - Professional profile',
+                'https://www.facebook.com/page - Facebook page or profile',
+                'https://www.tiktok.com/@username - TikTok profile',
+                'https://website.com/portfolio - Personal website or portfolio',
+                'https://news-site.com/article - News article or media coverage',
+                'https://school.edu/student-profile - School recognition page'
+              ];
+              
+              return (
+                <div key={index} className="flex items-center space-x-3">
+                  <div className="flex-grow">
+                    <input
+                      type="url"
+                      value={link}
+                      onChange={(e) => handleLinkChange(index, e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200"
+                      style={{
+                        backgroundColor: '#f8fafc',
+                        '--tw-ring-color': '#DAA520'
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = '#DAA520'}
+                      onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
+                      placeholder={placeholders[index] || `https://example.com - Supporting link ${index + 1}`}
+                    />
+                  </div>
+                  {formData.supportingLinks && formData.supportingLinks.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeLinkField(index)}
+                      className="text-red-500 hover:text-red-700 p-2"
+                    >
+                      <HiX className="h-5 w-5" />
+                    </button>
+                  )}
                 </div>
-                {formData.supportingLinks && formData.supportingLinks.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => removeLinkField(index)}
-                    className="text-red-500 hover:text-red-700 p-2"
-                  >
-                    <HiX className="h-5 w-5" />
-                  </button>
-                )}
-              </div>
-            ))}
+              );
+            })}
             
             {(!formData.supportingLinks || formData.supportingLinks.length < 5) && (
               <button

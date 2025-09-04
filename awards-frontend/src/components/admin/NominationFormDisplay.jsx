@@ -242,11 +242,11 @@ function NominationFormDisplay({ nomination }) {
               <HiPhotograph className="mr-2 h-4 w-4" />
               Nominee Photo <span className="text-red-500 ml-1">*</span>
             </label>
-            {nomination.nomineePhoto ? (
+            {nomination.supportingMaterials?.nomineePhoto ? (
               <div className="flex items-center space-x-4 p-4 rounded-xl border-2" 
                    style={{ backgroundColor: '#f0fdf4', borderColor: '#22c55e' }}>
                 <img 
-                  src={nomination.nomineePhoto} 
+                  src={nomination.supportingMaterials.nomineePhoto} 
                   alt="Nominee" 
                   className="w-24 h-24 object-cover rounded-xl border-2 shadow-md"
                   style={{ borderColor: '#DAA520' }}
@@ -257,7 +257,7 @@ function NominationFormDisplay({ nomination }) {
                     <span className="font-bold text-green-800">Photo uploaded successfully</span>
                   </div>
                   <a 
-                    href={nomination.nomineePhoto} 
+                    href={nomination.supportingMaterials.nomineePhoto} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium"
@@ -278,11 +278,11 @@ function NominationFormDisplay({ nomination }) {
           <div>
             <label className="block text-sm font-bold mb-4 flex items-center" style={{ color: '#003875' }}>
               <HiDocumentText className="mr-2 h-4 w-4" />
-              Supporting Documents (Optional)
+              Supporting Documents (Required)
             </label>
-            {nomination.supportingDocuments && nomination.supportingDocuments.length > 0 ? (
+            {nomination.supportingMaterials?.supportingDocuments && nomination.supportingMaterials.supportingDocuments.length > 0 ? (
               <div className="space-y-3">
-                {nomination.supportingDocuments.map((doc, index) => {
+                {nomination.supportingMaterials.supportingDocuments.map((doc, index) => {
                   const isImage = doc.name && doc.name.match(/\.(jpg|jpeg|png|gif)$/i);
                   const isPDF = doc.name && doc.name.match(/\.pdf$/i);
                   
@@ -338,9 +338,9 @@ function NominationFormDisplay({ nomination }) {
               <HiExternalLink className="mr-2 h-4 w-4" />
               Supporting Links (Optional)
             </label>
-            {nomination.supportingLinks && nomination.supportingLinks.filter(link => link && link.trim()).length > 0 ? (
+            {nomination.supportingMaterials?.supportingLinks && nomination.supportingMaterials.supportingLinks.filter(link => link && link.trim()).length > 0 ? (
               <div className="space-y-3">
-                {nomination.supportingLinks.filter(link => link && link.trim()).map((link, index) => (
+                {nomination.supportingMaterials.supportingLinks.filter(link => link && link.trim()).map((link, index) => (
                   <div key={index} className="p-4 rounded-xl border-2" 
                        style={{ backgroundColor: '#f0fdf4', borderColor: '#22c55e' }}>
                     <a 

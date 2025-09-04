@@ -91,6 +91,13 @@ function NominationForm() {
   const handleFileUpload = async (file, fieldName) => {
     if (!file) return;
     
+    // File size validation (5MB limit)
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    if (file.size > maxSize) {
+      alert(`File size too large! Maximum allowed size is 5MB. Your file is ${(file.size / 1024 / 1024).toFixed(2)}MB`);
+      return;
+    }
+    
     try {
       setUploadProgress(prev => ({ ...prev, [fieldName]: 0 }));
       
@@ -147,19 +154,19 @@ function NominationForm() {
     const required = {
       nominatorName: "Nominator name required", nominatorEmail: "Nominator email required", 
       nominatorPhone: "Nominator phone required", nominatorRelationship: "Relationship required",
-      nomineeName: "Nominee name required", nomineeAge: "Age required", nomineeCounty: "County required",
-      awardCategory: "Category required", shortBio: "Bio required", nominationStatement: "Statement required",
-      refereeName: "Referee name required", refereeEmail: "Referee email required"
+      nomineeName: "Nominee name required", nomineeAge: "Age required", nomineeGender: "Gender required",
+      nomineeCounty: "County required", awardCategory: "Category required", shortBio: "Bio required", 
+      nominationStatement: "Statement required", refereeName: "Referee name required", refereeEmail: "Referee email required"
     };
 
     Object.entries(required).forEach(([field, message]) => {
       if (!formData[field]) newErrors[field] = message;
     });
 
-    // Age validation
+    // Strict age validation (13-19)
     const age = parseInt(formData.nomineeAge);
-    if (age && (age < 13 || age > 19)) {
-      newErrors.nomineeAge = "Age must be between 13-19";
+    if (formData.nomineeAge && (isNaN(age) || age < 13 || age > 19)) {
+      newErrors.nomineeAge = "Age must be exactly between 13 and 19 years";
     }
 
     // Bio length validation (250 words max)
@@ -203,6 +210,11 @@ function NominationForm() {
     const nomineeAge = parseInt(formData.nomineeAge);
     if (nomineeAge && nomineeAge < 18 && !formData.parentalConsent) {
       newErrors.parentalConsent = "Parental consent required for nominees under 18";
+    }
+
+    // Supporting documents validation (now required)
+    if (!formData.supportingDocuments || formData.supportingDocuments.length === 0) {
+      newErrors.supportingDocuments = "Supporting documents are required";
     }
 
     return newErrors;
@@ -341,11 +353,13 @@ function NominationForm() {
                     nominatorRelationship: 'Section 1: Nominator Details',
                     nomineeName: 'Section 2: Nominee Information',
                     nomineeAge: 'Section 2: Nominee Information',
+                    nomineeGender: 'Section 2: Nominee Information',
                     nomineeCounty: 'Section 2: Nominee Information',
                     awardCategory: 'Section 3: Award Category',
                     shortBio: 'Section 4: Nomination Details',
                     nominationStatement: 'Section 4: Nomination Details',
                     nomineePhoto: 'Section 5: Supporting Materials',
+                    supportingDocuments: 'Section 5: Supporting Materials',
                     refereeName: 'Section 6: Referee Information',
                     refereeEmail: 'Section 6: Referee Information',
                     accurateInfo: 'Section 7: Consent & Declaration',
