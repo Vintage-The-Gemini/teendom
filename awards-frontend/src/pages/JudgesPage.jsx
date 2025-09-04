@@ -123,7 +123,7 @@ function JudgesPage() {
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
             Meet Our 2025 JUDGES
           </h1>
-          <p className="text-xl md:text-2xl text-white max-w-4xl mx-auto leading-relaxed mb-8">
+          <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-8 text-justify" style={{color: '#E8EAF6', fontFamily: "'Didot', 'Times New Roman', serif", fontWeight: '300'}}>
             The Teendom Awards are guided by a panel of young professionals who are respected leaders and changemakers and who bring credibility, fairness, and heart to the process. Each judge is carefully selected for their expertise, passion for youth empowerment, and commitment to celebrating the voices of Kenya's teenagers.
           </p>
         </div>
