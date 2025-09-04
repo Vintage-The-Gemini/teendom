@@ -2,6 +2,7 @@
 import express from 'express';
 import Nomination from '../models/Nomination.js';
 import mongoose from 'mongoose';
+import emailService from '../services/emailService.js';
 
 const router = express.Router();
 
@@ -90,12 +91,28 @@ router.post('/', async (req, res) => {
     console.log('📊 Document ID:', savedNomination._id);
     console.log('📊 Collection should now exist in database:', mongoose.connection.name);
 
-    // Note: Email functionality disabled for now
-    console.log('📧 Email functionality disabled (nodemailer not configured)');
+    // Send confirmation email
+    try {
+      console.log('📧 Sending confirmation email to:', nominatorEmail);
+      const emailResult = await emailService.sendConfirmationEmail(
+        nominatorEmail, 
+        nominatorName, 
+        nomineeName
+      );
+      
+      if (emailResult.success) {
+        console.log('✅ Confirmation email sent successfully');
+      } else {
+        console.log('⚠️ Email sending failed but nomination was saved:', emailResult.error);
+      }
+    } catch (emailError) {
+      console.error('📧 Email service error:', emailError);
+      // Don't fail the nomination if email fails
+    }
 
     res.status(201).json({
       success: true,
-      message: 'Nomination submitted successfully!',
+      message: 'Nomination submitted successfully! A confirmation email has been sent.',
       nominationId: savedNomination._id
     });
 
@@ -159,6 +176,43 @@ router.get('/', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Server error: ' + error.message
+    });
+  }
+});
+
+// GET /api/nominations/test-email - Test email functionality
+router.get('/test-email', async (req, res) => {
+  try {
+    console.log('🧪 Testing email service connection...');
+    const connectionTest = await emailService.testConnection();
+    
+    if (connectionTest) {
+      // Send a test email
+      const emailResult = await emailService.sendConfirmationEmail(
+        'admin@teendom.africa', 
+        'Test User', 
+        'Test Nominee'
+      );
+      
+      res.json({
+        success: true,
+        connectionTest: true,
+        emailSent: emailResult.success,
+        message: 'Email test completed',
+        details: emailResult
+      });
+    } else {
+      res.json({
+        success: false,
+        connectionTest: false,
+        message: 'Email server connection failed'
+      });
+    }
+  } catch (error) {
+    console.error('Email test error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
     });
   }
 });
