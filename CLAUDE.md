@@ -75,15 +75,21 @@ npm run typecheck      # Type checking
 ## Development Notes
 - Uses absolute imports with Vite
 - Responsive design with mobile-first approach
-- Red (#ef4444) and white color scheme
-- Inter font family
+- Golden (#DAA520) and dark blue theme colors
+- Didot font for headings, Montserrat for body text
 - Error boundaries and fallbacks implemented
-- Cloudinary for image management
+- Unsplash integration for abstract imagery
 
-## Recent Changes
-- Fixed Vite config for proper asset serving on Render
-- Updated admin routes
-- Enum fixes in models
+## Recent Changes (Latest Session)
+- **Homepage Energy Enhancement**: Replaced React icons with abstract Unsplash photos
+- **Visual Redesign**: Updated color scheme from red to golden/dark blue gradient
+- **Mobile Navbar Fix**: Improved mobile navigation visibility with golden colors
+- **Judges Page Updates**: Modified carousel timing and removed borders
+- **Categories Page**: Capitalized award titles and added white backgrounds
+- **About Page**: Removed CEO title overlay and justified text alignment
+- **GetInvolved Page**: Created new page with simplified partner/volunteer sections
+- **Abstract Graphics**: Final iteration uses abstract colorful photos instead of people
+- **Animation Optimization**: Reduced excessive floating animations for cleaner look
 
 ## Important Files
 - `frontend/src/pages/HomePage.jsx` - Landing page with hero section

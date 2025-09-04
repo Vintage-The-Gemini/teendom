@@ -10,25 +10,16 @@ function AwardsPage() {
       
       {/* Hero Section - Enhanced with energy */}
       <section className="pt-24 pb-16 px-6 relative overflow-hidden" style={{background: 'transparent'}}>
-        {/* Animated Background Elements with Stock Graphics */}
+        {/* Subtle Background Graphics */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="floating-graphic" style={{top: '10%', left: '10%', animationDelay: '0s'}}>
-            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=80&h=80&fit=crop" alt="Success" className="w-12 h-12 rounded-full opacity-60" />
+          <div className="floating-graphic" style={{top: '15%', left: '10%', animationDelay: '0s'}}>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 opacity-20"></div>
           </div>
-          <div className="floating-graphic" style={{top: '20%', right: '15%', animationDelay: '1s'}}>
-            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=80&h=80&fit=crop" alt="Achievement" className="w-16 h-16 rounded-full opacity-50" />
+          <div className="floating-graphic" style={{top: '30%', right: '15%', animationDelay: '3s'}}>
+            <div className="w-6 h-6 bg-gradient-to-r from-blue-400 to-blue-600 opacity-15 transform rotate-45"></div>
           </div>
-          <div className="floating-graphic" style={{top: '60%', left: '5%', animationDelay: '2s'}}>
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop" alt="Innovation" className="w-14 h-14 rounded-full opacity-70" />
-          </div>
-          <div className="floating-graphic" style={{top: '70%', right: '8%', animationDelay: '0.5s'}}>
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=80&h=80&fit=crop&crop=face" alt="Leadership" className="w-10 h-10 rounded-full opacity-60" />
-          </div>
-          <div className="floating-graphic" style={{top: '40%', right: '25%', animationDelay: '1.5s'}}>
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Excellence" className="w-12 h-12 rounded-full opacity-50" />
-          </div>
-          <div className="floating-graphic" style={{top: '80%', left: '20%', animationDelay: '2.5s'}}>
-            <img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=80&h=80&fit=crop&crop=face" alt="Inspiration" className="w-14 h-14 rounded-full opacity-70" />
+          <div className="floating-graphic" style={{top: '70%', left: '8%', animationDelay: '6s'}}>
+            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-green-600 opacity-25"></div>
           </div>
         </div>
         
@@ -51,12 +42,11 @@ function AwardsPage() {
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-500 hover:transform hover:scale-110 hover:rotate-1 group card-hover-glow overflow-hidden">
                   <div className="text-center relative">
-                    <div className="w-24 h-24 mx-auto mb-6 card-icon-img overflow-hidden rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500">
+                    <div className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500 overflow-hidden">
                       <img 
-                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=400&fit=crop&crop=face"
-                        alt="Confident teen leader" 
+                        src="https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?w=400&h=400&fit=crop"
+                        alt="Abstract colorful design" 
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        style={{filter: 'brightness(1.2) contrast(1.1)'}}
                       />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-golden transition-colors duration-300">Are you a teen making a difference?</h3>
@@ -67,12 +57,11 @@ function AwardsPage() {
                 
                 <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-500 hover:transform hover:scale-110 hover:-rotate-1 group card-hover-glow overflow-hidden">
                   <div className="text-center relative">
-                    <div className="w-24 h-24 mx-auto mb-6 card-icon-img overflow-hidden rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500">
+                    <div className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500 overflow-hidden">
                       <img 
-                        src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=400&h=400&fit=crop&crop=face"
-                        alt="Inspiring young person" 
+                        src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&h=400&fit=crop"
+                        alt="Abstract geometric pattern" 
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        style={{filter: 'brightness(1.2) contrast(1.1)'}}
                       />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-golden transition-colors duration-300">Know an inspiring teen?</h3>
@@ -83,12 +72,11 @@ function AwardsPage() {
                 
                 <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-golden/50 transition-all duration-500 hover:transform hover:scale-110 hover:rotate-1 group card-hover-glow overflow-hidden">
                   <div className="text-center relative">
-                    <div className="w-24 h-24 mx-auto mb-6 card-icon-img overflow-hidden rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500">
+                    <div className="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-golden/30 group-hover:border-golden transition-all duration-500 overflow-hidden">
                       <img 
-                        src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=400&fit=crop&crop=faces"
-                        alt="Team collaboration" 
+                        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop"
+                        alt="Abstract flowing shapes" 
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        style={{filter: 'brightness(1.2) contrast(1.1)'}}
                       />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-golden transition-colors duration-300">Want to support this vision?</h3>
@@ -158,26 +146,18 @@ function AwardsPage() {
         /* Floating background graphics */
         .floating-graphic {
           position: absolute;
-          animation: floatGraphic 8s ease-in-out infinite;
-          opacity: 0.7;
+          animation: floatGraphic 12s ease-in-out infinite;
+          opacity: 0.3;
         }
         
         @keyframes floatGraphic {
           0%, 100% {
-            transform: translateY(0px) scale(1) rotate(0deg);
-            opacity: 0.4;
-          }
-          25% {
-            transform: translateY(-40px) scale(1.1) rotate(5deg);
-            opacity: 0.8;
+            transform: translateY(0px);
+            opacity: 0.2;
           }
           50% {
-            transform: translateY(-15px) scale(0.9) rotate(-3deg);
-            opacity: 0.6;
-          }
-          75% {
-            transform: translateY(-25px) scale(1.05) rotate(8deg);
-            opacity: 0.7;
+            transform: translateY(-10px);
+            opacity: 0.4;
           }
         }
         
