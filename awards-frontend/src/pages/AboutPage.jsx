@@ -12,7 +12,7 @@ function AboutPage() {
       <section className="pt-24 pb-16 px-6">
         <div className="container mx-auto max-w-6xl text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6" style={{color: '#DAA520', textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontFamily: "'Didot', 'Times New Roman', serif", letterSpacing: '2px', fontWeight: '400', fontStyle: 'italic'}}>
-            About Teendom Africa
+            About Teendom Awards
           </h1>
         </div>
       </section>

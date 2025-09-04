@@ -30,34 +30,18 @@ function Navbar() {
           {/* Logo with distinct background */}
           <Link to="/" className="flex items-center group outline-none focus:outline-none border-none touch-manipulation" 
                 style={{ WebkitTapHighlightColor: 'transparent' }}>
-            <div className="relative p-3 rounded-none" style={{
-              background: 'linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05))',
-              border: '2px solid rgba(255, 215, 0, 0.3)',
-              boxShadow: '0 8px 32px rgba(255, 215, 0, 0.1)',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 12px 40px rgba(255, 215, 0, 0.2)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 8px 32px rgba(255, 215, 0, 0.1)';
-            }}>
-              <img 
-                src="/teendom awards primary icon.png" 
-                alt="Teendom Awards" 
-                className="h-16 w-auto transition-all duration-300"
-                style={{filter: 'drop-shadow(0 4px 8px rgba(255, 215, 0, 0.2))'}}
-                onError={(e) => {
-                  if (e.target.src.includes('primary icon')) {
-                    e.target.src = '/teendom awards primary logo.png';
-                  } else if (e.target.src.includes('primary logo')) {
-                    e.target.src = '/teendom.png';
-                  }
-                }}
-              />
-            </div>
+            <img 
+              src="/teendom awards primary icon.png" 
+              alt="Teendom Awards" 
+              className="h-16 w-auto transition-all duration-300"
+              onError={(e) => {
+                if (e.target.src.includes('primary icon')) {
+                  e.target.src = '/teendom awards primary logo.png';
+                } else if (e.target.src.includes('primary logo')) {
+                  e.target.src = '/teendom.png';
+                }
+              }}
+            />
           </Link>
 
           {/* Desktop Navigation - Modern Floating Pills */}
