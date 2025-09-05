@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     const {
       isSelfNomination, nominatorName, nominatorEmail, nominatorPhone, nominatorRelationship,
       nomineeName, nomineeDateOfBirth, nomineeAge, nomineeGender, nomineeEmail, nomineePhone, nomineeCounty, nomineeNationality,
-      awardCategory, shortBio, nominationStatement,
+      awardCategory, creativeArtsType, shortBio, nominationStatement,
       nomineePhoto, supportingDocuments, supportingLinks,
       refereeName, refereePosition, refereePhone, refereeEmail, contactReferee,
       accurateInfo, nomineePermission, parentalConsent, understandsProcess, noFalseInfo
@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     const isSelF = isSelfNomination === 'yes';
     
     console.log('🔍 Key fields:', {
-      isSelfNomination, nominatorName, nomineeName, awardCategory,
+      isSelfNomination, nominatorName, nomineeName, awardCategory, creativeArtsType,
       hasPhoto: !!nomineePhoto
     });
 
@@ -55,6 +55,7 @@ router.post('/', async (req, res) => {
         nationality: nomineeNationality || undefined
       },
       awardCategory,
+      creativeArtsType: creativeArtsType || undefined,
       details: {
         shortBio,
         nominationStatement

@@ -3,6 +3,14 @@ import React from "react";
 import { HiStar } from "react-icons/hi";
 
 function CategorySelection({ formData, handleInputChange, errors }) {
+  const creativeArtsSubcategories = [
+    { value: "visual", label: "Visual Arts (painting, drawing, photography)" },
+    { value: "performing", label: "Performing Arts (music, dance, theater, spoken word)" },
+    { value: "literary", label: "Literary Arts (writing, poetry)" },
+    { value: "digital", label: "Digital Arts (graphic design, video production)" },
+    { value: "crafts", label: "Crafts & Design" }
+  ];
+
   const awardCategories = [
     {
       value: "academic",
@@ -52,7 +60,7 @@ function CategorySelection({ formData, handleInputChange, errors }) {
     {
       value: "creative", 
       title: "Creative Arts Award",
-      description: "Outstanding achievements in visual, performing, or literary arts"
+      description: "Outstanding achievements in: Visual Arts (painting, drawing, photography), Performing Arts (music, dance, theater, spoken word), Literary Arts (writing, poetry), Digital Arts (graphic design, video production), or Crafts & Design"
     }
   ];
 
@@ -109,6 +117,36 @@ function CategorySelection({ formData, handleInputChange, errors }) {
           </label>
         ))}
       </div>
+
+      {/* Creative Arts Subcategory Selection */}
+      {formData.awardCategory === 'creative' && (
+        <div className="mt-6 p-4 rounded-xl" style={{ backgroundColor: '#fffbeb', border: '2px solid #DAA520' }}>
+          <h3 className="text-lg font-bold mb-4" style={{ color: '#003875' }}>
+            Please specify the type of Creative Arts:
+          </h3>
+          <div className="space-y-3">
+            {creativeArtsSubcategories.map((subcategory) => (
+              <label key={subcategory.value} className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  name="creativeArtsType"
+                  value={subcategory.value}
+                  checked={formData.creativeArtsType === subcategory.value}
+                  onChange={handleInputChange}
+                  className="w-4 h-4 mr-3"
+                  style={{ accentColor: '#DAA520' }}
+                />
+                <span className="text-sm font-medium" style={{ color: '#003875' }}>
+                  {subcategory.label}
+                </span>
+              </label>
+            ))}
+          </div>
+          {errors.creativeArtsType && (
+            <p className="text-red-500 text-sm mt-2 font-semibold">{errors.creativeArtsType}</p>
+          )}
+        </div>
+      )}
 
       {errors.awardCategory && (
         <p className="text-red-500 text-sm mt-4 font-semibold">{errors.awardCategory}</p>

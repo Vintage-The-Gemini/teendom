@@ -3,7 +3,7 @@ import React from "react";
 
 function NominatorSection({ formData, handleInputChange, errors }) {
   const relationshipOptions = [
-    "Self", "Parent/Guardian", "Teacher", "School Principal", "Coach", "Mentor", 
+    "Parent/Guardian", "Teacher", "School Principal", "Coach", "Mentor", 
     "Community Leader", "Peer/Friend", "Family Member", "Youth Worker", "Other"
   ];
 

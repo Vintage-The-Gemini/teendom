@@ -13,6 +13,7 @@ function JudgesPage() {
       title: "Orthopaedic Surgeon",
       category: "SPORTS AND WELLNESS AWARD",
       image: "/judges/judge Antony Ndeda.jpg",
+      loading: "lazy",
       quote: "Celebrating young people represents who we are as a people, acknowledging that they will make us better now and in the future and in all aspects of life"
     },
     {
@@ -57,7 +58,7 @@ function JudgesPage() {
     },
     {
       id: 7,
-      name: "Ms. LORETTA AKATCH",
+      name: "Loretta Akatch",
       title: "Educator",
       category: "ACADEMIC EXCELLENCE CATEGORY",
       image: "/judges/judge Loretta Akatch.jpg",
@@ -140,6 +141,13 @@ function JudgesPage() {
                     src={judge.image} 
                     alt={judge.name}
                     className="w-full h-96 object-cover object-top"
+                    loading="lazy"
+                    style={{ 
+                      maxWidth: '100%', 
+                      height: 'auto',
+                      aspectRatio: '1/1',
+                      objectFit: 'cover' 
+                    }}
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';

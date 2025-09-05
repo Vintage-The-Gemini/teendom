@@ -35,6 +35,12 @@ const nominationSchema = new mongoose.Schema({
       'teen-year', 'creative'
     ]
   },
+  
+  // Creative Arts Subcategory (required for creative category)
+  creativeArtsType: {
+    type: String,
+    enum: ['visual', 'performing', 'literary', 'digital', 'crafts']
+  },
 
   // Section 4: Nomination Details
   details: {
@@ -145,6 +151,11 @@ nominationSchema.pre('save', function(next) {
     this.nominator.email = this.nominator.email || this.nominee.email;
     this.nominator.phone = this.nominator.phone || this.nominee.phone;
     this.nominator.relationship = this.nominator.relationship || 'Self';
+  }
+
+  // Creative Arts validation
+  if (this.awardCategory === 'creative' && !this.creativeArtsType) {
+    return next(new Error('Creative Arts type is required when award category is Creative Arts'));
   }
   
   // Calculate age from date of birth to ensure consistency

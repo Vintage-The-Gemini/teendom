@@ -26,7 +26,7 @@ function NominationForm() {
       isSelfNomination: "", nominatorName: "", nominatorEmail: "", nominatorPhone: "", nominatorRelationship: "",
       nomineeName: "", nomineeDateOfBirth: "", nomineeAge: "", nomineeGender: "", nomineeEmail: "", nomineePhone: "", 
       nomineeCounty: "", nomineeNationality: "",
-      awardCategory: "", shortBio: "", nominationStatement: "",
+      awardCategory: "", creativeArtsType: "", shortBio: "", nominationStatement: "",
       nomineePhoto: null, supportingDocuments: [], supportingLinks: [""],
       refereeName: "", refereePosition: "", refereePhone: "", refereeEmail: "", contactReferee: false,
       accurateInfo: false, nomineePermission: false, parentalConsent: false, understandsProcess: false, noFalseInfo: false
@@ -183,6 +183,11 @@ function NominationForm() {
     Object.entries(required).forEach(([field, message]) => {
       if (!formData[field]) newErrors[field] = message;
     });
+
+    // Creative Arts subcategory validation
+    if (formData.awardCategory === 'creative' && !formData.creativeArtsType) {
+      newErrors.creativeArtsType = "Please specify the type of Creative Arts";
+    }
 
     // Strict age validation (13-19)
     const age = parseInt(formData.nomineeAge);

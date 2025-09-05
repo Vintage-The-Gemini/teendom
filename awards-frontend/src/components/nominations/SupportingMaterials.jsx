@@ -131,7 +131,7 @@ function SupportingMaterials({ formData, setFormData, errors, uploadProgress, ha
             <HiDocumentText className="mx-auto h-10 w-10 mb-3" style={{ color: '#6b7280' }} />
             <input
               type="file"
-              accept="image/jpeg,image/png,application/pdf"
+              accept="image/jpeg,image/png,image/jpg,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
               onChange={(e) => handleFileUpload(e.target.files[0], 'supportingDocuments')}
               className="hidden"
               id="supportingDocs"
