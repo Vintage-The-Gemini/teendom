@@ -92,10 +92,7 @@ function AboutPage() {
                     <p className="text-lg font-light mt-2" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                       Founder, Teendom Africa
                     </p>
-                    <div className="mt-4 space-y-1">
-                      <p className="text-sm font-medium" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
-                        For more information on the founder & linkages to the work with teens:
-                      </p>
+                    <div className="mt-4">
                       <a 
                         href="https://sandraochola.com/" 
                         target="_blank" 
@@ -117,7 +114,7 @@ function AboutPage() {
                           e.currentTarget.style.textShadow = 'none';
                         }}
                       >
-                        https://sandraochola.com/
+                        sandraochola.com
                       </a>
                     </div>
                   </div>

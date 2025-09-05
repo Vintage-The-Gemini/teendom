@@ -97,31 +97,12 @@ router.post('/', async (req, res) => {
     console.log('📊 Document ID:', savedNomination._id);
     console.log('📊 Collection should now exist in database:', mongoose.connection.name);
 
-    // Send confirmation email
-    try {
-      const emailRecipient = isSelF ? nomineeEmail : nominatorEmail;
-      const emailNominatorName = isSelF ? nomineeName : nominatorName;
-      
-      console.log('📧 Sending confirmation email to:', emailRecipient);
-      const emailResult = await emailService.sendConfirmationEmail(
-        emailRecipient, 
-        emailNominatorName, 
-        nomineeName
-      );
-      
-      if (emailResult.success) {
-        console.log('✅ Confirmation email sent successfully');
-      } else {
-        console.log('⚠️ Email sending failed but nomination was saved:', emailResult.error);
-      }
-    } catch (emailError) {
-      console.error('📧 Email service error:', emailError);
-      // Don't fail the nomination if email fails
-    }
+    // Send confirmation email - TEMPORARILY DISABLED FOR SPEED
+    console.log('📧 Email sending temporarily disabled for faster submissions');
 
     res.status(201).json({
       success: true,
-      message: 'Nomination submitted successfully! A confirmation email has been sent.',
+      message: 'Nomination submitted successfully!',
       nominationId: savedNomination._id
     });
 

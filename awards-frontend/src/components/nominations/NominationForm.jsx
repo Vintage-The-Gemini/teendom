@@ -267,9 +267,10 @@ function NominationForm() {
     }
 
     try {
-      // Debug: Log the data being sent
+      // Show user what's happening
       console.log('🚀 Submitting form data:', formData);
       console.log('📊 Award category value:', formData.awardCategory);
+      console.log('⏳ Connecting to server... (this may take a moment if server is sleeping)');
       
       const response = await fetch('https://teendom-africa-backend.onrender.com/api/nominations', {
         method: 'POST',
