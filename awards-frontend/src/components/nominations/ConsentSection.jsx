@@ -57,25 +57,21 @@ function ConsentSection({ formData, handleInputChange, errors }) {
                 <p className="text-red-500 text-sm font-semibold ml-8">{errors.nomineePermission}</p>
               )}
 
-              {isMinor && (
-                <div>
-                  <label className="flex items-start space-x-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="parentalConsent"
-                      checked={formData.parentalConsent || false}
-                      onChange={handleInputChange}
-                      className="mt-1 w-5 h-5 rounded"
-                      style={{ accentColor: '#DAA520' }}
-                    />
-                    <span className="text-sm font-medium" style={{ color: '#003875' }}>
-                      If the nominee is under 18, I confirm that parental or guardian consent has been obtained for this nomination.
-                    </span>
-                  </label>
-                  {errors.parentalConsent && (
-                    <p className="text-red-500 text-sm font-semibold ml-8">{errors.parentalConsent}</p>
-                  )}
-                </div>
+              <label className="flex items-start space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="parentalConsent"
+                  checked={formData.parentalConsent || false}
+                  onChange={handleInputChange}
+                  className="mt-1 w-5 h-5 rounded"
+                  style={{ accentColor: '#DAA520' }}
+                />
+                <span className="text-sm font-medium" style={{ color: '#003875' }}>
+                  If the nominee is under 18, I confirm that parental or guardian consent has been obtained for this nomination.
+                </span>
+              </label>
+              {errors.parentalConsent && (
+                <p className="text-red-500 text-sm font-semibold ml-8">{errors.parentalConsent}</p>
               )}
 
               <label className="flex items-start space-x-3 cursor-pointer">
