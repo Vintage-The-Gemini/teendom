@@ -23,7 +23,7 @@ function NominationForm() {
     }
     
     return {
-      nominatorName: "", nominatorEmail: "", nominatorPhone: "", nominatorRelationship: "",
+      isSelfNomination: "", nominatorName: "", nominatorEmail: "", nominatorPhone: "", nominatorRelationship: "",
       nomineeName: "", nomineeDateOfBirth: "", nomineeAge: "", nomineeGender: "", nomineeEmail: "", nomineePhone: "", 
       nomineeCounty: "", nomineeNationality: "", nomineeSchool: "", nomineeCurrentGrade: "",
       awardCategory: "", shortBio: "", nominationStatement: "",
@@ -153,13 +153,27 @@ function NominationForm() {
 
   const validateForm = () => {
     const newErrors = {};
+    const isSelf = formData.isSelfNomination === 'yes';
+    
+    // Self-nomination selection required
+    if (!formData.isSelfNomination) {
+      newErrors.isSelfNomination = "Please select if you're nominating yourself";
+    }
+
+    // Required fields - nominator fields only needed if NOT self-nominating
     const required = {
-      nominatorName: "Nominator name required", nominatorEmail: "Nominator email required", 
-      nominatorPhone: "Nominator phone required", nominatorRelationship: "Relationship required",
       nomineeName: "Nominee name required", nomineeAge: "Age required", nomineeGender: "Gender required",
       nomineeCounty: "County required", awardCategory: "Category required", shortBio: "Bio required", 
       nominationStatement: "Statement required", refereeName: "Referee name required", refereeEmail: "Referee email required"
     };
+
+    // Add nominator fields only if NOT self-nominating
+    if (!isSelf) {
+      required.nominatorName = "Nominator name required";
+      required.nominatorEmail = "Nominator email required"; 
+      required.nominatorPhone = "Nominator phone required";
+      required.nominatorRelationship = "Relationship required";
+    }
 
     Object.entries(required).forEach(([field, message]) => {
       if (!formData[field]) newErrors[field] = message;

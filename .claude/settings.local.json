@@ -71,7 +71,8 @@
       "Read(/C:\\Users\\Admin\\Desktop\\desighn\\teendom\\awards-frontend\\src\\components\\nominations/**)",
       "Bash(taskkill:*)",
       "Bash(set PORT=5000)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

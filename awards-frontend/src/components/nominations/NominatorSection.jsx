@@ -3,9 +3,11 @@ import React from "react";
 
 function NominatorSection({ formData, handleInputChange, errors }) {
   const relationshipOptions = [
-    "Parent/Guardian", "Teacher", "School Principal", "Coach", "Mentor", 
+    "Self", "Parent/Guardian", "Teacher", "School Principal", "Coach", "Mentor", 
     "Community Leader", "Peer/Friend", "Family Member", "Youth Worker", "Other"
   ];
+
+  const isSelfNomination = formData.isSelfNomination === 'yes';
 
   return (
     <section className="bg-white rounded-2xl p-6 shadow-lg" style={{ 
@@ -18,8 +20,60 @@ function NominatorSection({ formData, handleInputChange, errors }) {
         </span>
         NOMINATOR INFORMATION
       </h2>
-      
-      <div className="grid md:grid-cols-2 gap-6">
+
+      {/* Self-Nomination Question */}
+      <div className="mb-8 p-6 rounded-xl" style={{ backgroundColor: '#fef3c7', border: '2px solid #DAA520' }}>
+        <h3 className="text-lg font-bold mb-4" style={{ color: '#003875' }}>
+          Are you nominating yourself?
+        </h3>
+        <div className="flex gap-6">
+          <label className="flex items-center cursor-pointer">
+            <input
+              type="radio"
+              name="isSelfNomination"
+              value="yes"
+              checked={formData.isSelfNomination === 'yes'}
+              onChange={handleInputChange}
+              className="mr-2 w-4 h-4"
+              style={{ accentColor: '#DAA520' }}
+            />
+            <span className="font-semibold" style={{ color: '#003875' }}>
+              Yes (skip to next section)
+            </span>
+          </label>
+          <label className="flex items-center cursor-pointer">
+            <input
+              type="radio"
+              name="isSelfNomination"
+              value="no"
+              checked={formData.isSelfNomination === 'no'}
+              onChange={handleInputChange}
+              className="mr-2 w-4 h-4"
+              style={{ accentColor: '#DAA520' }}
+            />
+            <span className="font-semibold" style={{ color: '#003875' }}>
+              No (fill in below)
+            </span>
+          </label>
+        </div>
+        {errors.isSelfNomination && (
+          <p className="text-red-500 text-sm mt-2 font-semibold">{errors.isSelfNomination}</p>
+        )}
+      </div>
+
+      {/* Show self-nomination confirmation or nominator fields */}
+      {isSelfNomination ? (
+        <div className="p-6 rounded-xl text-center" style={{ backgroundColor: '#dcfce7', border: '2px solid #16a34a' }}>
+          <div className="text-4xl mb-4">🌟</div>
+          <h3 className="text-xl font-bold mb-2" style={{ color: '#166534' }}>
+            Self-Nomination Confirmed!
+          </h3>
+          <p className="font-medium" style={{ color: '#166534' }}>
+            You're nominating yourself for the Teendom Awards. Your voice matters - proceed to the next section.
+          </p>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
             Full Name *
@@ -127,7 +181,8 @@ function NominatorSection({ formData, handleInputChange, errors }) {
             <p className="text-red-500 text-sm mt-1 font-semibold">{errors.nominatorRelationship}</p>
           )}
         </div>
-      </div>
+        </div>
+      )}
     </section>
   );
 }

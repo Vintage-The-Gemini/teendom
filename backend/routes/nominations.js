@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
   
   try {
     const {
-      nominatorName, nominatorEmail, nominatorPhone, nominatorRelationship,
+      isSelfNomination, nominatorName, nominatorEmail, nominatorPhone, nominatorRelationship,
       nomineeName, nomineeDateOfBirth, nomineeAge, nomineeGender, nomineeEmail, nomineePhone, nomineeCounty, nomineeNationality, nomineeSchool, nomineeCurrentGrade,
       awardCategory, shortBio, nominationStatement,
       nomineePhoto, supportingDocuments, supportingLinks,
@@ -23,14 +23,21 @@ router.post('/', async (req, res) => {
       accurateInfo, nomineePermission, parentalConsent, understandsProcess, noFalseInfo
     } = req.body;
 
+    const isSelF = isSelfNomination === 'yes';
+    
     console.log('🔍 Key fields:', {
-      nominatorName, nomineeName, awardCategory,
+      isSelfNomination, nominatorName, nomineeName, awardCategory,
       hasPhoto: !!nomineePhoto
     });
 
     // Create nomination object
     const nominationData = {
-      nominator: {
+      nominator: isSelF ? {
+        name: nomineeName,
+        email: nomineeEmail,
+        phone: nomineePhone,
+        relationship: 'Self'
+      } : {
         name: nominatorName,
         email: nominatorEmail,
         phone: nominatorPhone,
@@ -93,10 +100,13 @@ router.post('/', async (req, res) => {
 
     // Send confirmation email
     try {
-      console.log('📧 Sending confirmation email to:', nominatorEmail);
+      const emailRecipient = isSelF ? nomineeEmail : nominatorEmail;
+      const emailNominatorName = isSelF ? nomineeName : nominatorName;
+      
+      console.log('📧 Sending confirmation email to:', emailRecipient);
       const emailResult = await emailService.sendConfirmationEmail(
-        nominatorEmail, 
-        nominatorName, 
+        emailRecipient, 
+        emailNominatorName, 
         nomineeName
       );
       
