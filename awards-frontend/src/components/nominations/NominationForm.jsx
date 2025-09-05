@@ -25,7 +25,7 @@ function NominationForm() {
     return {
       isSelfNomination: "", nominatorName: "", nominatorEmail: "", nominatorPhone: "", nominatorRelationship: "",
       nomineeName: "", nomineeDateOfBirth: "", nomineeAge: "", nomineeGender: "", nomineeEmail: "", nomineePhone: "", 
-      nomineeCounty: "", nomineeNationality: "", nomineeSchool: "", nomineeCurrentGrade: "",
+      nomineeCounty: "", nomineeNationality: "",
       awardCategory: "", shortBio: "", nominationStatement: "",
       nomineePhoto: null, supportingDocuments: [], supportingLinks: [""],
       refereeName: "", refereePosition: "", refereePhone: "", refereeEmail: "", contactReferee: false,
@@ -164,7 +164,8 @@ function NominationForm() {
     const required = {
       nomineeName: "Nominee name required", nomineeAge: "Age required", nomineeGender: "Gender required",
       nomineeCounty: "County required", awardCategory: "Category required", shortBio: "Bio required", 
-      nominationStatement: "Statement required", refereeName: "Referee name required", refereeEmail: "Referee email required"
+      nominationStatement: "Statement required", refereeName: "Referee name required", refereeEmail: "Referee email required",
+      refereePhone: "Referee phone required"
     };
 
     // Add nominator fields only if NOT self-nominating
@@ -173,6 +174,10 @@ function NominationForm() {
       required.nominatorEmail = "Nominator email required"; 
       required.nominatorPhone = "Nominator phone required";
       required.nominatorRelationship = "Relationship required";
+    } else {
+      // For self-nominations, nominee email and phone are required
+      required.nomineeEmail = "Your email is required for self-nomination";
+      required.nomineePhone = "Your phone is required for self-nomination";
     }
 
     Object.entries(required).forEach(([field, message]) => {

@@ -2,12 +2,15 @@
 import mongoose from 'mongoose';
 
 const nominationSchema = new mongoose.Schema({
-  // Section 1: Nominator Information (All Required)
+  // Self-nomination flag
+  isSelfNomination: { type: Boolean, default: false },
+
+  // Section 1: Nominator Information (Required for non-self nominations)
   nominator: {
-    name: { type: String, required: true, trim: true },
-    email: { type: String, required: true, trim: true, lowercase: true },
-    phone: { type: String, required: true, trim: true },
-    relationship: { type: String, required: true, trim: true }
+    name: { type: String, trim: true },
+    email: { type: String, trim: true, lowercase: true },
+    phone: { type: String, trim: true },
+    relationship: { type: String, trim: true }
   },
 
   // Section 2: Nominee Information
@@ -16,12 +19,10 @@ const nominationSchema = new mongoose.Schema({
     dateOfBirth: { type: Date }, // Added field for DOB
     age: { type: Number, required: true, min: 13, max: 19 },
     gender: { type: String, enum: ['Male', 'Female'] }, // Added field
-    email: { type: String, trim: true, lowercase: true }, // Optional for minors
-    phone: { type: String, trim: true }, // Optional for minors
+    email: { type: String, trim: true, lowercase: true }, // Optional for minors, required for self-nominations
+    phone: { type: String, trim: true }, // Optional for minors, required for self-nominations
     county: { type: String, required: true, trim: true },
-    nationality: { type: String, enum: ['Kenyan Citizen', 'Kenyan Resident'] }, // Added field
-    school: { type: String, trim: true }, // Optional for minors
-    currentGrade: { type: String, trim: true } // Added field
+    nationality: { type: String, enum: ['Kenyan Citizen', 'Kenyan Resident'] } // Added field
   },
 
   // Section 3: Award Category
@@ -51,7 +52,7 @@ const nominationSchema = new mongoose.Schema({
     supportingLinks: [String] // Array of URLs
   },
 
-  // Section 6: Referee Information (All Required)
+  // Section 6: Referee Information (Required)
   referee: {
     name: { type: String, required: true, trim: true },
     position: { type: String, required: true, trim: true },
@@ -130,6 +131,20 @@ nominationSchema.pre('save', function(next) {
     if (!this.nominator.name || !this.nominator.email || !this.nominator.phone || !this.nominator.relationship) {
       return next(new Error('Nominator details are required for non-self nominations'));
     }
+  } else {
+    // For self-nominations, email and phone are required
+    if (!this.nominee.email) {
+      return next(new Error('Email is required for self-nominations'));
+    }
+    if (!this.nominee.phone) {
+      return next(new Error('Phone number is required for self-nominations'));
+    }
+    
+    // For self-nominations, set nominator fields from nominee data
+    this.nominator.name = this.nominator.name || this.nominee.name;
+    this.nominator.email = this.nominator.email || this.nominee.email;
+    this.nominator.phone = this.nominator.phone || this.nominee.phone;
+    this.nominator.relationship = this.nominator.relationship || 'Self';
   }
   
   // Calculate age from date of birth to ensure consistency

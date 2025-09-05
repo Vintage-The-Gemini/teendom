@@ -3,10 +3,17 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import NominationForm from "../components/nominations/NominationForm";
 import { HiStar, HiLightningBolt } from "react-icons/hi";
+import SEOHead from "../components/SEOHead";
 
 function NominatePage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#003875', fontFamily: 'Inter, system-ui, sans-serif' }}>
+      <SEOHead 
+        title="Nominate a Teen - Teendom Awards 2025 | Self-Nominations Welcome"
+        description="Nominate an exceptional Kenyan teenager (13-19) for the Teendom Awards 2025. Free nomination process across 10 categories. Self-nominations encouraged! Deadline: September 30, 2025."
+        keywords="nominate teen Kenya, teen nomination form, Teendom Awards nomination, self nomination teens, Kenya youth awards, teenage excellence nomination, teen leadership awards, academic excellence teens"
+        canonical="https://teendom.africa/nominate"
+      />
       <Navbar />
       
       {/* Hero Section */}

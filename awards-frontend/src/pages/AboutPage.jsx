@@ -92,29 +92,34 @@ function AboutPage() {
                     <p className="text-lg font-light mt-2" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
                       Founder, Teendom Africa
                     </p>
-                    <a 
-                      href="https://sandraochola.com/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-block mt-4 text-sm font-medium transition-all duration-300 hover:scale-105"
-                      style={{ 
-                        color: '#DAA520', 
-                        fontFamily: "'Montserrat', sans-serif",
-                        textDecoration: 'underline',
-                        textDecorationColor: 'rgba(218, 165, 32, 0.3)',
-                        textUnderlineOffset: '4px'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.textDecorationColor = '#DAA520';
-                        e.currentTarget.style.textShadow = '0 2px 8px rgba(218, 165, 32, 0.4)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.textDecorationColor = 'rgba(218, 165, 32, 0.3)';
-                        e.currentTarget.style.textShadow = 'none';
-                      }}
-                    >
-                      For more information on the founder & linkages to the work with teens
-                    </a>
+                    <div className="mt-4 space-y-1">
+                      <p className="text-sm font-medium" style={{ color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif" }}>
+                        For more information on the founder & linkages to the work with teens:
+                      </p>
+                      <a 
+                        href="https://sandraochola.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-block text-sm font-medium transition-all duration-300 hover:scale-105"
+                        style={{ 
+                          color: '#DAA520', 
+                          fontFamily: "'Montserrat', sans-serif",
+                          textDecoration: 'underline',
+                          textDecorationColor: 'rgba(218, 165, 32, 0.3)',
+                          textUnderlineOffset: '4px'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.textDecorationColor = '#DAA520';
+                          e.currentTarget.style.textShadow = '0 2px 8px rgba(218, 165, 32, 0.4)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.textDecorationColor = 'rgba(218, 165, 32, 0.3)';
+                          e.currentTarget.style.textShadow = 'none';
+                        }}
+                      >
+                        https://sandraochola.com/
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

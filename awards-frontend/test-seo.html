@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Testing Console</title>
+    <style>
+        body { 
+            font-family: monospace; 
+            margin: 20px; 
+            background: #1a1a1a; 
+            color: #00ff00; 
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .section { 
+            margin: 20px 0; 
+            padding: 15px; 
+            border: 1px solid #333; 
+            background: #2a2a2a;
+        }
+        .title { color: #DAA520; font-weight: bold; margin-bottom: 10px; }
+        .meta-item { margin: 5px 0; }
+        .value { color: #87CEEB; }
+        button {
+            background: #DAA520;
+            color: #003875;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-weight: bold;
+        }
+        button:hover { opacity: 0.8; }
+        .console-output {
+            background: #000;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #DAA520;">🏆 Teendom Awards - SEO Testing Console</h1>
+        
+        <button onclick="testAllSEO()">🔍 Test All SEO Metadata</button>
+        <button onclick="testStructuredData()">📊 Test Structured Data</button>
+        <button onclick="testSocialMedia()">📱 Test Social Media Tags</button>
+        <button onclick="clearConsole()">🧹 Clear Console</button>
+        
+        <div id="console" class="console-output">
+Click buttons above to test SEO metadata...
+        </div>
+    </div>
+
+    <script>
+        const log = (message) => {
+            const console = document.getElementById('console');
+            console.textContent += message + '\n';
+        };
+
+        const clearConsole = () => {
+            document.getElementById('console').textContent = '';
+        };
+
+        const testAllSEO = () => {
+            clearConsole();
+            log('🚀 TEENDOM AWARDS - SEO METADATA TEST');
+            log('⚠️  INSTRUCTIONS: Copy and paste these commands into the main site console');
+            log('=' .repeat(70));
+            
+            log('\n📋 STEP 1: Go to http://localhost:5173 (main Teendom site)');
+            log('📋 STEP 2: Open Developer Console (F12)');
+            log('📋 STEP 3: Copy and paste the commands below:\n');
+            
+            log('// === BASIC SEO METADATA TEST ===');
+            log('console.log("🚀 TEENDOM AWARDS - SEO METADATA TEST");');
+            log('console.log("=" + "=".repeat(50));');
+            log('console.log("\\n📄 BASIC META TAGS:");');
+            log('console.log(`Title: "${document.title}"`);');
+            log('');
+            log('const description = document.querySelector(\'meta[name="description"]\');');
+            log('console.log(`Description: "${description ? description.content : \'NOT FOUND\'}"`);');
+            log('');
+            log('const keywords = document.querySelector(\'meta[name="keywords"]\');');
+            log('console.log(`Keywords: "${keywords ? keywords.content : \'NOT FOUND\'}"`);');
+            log('');
+            log('const robots = document.querySelector(\'meta[name="robots"]\');');
+            log('console.log(`Robots: "${robots ? robots.content : \'NOT FOUND\'}"`);');
+            log('');
+            log('const canonical = document.querySelector(\'link[rel="canonical"]\');');
+            log('console.log(`Canonical URL: "${canonical ? canonical.href : \'NOT FOUND\'}"`);');
+            log('');
+            log('// === OPEN GRAPH TAGS ===');
+            log('console.log("\\n🌐 OPEN GRAPH TAGS:");');
+            log('const ogTags = [\'og:title\', \'og:description\', \'og:image\', \'og:url\', \'og:type\', \'og:site_name\'];');
+            log('ogTags.forEach(tag => {');
+            log('    const element = document.querySelector(`meta[property="${tag}"]`);');
+            log('    console.log(`${tag}: "${element ? element.content : \'NOT FOUND\'}"`);');
+            log('});');
+            log('');
+            log('// === TWITTER CARDS ===');
+            log('console.log("\\n🐦 TWITTER CARD TAGS:");');
+            log('const twitterTags = [\'twitter:card\', \'twitter:title\', \'twitter:description\', \'twitter:image\', \'twitter:site\'];');
+            log('twitterTags.forEach(tag => {');
+            log('    const element = document.querySelector(`meta[name="${tag}"]`);');
+            log('    console.log(`${tag}: "${element ? element.content : \'NOT FOUND\'}"`);');
+            log('});');
+            log('');
+            log('// === STRUCTURED DATA ===');
+            log('console.log("\\n🏗️ STRUCTURED DATA:");');
+            log('const scripts = document.querySelectorAll(\'script[type="application/ld+json"]\');');
+            log('console.log(`Found ${scripts.length} structured data blocks:`);');
+            log('scripts.forEach((script, index) => {');
+            log('    try {');
+            log('        const data = JSON.parse(script.textContent);');
+            log('        console.log(`Block ${index + 1}: ${data[\'@type\'] || \'Unknown Type\'}`);');
+            log('        console.log(`Name: ${data.name || \'Not specified\'}`);');
+            log('    } catch (e) {');
+            log('        console.log(`Error parsing block ${index + 1}: ${e.message}`);');
+            log('    }');
+            log('});');
+            log('');
+            log('console.log("\\n✅ SEO METADATA TEST COMPLETE!");');
+            log('console.log("💡 TIP: This shows what search engines and social media will see!");');
+        };
+
+        const testStructuredData = () => {
+            clearConsole();
+            log('🏗️ STRUCTURED DATA (JSON-LD) TEST');
+            log('=' .repeat(40));
+            
+            const scripts = document.querySelectorAll('script[type="application/ld+json"]');
+            
+            if (scripts.length === 0) {
+                log('❌ No structured data found');
+                return;
+            }
+            
+            log(`📊 Found ${scripts.length} structured data blocks:\n`);
+            
+            scripts.forEach((script, index) => {
+                try {
+                    const data = JSON.parse(script.textContent);
+                    log(`Block ${index + 1}: ${data['@type'] || 'Unknown Type'}`);
+                    log(`Context: ${data['@context'] || 'Not specified'}`);
+                    log(`Name: ${data.name || 'Not specified'}`);
+                    if (data.description) {
+                        log(`Description: ${data.description.substring(0, 100)}...`);
+                    }
+                    log('---');
+                } catch (e) {
+                    log(`❌ Error parsing structured data block ${index + 1}: ${e.message}`);
+                }
+            });
+            
+            log('✅ STRUCTURED DATA TEST COMPLETE!');
+        };
+
+        const testSocialMedia = () => {
+            clearConsole();
+            log('📱 SOCIAL MEDIA OPTIMIZATION TEST');
+            log('=' .repeat(35));
+            
+            // Facebook/Open Graph
+            log('\n👥 FACEBOOK SHARING:');
+            const fbTitle = document.querySelector('meta[property="og:title"]');
+            const fbDesc = document.querySelector('meta[property="og:description"]');
+            const fbImage = document.querySelector('meta[property="og:image"]');
+            
+            log(`✓ Title: ${fbTitle ? 'FOUND' : '❌ MISSING'}`);
+            log(`✓ Description: ${fbDesc ? 'FOUND' : '❌ MISSING'}`);
+            log(`✓ Image: ${fbImage ? 'FOUND' : '❌ MISSING'}`);
+            
+            if (fbImage) {
+                log(`  Image URL: ${fbImage.content}`);
+            }
+            
+            // Twitter
+            log('\n🐦 TWITTER SHARING:');
+            const twCard = document.querySelector('meta[name="twitter:card"]');
+            const twTitle = document.querySelector('meta[name="twitter:title"]');
+            const twDesc = document.querySelector('meta[name="twitter:description"]');
+            const twImage = document.querySelector('meta[name="twitter:image"]');
+            
+            log(`✓ Card Type: ${twCard ? twCard.content : '❌ MISSING'}`);
+            log(`✓ Title: ${twTitle ? 'FOUND' : '❌ MISSING'}`);
+            log(`✓ Description: ${twDesc ? 'FOUND' : '❌ MISSING'}`);
+            log(`✓ Image: ${twImage ? 'FOUND' : '❌ MISSING'}`);
+            
+            // LinkedIn/Other
+            log('\n💼 LINKEDIN SHARING:');
+            log('✓ Uses Open Graph tags (compatible)');
+            
+            log('\n✅ SOCIAL MEDIA TEST COMPLETE!');
+            log('\n💡 TIP: Use Facebook Debugger & Twitter Card Validator to test live sharing!');
+        };
+
+        // Auto-run basic test on page load
+        window.onload = () => {
+            setTimeout(testAllSEO, 1000);
+        };
+    </script>
+</body>
+</html>

@@ -12,6 +12,7 @@ function NomineeSection({ formData, handleInputChange, errors }) {
   ];
 
   const isMinor = parseInt(formData.nomineeAge) < 18;
+  const isSelfNomination = formData.isSelfNomination === 'yes';
 
   return (
     <section className="bg-white rounded-2xl p-6 shadow-lg" style={{ 
@@ -108,57 +109,6 @@ function NomineeSection({ formData, handleInputChange, errors }) {
           )}
         </div>
 
-        <div>
-          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
-            School/Institution
-          </label>
-          <input
-            type="text"
-            name="nomineeSchool"
-            value={formData.nomineeSchool || ''}
-            onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
-              errors.nomineeSchool ? 'border-red-500' : 'border-gray-300'
-            }`}
-            style={{
-              backgroundColor: '#f8fafc',
-              borderColor: errors.nomineeSchool ? '#ef4444' : '#d1d5db',
-              '--tw-ring-color': '#DAA520'
-            }}
-            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
-            onBlur={(e) => e.target.style.borderColor = errors.nomineeSchool ? '#ef4444' : '#d1d5db'}
-            placeholder="Enter school or institution name"
-          />
-          {errors.nomineeSchool && (
-            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.nomineeSchool}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
-            Current Grade/Level
-          </label>
-          <input
-            type="text"
-            name="nomineeCurrentGrade"
-            value={formData.nomineeCurrentGrade || ''}
-            onChange={handleInputChange}
-            className={`w-full px-4 py-3 border-2 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200 ${
-              errors.nomineeCurrentGrade ? 'border-red-500' : 'border-gray-300'
-            }`}
-            style={{
-              backgroundColor: '#f8fafc',
-              borderColor: errors.nomineeCurrentGrade ? '#ef4444' : '#d1d5db',
-              '--tw-ring-color': '#DAA520'
-            }}
-            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
-            onBlur={(e) => e.target.style.borderColor = errors.nomineeCurrentGrade ? '#ef4444' : '#d1d5db'}
-            placeholder="e.g., Form 4, Year 2, Grade 12"
-          />
-          {errors.nomineeCurrentGrade && (
-            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.nomineeCurrentGrade}</p>
-          )}
-        </div>
 
         <div>
           <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
@@ -190,29 +140,10 @@ function NomineeSection({ formData, handleInputChange, errors }) {
           )}
         </div>
 
-        <div>
-          <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
-            School Name (Optional)
-          </label>
-          <input
-            type="text"
-            name="nomineeSchool"
-            value={formData.nomineeSchool}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl font-medium focus:outline-none focus:ring-2 transition-colors duration-200"
-            style={{
-              backgroundColor: '#f8fafc',
-              '--tw-ring-color': '#DAA520'
-            }}
-            onFocus={(e) => e.target.style.borderColor = '#DAA520'}
-            onBlur={(e) => e.target.style.borderColor = '#d1d5db'}
-            placeholder="School name (if applicable)"
-          />
-        </div>
 
         <div>
           <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
-            Email Address {isMinor ? "(Optional)" : ""}
+            Email Address {isSelfNomination ? "*" : (isMinor ? "(Optional)" : "")}
           </label>
           <input
             type="email"
@@ -238,7 +169,7 @@ function NomineeSection({ formData, handleInputChange, errors }) {
 
         <div>
           <label className="block text-sm font-bold mb-2" style={{ color: '#003875' }}>
-            Phone Number {isMinor ? "(Optional)" : ""}
+            Phone Number {isSelfNomination ? "*" : (isMinor ? "(Optional)" : "")}
           </label>
           <input
             type="tel"

@@ -2,10 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { HiStar } from "react-icons/hi";
+import SEOHead from "../components/SEOHead";
 
 function AwardsPage() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0b1426 0%, #162a4a 50%, #0b1426 100%)' }}>
+      <SEOHead 
+        title="Teendom Awards 2025 - Official Awards Platform | Celebrate Kenya's Teen Excellence"
+        description="Nominate exceptional Kenyan teenagers (13-19) for the Teendom Awards 2025. Celebrating academic excellence, leadership, innovation, arts, sports, and social impact across Kenya. Self-nominations welcome!"
+        keywords="Teendom Awards 2025, Kenya teen awards, youth excellence, teenage achievements, self nomination, academic awards, leadership awards, innovation awards, Kenya teenagers, teen recognition ceremony"
+        canonical="https://teendom.africa"
+      />
       <Navbar />
       
       {/* Hero Section - Enhanced with energy */}

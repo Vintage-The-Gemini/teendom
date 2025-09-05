@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Important pages
+Allow: /nominate
+Allow: /categories
+Allow: /about
+Allow: /judges
+Allow: /faq
+Allow: /gallery
+Allow: /get-involved
+
+# Block admin areas
+Disallow: /admin
+Disallow: /admin-login
+
+# Sitemap
+Sitemap: https://teendom.africa/sitemap.xml
+
+# Crawl delay (optional - be nice to servers)
+Crawl-delay: 1

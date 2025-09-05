@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
   try {
     const {
       isSelfNomination, nominatorName, nominatorEmail, nominatorPhone, nominatorRelationship,
-      nomineeName, nomineeDateOfBirth, nomineeAge, nomineeGender, nomineeEmail, nomineePhone, nomineeCounty, nomineeNationality, nomineeSchool, nomineeCurrentGrade,
+      nomineeName, nomineeDateOfBirth, nomineeAge, nomineeGender, nomineeEmail, nomineePhone, nomineeCounty, nomineeNationality,
       awardCategory, shortBio, nominationStatement,
       nomineePhoto, supportingDocuments, supportingLinks,
       refereeName, refereePosition, refereePhone, refereeEmail, contactReferee,
@@ -32,10 +32,11 @@ router.post('/', async (req, res) => {
 
     // Create nomination object
     const nominationData = {
+      isSelfNomination: isSelF,
       nominator: isSelF ? {
-        name: nomineeName,
-        email: nomineeEmail,
-        phone: nomineePhone,
+        name: nomineeName || 'Self',
+        email: nomineeEmail || '',
+        phone: nomineePhone || '',
         relationship: 'Self'
       } : {
         name: nominatorName,
@@ -51,9 +52,7 @@ router.post('/', async (req, res) => {
         email: nomineeEmail || undefined,
         phone: nomineePhone || undefined,
         county: nomineeCounty,
-        nationality: nomineeNationality || undefined,
-        school: nomineeSchool || undefined,
-        currentGrade: nomineeCurrentGrade || undefined
+        nationality: nomineeNationality || undefined
       },
       awardCategory,
       details: {
@@ -65,13 +64,13 @@ router.post('/', async (req, res) => {
         supportingDocuments: supportingDocuments || [],
         supportingLinks: supportingLinks || []
       },
-      referee: (refereeName && refereePosition) ? {
+      referee: {
         name: refereeName,
         position: refereePosition,
-        phone: refereePhone || '',
-        email: refereeEmail || '',
+        phone: refereePhone,
+        email: refereeEmail,
         contactPermission: contactReferee || false
-      } : undefined,
+      },
       consent: {
         accurateInfo: accurateInfo || true,
         nomineePermission: nomineePermission || true,

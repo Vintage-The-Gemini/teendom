@@ -15,7 +15,7 @@ function GetInvolvedPage() {
             Get Involved
           </h1>
           <p className="text-xl md:text-2xl max-w-5xl mx-auto leading-relaxed mb-12" style={{color: '#E8EAF6', fontFamily: "'Montserrat', sans-serif", fontWeight: '300', textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'}}>
-            Join the movement to celebrate, support, and empower Kenya's most exceptional teenagers. Together, we can create a nation where teen excellence is recognized, celebrated, and nurtured.
+            Join the movement to celebrate, support, and empower Kenya's most exceptional teenagers. Together, we can create a community where teen excellence is recognized, celebrated, and nurtured.
           </p>
         </div>
       </section>
